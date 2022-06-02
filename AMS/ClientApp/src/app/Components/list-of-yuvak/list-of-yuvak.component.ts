@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Yuvak } from 'src/app/models/yuvak.model';
+import { YuvakService } from 'src/app/Services/Yuvak/yuvak.service';
 
 @Component({
   selector: 'app-list-of-yuvak',
@@ -6,10 +8,33 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-of-yuvak.component.css']
 })
 export class ListOfYuvakComponent implements OnInit {
-
-  constructor() { }
+  yuvak: Yuvak[] = [];
+  // num?: number;
+  constructor(private yuvakServices: YuvakService) { }
 
   ngOnInit(): void {
+    this.getAllYuvak();
+  }
+
+  getAllYuvak() {
+    this.yuvakServices.getAllYuvak(1)
+      .subscribe(
+        response => {
+          this.yuvak = response;
+          console.table(this.yuvak);
+        }
+      );
+  }
+
+  lastMonthAttendance(id: number){
+    this.yuvakServices.getLastMonthAttendance(1)
+    .subscribe(
+      response => {
+        console.table(response);
+        return response;
+        // this.num = response
+      }
+    );
   }
 
 }
