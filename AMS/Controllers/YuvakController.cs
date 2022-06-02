@@ -22,10 +22,17 @@ namespace AMS.Controllers
         }
 
         [HttpGet]
-        [Route("{id:int}")]
+        [Route("[action]/{id:int}")]
         public async Task<IActionResult> getKaryakar(int id)
         {
             return Ok(await _context.GetYuvak(id));
+        }
+        
+        [HttpGet]
+        [Route("[action]/{id:int}")]
+        public async Task<IActionResult> getKaryakarById(int id)
+        {
+            return Ok(await _context.GetYuvakById(id));
         }
 
         [HttpPost]

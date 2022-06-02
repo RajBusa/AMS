@@ -29,6 +29,11 @@ namespace AMS.Repository
         {
             return await _db.QueryAsync<Yuvak>("select * from Yuvak where Id = @Id", new { @Id = id });
         }
+        
+        public async Task<IEnumerable<Yuvak>> GetYuvakById(int id)
+        {
+            return await _db.QueryAsync<Yuvak>("select * from Yuvak where SamparkId = @Id", new { @Id = id });
+        }
 
         public async Task<int> InsertYuvak(Yuvak yuvak)
         {
