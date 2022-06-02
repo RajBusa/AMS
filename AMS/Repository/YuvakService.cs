@@ -64,7 +64,7 @@ namespace AMS.Repository
                 @Education = yuvak.Education,
                 @Email = yuvak.Email,
                 @MandalId = yuvak.MandalId,
-                @SamparkId = yuvak.  
+                @SamparkId = yuvak.SamparkId
             });
         }
     }
