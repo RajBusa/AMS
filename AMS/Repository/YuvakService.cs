@@ -30,6 +30,11 @@ namespace AMS.Repository
             return await _db.QueryAsync<Yuvak>("select * from Yuvak where Id = @Id", new { @Id = id });
         }
 
+        public async Task<IEnumerable<Yuvak>> GetYuvakBySamparkId(int id)
+        {
+            return await _db.QueryAsync<Yuvak>("select * from Yuvak where SamparkId = @Id", new { @Id = id });
+        }
+
         public async Task<int> InsertYuvak(Yuvak yuvak)
         {
             var sql = "insert into Yuvak values (NULL, @Name, @DOB, @Address, @Mobile, @Education, @Email ,@MandalId, @SamparkId);";
@@ -59,10 +64,7 @@ namespace AMS.Repository
                 @Education = yuvak.Education,
                 @Email = yuvak.Email,
                 @MandalId = yuvak.MandalId,
-                @SamparkId = yuvak.SamparkId
-
-
-                
+                @SamparkId = yuvak.  
             });
         }
     }

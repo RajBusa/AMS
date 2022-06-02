@@ -9,7 +9,9 @@ namespace AMS.Repository
         Task<IEnumerable<Yuvak>> GetYuvak(int id);
 
         Task<int> DeleteYuvak(int id);
-        
+
+        Task<IEnumerable<Yuvak>> GetYuvakBySamparkId(int id);
+
         Task<int> UpdateYuvak(Yuvak yuvak);
 
         Task<int> InsertYuvak(Yuvak yuvak);
