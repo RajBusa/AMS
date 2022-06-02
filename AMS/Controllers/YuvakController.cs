@@ -23,18 +23,17 @@ namespace AMS.Controllers
 
         [HttpGet]
         [Route("[action]/{id:int}")]
-        public async Task<IActionResult> getYuvak(int id)
+        public async Task<IActionResult> getKaryakar(int id)
         {
             Console.WriteLine("getKaryakar");
             return Ok(await _context.GetYuvak(id));
         }
-
+        
         [HttpGet]
         [Route("[action]/{id:int}")]
-        public async Task<IActionResult> getYuvakBySamparkId(int id)
+        public async Task<IActionResult> getKaryakarById(int id)
         {
-            Console.WriteLine("getYuvakBySamparkId");
-            return Ok(await _context.GetYuvakBySamparkId(id));
+            return Ok(await _context.GetYuvakById(id));
         }
 
         [HttpPost]
