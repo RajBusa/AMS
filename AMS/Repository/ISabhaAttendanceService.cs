@@ -13,5 +13,7 @@ namespace AMS.Repository
         Task<int> UpdateSabhaAttendance(SabhaAttendance sabhaAttendance);
 
         Task<int> InsertSabhaAttendance(SabhaAttendance sabhaAttendance);
+
+        Task<int> LastMonthSabha(int id);
     }
 }

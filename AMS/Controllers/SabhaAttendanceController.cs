@@ -21,11 +21,18 @@ namespace AMS.Controllers
             return Ok(await _context.GetAllSabhaAttendance());
         }
 
+        //[HttpGet]
+        //[Route("{id:int}")]
+        //public async Task<IActionResult> getSabhaAttendance(int id)
+        //{
+        //    return Ok(await _context.GetSabhaAttendance(id));
+        //}
+
         [HttpGet]
         [Route("{id:int}")]
-        public async Task<IActionResult> getSabhaAttendance(int id)
+        public async Task<IActionResult> lastMonthSabha([FromRoute] int id)
         {
-            return Ok(await _context.GetSabhaAttendance(id));
+            return Ok(await _context.LastMonthSabha(id));
         }
 
         [HttpPost]

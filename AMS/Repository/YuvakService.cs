@@ -29,11 +29,24 @@ namespace AMS.Repository
         {
             return await _db.QueryAsync<Yuvak>("select * from Yuvak where Id = @Id", new { @Id = id });
         }
-        
+
         public async Task<IEnumerable<Yuvak>> GetYuvakById(int id)
         {
             return await _db.QueryAsync<Yuvak>("select * from Yuvak where SamparkId = @Id", new { @Id = id });
         }
+
+        //public async Task<IEnumerable<LastMonthSabha>> GetYuvakById(int id)
+        //{
+        //    List<Yuvak> yuvaks = await (List<Yuvak>) _db.QueryAsync<Yuvak>("select * from Yuvak where SamparkId = @Id", new { @Id = id });
+        //    for(int i = 0; i < yuvaks.Count; i++)
+        //    {
+        //        int count = await _db.ExecuteScalarAsync<int>("SELECT count(*) FROM SabhaAttendance where YuvakId = @id", new
+        //        {
+        //            @id = yuvaks[i].Id,
+
+        //        });
+        //    }
+        //}
 
         public async Task<int> InsertYuvak(Yuvak yuvak)
         {

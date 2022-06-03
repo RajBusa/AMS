@@ -40,5 +40,7 @@ namespace AMS.Controllers
         {
             return Ok(await _context.UpdateSabha(data));
         }
+
+       
     }
 }
