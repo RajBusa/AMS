@@ -30,10 +30,10 @@ namespace AMS.Controllers
         }
         
         [HttpGet]
-        [Route("[action]/{id:int}")]
-        public async Task<IActionResult> getKaryakarById(int id)
+        [Route("[action]/{id:int}/{isMandal:bool}")]
+        public async Task<IActionResult> getKaryakarById(int id, bool isMandal)
         {
-            return Ok(await _context.GetYuvakById(id));
+            return Ok(await _context.GetYuvakById(id, isMandal));
         }
 
         [HttpPost]

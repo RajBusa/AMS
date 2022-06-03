@@ -35,11 +35,20 @@ namespace AMS.Repository
         //    return await _db.QueryAsync<Yuvak>("select * from Yuvak where SamparkId = @Id", new { @Id = id });
         //}
 
-        public async Task<IEnumerable<LastMonthSabha>> GetYuvakById(int id)
+        public async Task<IEnumerable<LastMonthSabha>> GetYuvakById(int id, bool isMandal)
         {
             
             List<LastMonthSabha> data = new List<LastMonthSabha>();
-            List<Yuvak> yuvaks = (List<Yuvak>) await _db.QueryAsync<Yuvak>("select * from Yuvak where SamparkId = @Id", new { @Id = id });
+            List<Yuvak> yuvaks;
+            if (isMandal == true)
+            {
+                yuvaks = (List<Yuvak>)await _db.QueryAsync<Yuvak>("select * from Yuvak where MandalId = @Id", new { @Id = id });
+            }
+            else
+            {
+                yuvaks = (List<Yuvak>)await _db.QueryAsync<Yuvak>("select * from Yuvak where SamparkId = @Id", new { @Id = id });
+            }
+            
             foreach (Yuvak item in yuvaks)
             {
             LastMonthSabha lastMonthSabha = new LastMonthSabha();
@@ -47,6 +56,7 @@ namespace AMS.Repository
                 {
                     @id = item.Id,
                 });
+                lastMonthSabha.Id = item.Id;
                 lastMonthSabha.Name = item.Name;    
                 lastMonthSabha.Address = item.Address;
                 lastMonthSabha.Email = item.Email;

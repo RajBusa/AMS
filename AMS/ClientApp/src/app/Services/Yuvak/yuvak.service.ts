@@ -11,8 +11,8 @@ export class YuvakService {
   baseUrl = 'https://localhost:7140/api/'
   constructor(private http: HttpClient) { }
 
-  getAllYuvak(id: number): Observable<Yuvak[]>{
-    return this.http.get<Yuvak[]>(this.baseUrl + 'Yuvak/getKaryakarById/' +id);
+  getAllYuvak(id: number, isMandal: boolean): Observable<Yuvak[]>{
+    return this.http.get<Yuvak[]>(this.baseUrl + 'Yuvak/getKaryakarById/' +id + '/'+ isMandal);
   }
 
   getTotalSabha(id: number): Observable<number>{

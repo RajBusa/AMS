@@ -23,18 +23,18 @@ namespace AMS.Repository
 
         public async Task<int> GetSabhaByMandalId(int id)
         {
-            return await _db.ExecuteScalarAsync<int>("SELECT count(*) FROM Sabha where MandalId = @id AND Date BETWEEN datetime('now', 'localtime', '-1 month') AND datetime('now', 'localtime');", new { });
+            return await _db.ExecuteScalarAsync<int>("SELECT count(*) FROM Sabha where MandalId = @id AND SabhaDate BETWEEN datetime('now','-1 month') AND datetime('now');", new { @id = id });
         }
 
         public async Task<int> InsertSabha(Sabha sabha)
         {
             var sql = ("INSERT INTO Sabha (Id,MandalId,Date) VALUES (NULL,@MandalId,@Date)");
-            return await _db.ExecuteAsync(sql, new { @MandalId = sabha.MandalId, @Date = sabha.Date});
+            return await _db.ExecuteAsync(sql, new { @MandalId = sabha.MandalId, @Date = sabha.SabhaDate});
         }
         public async Task<int> UpdateSabha(Sabha sabha)
         {
             var sql = ("UPDATE Sabha SET MandalId = @MandalId,Date = @Date WHERE Id = @id");
-            return await _db.ExecuteAsync(sql, new { @MandalId = sabha.MandalId, @Date = sabha.Date, @id = sabha.Id});
+            return await _db.ExecuteAsync(sql, new { @MandalId = sabha.MandalId, @Date = sabha.SabhaDate, @id = sabha.Id});
         }
     }
 }

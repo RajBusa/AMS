@@ -165,11 +165,11 @@ namespace AMS.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("MandalId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("SabhaDate")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
