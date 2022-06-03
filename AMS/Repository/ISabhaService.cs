@@ -9,6 +9,8 @@ namespace AMS.Repository
         Task<int> InsertSabha(Sabha sabha);
         Task<int> UpdateSabha(Sabha sabha);
 
+        Task<int> GetSabhaByMandalId(int id);
+
 
     }
 }

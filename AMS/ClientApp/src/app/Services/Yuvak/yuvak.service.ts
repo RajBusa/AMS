@@ -7,6 +7,7 @@ import { Yuvak } from 'src/app/models/yuvak.model';
   providedIn: 'root'
 })
 export class YuvakService {
+
   baseUrl = 'https://localhost:7140/api/'
   constructor(private http: HttpClient) { }
 
@@ -14,7 +15,7 @@ export class YuvakService {
     return this.http.get<Yuvak[]>(this.baseUrl + 'Yuvak/getKaryakarById/' +id);
   }
 
-  getLastMonthAttendance(id: number): Observable<number>{
-    return this.http.get<number>(this.baseUrl + 'SabhaAttendance/' +id);
+  getTotalSabha(id: number): Observable<number>{
+    return this.http.get<number>(this.baseUrl + 'Sabha/' +id);
   }
 }

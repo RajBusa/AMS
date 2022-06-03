@@ -25,6 +25,8 @@ import { SamparkKaryakarComponent } from './Components/sampark-karyakar/sampark-
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import { ListOfYuvakComponent } from './Components/list-of-yuvak/list-of-yuvak.component';
 
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +49,7 @@ import { ListOfYuvakComponent } from './Components/list-of-yuvak/list-of-yuvak.c
     HttpClientModule,
     FormsModule,
     ApiAuthorizationModule,
+    Ng2SearchPipeModule,
     RouterModule.forRoot([
       { path: '', component: InitComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
@@ -55,7 +58,9 @@ import { ListOfYuvakComponent } from './Components/list-of-yuvak/list-of-yuvak.c
       { path: 'nirikshak', component: NirikshakComponent},
       { path: 'sanchalak', component: SanchalakComponent},
       { path: 'sampark', component: SamparkKaryakarComponent}
-    ])
+    ]),
+
+    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }

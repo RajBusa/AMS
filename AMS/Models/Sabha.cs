@@ -11,6 +11,6 @@ namespace AMS.Models
         public int MandalId { get; set; }
         public Mandal? Mandal { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime SabhaDate { get; set; }
     }
 }

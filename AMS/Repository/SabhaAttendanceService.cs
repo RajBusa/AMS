@@ -58,7 +58,7 @@ namespace AMS.Repository
 
         public async Task<int> LastMonthSabha(int id)
         {
-            //var sql = "SELECT count(Attendance) FROM SabhaAttendance where YuvakId = @id AND Attendance BETWEEN datetime('now', 'localtime', '-1 month') AND datetime('now', 'localtime');";
+            //var sql = "SELECT count(*) FROM SabhaAttendance where YuvakId = @id AND Attendance BETWEEN datetime('now', 'localtime', '-1 month') AND datetime('now', 'localtime');";
             //var sql = "SELECT count(YuvakId) FROM SabhaAttendance where (YuvakId = @id) AND (Attendance BETWEEN '2022-05-02  17:00:00' AND '2022-06-02 17:00:00');";
             var sql = "SELECT count(*) FROM SabhaAttendance where YuvakId = @id";
             return await _db.ExecuteScalarAsync<int>(sql, new

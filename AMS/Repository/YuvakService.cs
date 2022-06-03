@@ -43,11 +43,11 @@ namespace AMS.Repository
             foreach (Yuvak item in yuvaks)
             {
             LastMonthSabha lastMonthSabha = new LastMonthSabha();
-                int count = await _db.ExecuteScalarAsync<int>("select count(*) from sabhaattendance where yuvakid = @id", new
+                int count = await _db.ExecuteScalarAsync<int>("SELECT count(*) FROM SabhaAttendance where YuvakId = @id AND Attendance BETWEEN datetime('now', 'localtime', '-1 month') AND datetime('now', 'localtime');", new
                 {
                     @id = item.Id,
                 });
-                lastMonthSabha.Name = item.Name;
+                lastMonthSabha.Name = item.Name;    
                 lastMonthSabha.Address = item.Address;
                 lastMonthSabha.Email = item.Email;
                 lastMonthSabha.Education = item.Education;

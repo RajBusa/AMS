@@ -10,10 +10,12 @@ import { YuvakService } from 'src/app/Services/Yuvak/yuvak.service';
 export class ListOfYuvakComponent implements OnInit { 
   yuvak: Yuvak[] = [];
   // num?: number;
+  totalSabha?: number;
   constructor(private yuvakServices: YuvakService) { }
-
+  searchText = '';
   ngOnInit(): void {
     this.getAllYuvak();
+    this.getTotalSabha();
   }
 
   getAllYuvak() {
@@ -22,6 +24,15 @@ export class ListOfYuvakComponent implements OnInit {
         response => {
           this.yuvak = response;
           console.table(response);
+        }
+      );
+  }
+  
+  getTotalSabha(){
+    this.yuvakServices.getTotalSabha(1)
+      .subscribe(
+        response => {
+          this.totalSabha = response;
         }
       );
   }
