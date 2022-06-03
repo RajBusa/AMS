@@ -7,7 +7,7 @@ import { YuvakService } from 'src/app/Services/Yuvak/yuvak.service';
   templateUrl: './list-of-yuvak.component.html',
   styleUrls: ['./list-of-yuvak.component.css']
 })
-export class ListOfYuvakComponent implements OnInit {
+export class ListOfYuvakComponent implements OnInit { 
   yuvak: Yuvak[] = [];
   // num?: number;
   constructor(private yuvakServices: YuvakService) { }
@@ -21,20 +21,9 @@ export class ListOfYuvakComponent implements OnInit {
       .subscribe(
         response => {
           this.yuvak = response;
-          console.table(this.yuvak);
+          console.table(response);
         }
       );
-  }
-
-  lastMonthAttendance(id: number){
-    this.yuvakServices.getLastMonthAttendance(1)
-    .subscribe(
-      response => {
-        console.table(response);
-        return response;
-        // this.num = response
-      }
-    );
   }
 
 }

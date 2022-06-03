@@ -1,3 +1,4 @@
+<input type="text" name="" id="">
 <div class="container">
     <ul class="list-group list-group-flush" *ngFor="let y of yuvak">
         <li class="list-group-item d-flex justify-content-between bg-danger bg-opacity-75 my-1 align-items-start">
@@ -5,7 +6,7 @@
                 {{y.name}}
             </div>
             <div class="me-5">
-                {{lastMonthAttendance(y.id)}}
+                {{y.count}} / 4
             </div>
             <div class="text-success px-3 h4 mb-0">
                 <a href="http://wa.me/91{{y.mobile}}"><i class="fa-brands fa-whatsapp text-success"></i></a>

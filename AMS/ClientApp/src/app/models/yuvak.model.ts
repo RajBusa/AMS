@@ -7,5 +7,6 @@ export interface Yuvak{
     education: string,
     email: string,
     mandalId: number,
-    samparkId: number
+    samparkId: number,
+    count: number
 }

@@ -12,17 +12,14 @@ namespace AMS.Repository
         {
             _db = db;
         }
-
         public async Task<IEnumerable<Sabha>> GetAllSabha()
         {
             return await _db.QueryAsync<Sabha>("select * from Sabha");
         }
-
         public async Task<IEnumerable<Sabha>> GetSabhaById(int id)
         {
             return await _db.QueryAsync<Sabha>("select * from Sabha Where Id = @Id", new { @Id = id });
         }
-
         public async Task<int> InsertSabha(Sabha sabha)
         {
             var sql = ("INSERT INTO Sabha (Id,MandalId,Date) VALUES (NULL,@MandalId,@Date)");

@@ -30,23 +30,37 @@ namespace AMS.Repository
             return await _db.QueryAsync<Yuvak>("select * from Yuvak where Id = @Id", new { @Id = id });
         }
 
-        public async Task<IEnumerable<Yuvak>> GetYuvakById(int id)
-        {
-            return await _db.QueryAsync<Yuvak>("select * from Yuvak where SamparkId = @Id", new { @Id = id });
-        }
-
-        //public async Task<IEnumerable<LastMonthSabha>> GetYuvakById(int id)
+        //public async Task<IEnumerable<Yuvak>> GetYuvakById(int id)
         //{
-        //    List<Yuvak> yuvaks = await (List<Yuvak>) _db.QueryAsync<Yuvak>("select * from Yuvak where SamparkId = @Id", new { @Id = id });
-        //    for(int i = 0; i < yuvaks.Count; i++)
-        //    {
-        //        int count = await _db.ExecuteScalarAsync<int>("SELECT count(*) FROM SabhaAttendance where YuvakId = @id", new
-        //        {
-        //            @id = yuvaks[i].Id,
-
-        //        });
-        //    }
+        //    return await _db.QueryAsync<Yuvak>("select * from Yuvak where SamparkId = @Id", new { @Id = id });
         //}
+
+        public async Task<IEnumerable<LastMonthSabha>> GetYuvakById(int id)
+        {
+            
+            List<LastMonthSabha> data = new List<LastMonthSabha>();
+            List<Yuvak> yuvaks = (List<Yuvak>) await _db.QueryAsync<Yuvak>("select * from Yuvak where SamparkId = @Id", new { @Id = id });
+            foreach (Yuvak item in yuvaks)
+            {
+            LastMonthSabha lastMonthSabha = new LastMonthSabha();
+                int count = await _db.ExecuteScalarAsync<int>("select count(*) from sabhaattendance where yuvakid = @id", new
+                {
+                    @id = item.Id,
+                });
+                lastMonthSabha.Name = item.Name;
+                lastMonthSabha.Address = item.Address;
+                lastMonthSabha.Email = item.Email;
+                lastMonthSabha.Education = item.Education;
+                lastMonthSabha.DOB = item.DOB;
+                lastMonthSabha.Mobile = item.Mobile;
+                lastMonthSabha.MandalId = item.MandalId;
+                lastMonthSabha.SamparkId = item.SamparkId;
+                lastMonthSabha.count = count;
+                data.Add(lastMonthSabha);
+                lastMonthSabha = null;
+            }
+            return data;
+        }
 
         public async Task<int> InsertYuvak(Yuvak yuvak)
         {
