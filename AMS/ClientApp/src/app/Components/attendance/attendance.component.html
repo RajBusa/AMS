@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="ms-1 text-white Date my-3 row border-2">
+        <div class="date bg-primary text-center h3 py-2  rounded-start col-3 ">{{sabha[0]?.sabhaDate| date : 'dd'}}</div>
+        <div class="month bg-secondary py-1 h4  text-center rounded-end col-4">{{sabha[0]?.sabhaDate| date : 'LLLL'}}</div>
+        <div class="changeDate px-2 col-5">
+            <button class="btn w-100 py-2 btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"> Change
+                Date</button>
+        </div>
+
+        <div class="modal fade"tabindex="-1"  id="exampleModal"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" class="text-dark" id="exampleModalLabel">Change Date</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="" #form="ngForm" (ngSubmit)="onSubmit()">
+                        <div class="modal-body">
+                            <input type="date" name="sahbadate" [(ngModel)] = "sahbadate">
+                            <p class="text-dark">{{sabha[0]?.sabhaDate}}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button class="btn btn-primary"  data-bs-dismiss="modal">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form class="d-flex my-2 row" role="search">
+        <div class="col-7">
+            <input class="form-control" type="search" placeholder="Search" [(ngModel)]="searchText" name="searchText">
+        </div>
+        <div class="col-5">
+            <!-- <i class="fa-solid fa-bars-filter"></i> -->
+            <button class="btn btn-primary col-12" routerLink="/yuvakList">View Attendance</button>
+        </div>
+    </form>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item d-flex justify-content-between align-items-start"
+            *ngFor="let y of yuvak | filter:searchText">
+            <div class="ms-2 me-auto fw-bold">
+                {{y.name}}
+            </div>
+            <span><input type="checkbox" class="checkBox" name="" id=""></span>
+        </li>
+    </ul>
+    <!-- <ul class="list-group list-group-flush" *ngIf="sabhaDate == '2019-06-29'; else elseBlock">
+        <li class="list-group-item d-flex justify-content-between align-items-start"
+            *ngFor="let y of yuvak | filter:searchText">
+            <div class="ms-2 me-auto fw-bold">
+                {{y.name}}
+            </div>
+            <span><input type="checkbox" class="checkBox" name="" id=""></span>
+        </li>
+    </ul>
+    <ng-template #elseBlock>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-start"
+                *ngFor="let y of yuvak | filter:searchText">
+                <div class="ms-2 me-auto fw-bold">
+                    {{y.name}}
+                </div>
+                <span><input type="checkbox" class="checkBox" name="" id="" disabled></span>
+            </li>
+        </ul>
+    </ng-template> -->
+</div>

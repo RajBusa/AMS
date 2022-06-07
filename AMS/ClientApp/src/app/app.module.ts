@@ -26,6 +26,7 @@ import { NavbarComponent } from './Components/navbar/navbar.component';
 import { ListOfYuvakComponent } from './Components/list-of-yuvak/list-of-yuvak.component';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { AttendanceComponent } from './Components/attendance/attendance.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     SamparkKaryakarComponent,
     NavbarComponent,
     ListOfYuvakComponent,
+    AttendanceComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -57,7 +59,9 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
       { path: 'nirdeshak', component: NirdeshakComponent},
       { path: 'nirikshak', component: NirikshakComponent},
       { path: 'sanchalak', component: SanchalakComponent},
-      { path: 'sampark', component: SamparkKaryakarComponent}
+      { path: 'sampark', component: SamparkKaryakarComponent},
+      { path: 'yuvakList', component: ListOfYuvakComponent}
+
     ]),
 
     

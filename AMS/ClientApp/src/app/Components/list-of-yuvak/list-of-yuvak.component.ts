@@ -13,13 +13,15 @@ export class ListOfYuvakComponent implements OnInit {
   mandalId: number = 1;
   isMandal: boolean = true;
   totalSabha: number = 0;
-  filter: string = "Accending";
-  constructor(private yuvakServices: YuvakService) { }
+  filter: string = "Descending";
   searchText = '';
+
+  
+  constructor(private yuvakServices: YuvakService) { }
   ngOnInit(): void {
     this.getAllYuvak(this.samparkId, this.isMandal);
     this.getTotalSabha(this.mandalId);
-    // this.sortYuvak()
+    this.sortYuvak()
   }
 
   getAllYuvak(samparkId: number, isMandal: boolean) {
