@@ -26,6 +26,8 @@ export class YuvakService {
   }
 
   updateSabha(sabha: Sabha) : Observable<Sabha>{
+    console.log("Services")
+    console.table(sabha);
     return this.http.put<Sabha>(this.baseUrl + 'Sabha/updateSabha', sabha);
   }
 

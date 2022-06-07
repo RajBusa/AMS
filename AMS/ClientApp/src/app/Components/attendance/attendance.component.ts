@@ -16,7 +16,7 @@ export class AttendanceComponent implements OnInit {
   yuvak: Yuvak[] = [];
   sabha: Sabha[] = [];
   searchText: string = '';
-  sahbadate: Date = new Date();
+  sahbadate: string = '';
   constructor(private yuvakServices: YuvakService) { }
 
 
@@ -49,9 +49,16 @@ export class AttendanceComponent implements OnInit {
 
   onSubmit(){
     console.log(typeof this.sahbadate)
-    this.sabha[0].sabhaDate = new Date(this.sahbadate);
+    this.sabha[0].sabhaDate = this.sahbadate;
     // this.sabha[0].sabhaDate = ;
     console.log(this.sabha[0].sabhaDate);
-    this.yuvakServices.updateSabha(this.sabha[0]);
+    this.yuvakServices.updateSabha(this.sabha[0])
+      .subscribe(
+        response => {
+          console.log("response")
+          console.log(response)
+          this.getSabha(this.mandalId);
+        }
+      )
   }
 }
