@@ -53,8 +53,8 @@
             <div class="ms-2 me-auto fw-bold">
                 {{y.name}}
             </div>
-            <form action="" #form="ngForm" (ngSubmit)="XYZ()"></form>
-            <span><input type="checkbox" class="checkBox"  name="" id=""></span>
+            <!-- <form action="" #form="ngForm" (ngSubmit)="XYZ()"></form> -->
+            <span><input type="checkbox" (click)="takeAttendace(y.id)" class="checkBox"  name="" id=""></span>
         </li>
     </ul>
     <ng-template #elseBlock>

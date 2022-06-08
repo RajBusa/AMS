@@ -12,12 +12,13 @@ namespace AMS.Repository
             _db = db;
         }
 
-        public async Task<int> DeleteSabhaAttendance(int id)
+        public async Task<int> DeleteSabhaAttendance(int yid, int sid)
         {
-            var sql = "DELETE FROM SabhaAttendance WHERE id = @id";
+            var sql = "DELETE FROM SabhaAttendance WHERE YuvakId = @yid AND SabhaId = @sid";
             return await _db.ExecuteAsync(sql, new
             {
-                @id = id,
+                @yid = yid,
+                sid = sid,
             });
         }
 
@@ -39,23 +40,30 @@ namespace AMS.Repository
                 @YuvakId = sabhaAttendance.YuvakId,
                 @SabhaId = sabhaAttendance.SabhaId,
                 @Attendance = sabhaAttendance.Attendance
-
             });
         }
 
-        public async Task<int> UpdateSabhaAttendance(SabhaAttendance sabhaAttendance)
+        //public async Task<int> UpdateSabhaAttendance(SabhaAttendance sabhaAttendance)
+        //{
+        //    var sql = "Update SabhaAttendance set YuvakId = @YuvakId, SabhaId = @SabhaId, Attendance = @Attendance  where id = @id";
+        //    return await _db.ExecuteAsync(sql, new
+        //    {
+        //        @id = sabhaAttendance.Id,
+        //        @YuvakId = sabhaAttendance.YuvakId,
+        //        @SabhaId = sabhaAttendance.SabhaId,
+        //        @Attendance = sabhaAttendance.Attendance
+        //    }); ;
+        //}
+
+        public async Task<int> ExistAttendance(int yid, int sid)
         {
-            var sql = "Update SabhaAttendance set YuvakId = @YuvakId, SabhaId = @SabhaId, Attendance = @Attendance  where id = @id";
-            return await _db.ExecuteAsync(sql, new
+            var sql = "SELECT count(*) FROM SabhaAttendance where YuvakId = @yid AND SabhaId = @sid";
+            return await _db.ExecuteScalarAsync<int>(sql, new
             {
-                @id = sabhaAttendance.Id,
-                @YuvakId = sabhaAttendance.YuvakId,
-                @SabhaId = sabhaAttendance.SabhaId,
-                @Attendance = sabhaAttendance.Attendance
-            }); ;
+                @yid = yid,
+                @sid = sid,
+            }) ;
         }
-
-
         public async Task<int> LastMonthSabha(int id)
         {
             //var sql = "SELECT count(*) FROM SabhaAttendance where YuvakId = @id AND Attendance BETWEEN datetime('now', 'localtime', '-1 month') AND datetime('now', 'localtime');";

@@ -26,9 +26,13 @@ export class YuvakService {
   }
 
   updateSabha(sabha: Sabha) : Observable<Sabha>{
-    console.log("Services")
-    console.table(sabha);
     return this.http.put<Sabha>(this.baseUrl + 'Sabha/updateSabha', sabha);
   }
-
+  
+  ExitisingAttendance(yid:number,sid:number) : Observable<number>{
+    return this.http.get<number>(this.baseUrl + 'SabhaAttendance/'+yid+'/'+sid);
+  }
+  DeleteAttendance(yid:number,sid:number) : Observable<number>{
+    return this.http.delete<number>(this.baseUrl + 'SabhaAttendance/'+yid+'/'+sid);
+  }
 }
