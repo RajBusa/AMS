@@ -16,7 +16,8 @@ export class AttendanceComponent implements OnInit {
   yuvak: Yuvak[] = [];
   sabha: Sabha[] = [];
   searchText: string = '';
-  sahbadate: string = '';
+  changeSabhaDate: string = '';
+  todayDate: string = formatDate(new Date(), 'yyyy-MM-dd', 'en_US');
   constructor(private yuvakServices: YuvakService) { }
 
 
@@ -41,24 +42,25 @@ export class AttendanceComponent implements OnInit {
       .subscribe(
         response => {
           this.sabha = response;
-          this.sahbadate = response[0].sabhaDate;
-          console.table(response[0].sabhaDate)
+          this.sabha[0].sabhaDate = formatDate(this.sabha[0].sabhaDate, 'yyyy-MM-dd', 'en_US')
+          console.table(this.sabha[0])
         }
       )
   }
 
   onSubmit(){
-    console.log(typeof this.sahbadate)
-    this.sabha[0].sabhaDate = this.sahbadate;
-    // this.sabha[0].sabhaDate = ;
+    // formatDate(new Date(), 'yyyy-MM-dd', 'en_US')
+    this.sabha[0].sabhaDate = formatDate(this.changeSabhaDate, 'yyyy-MM-dd', 'en_US');
     console.log(this.sabha[0].sabhaDate);
     this.yuvakServices.updateSabha(this.sabha[0])
       .subscribe(
         response => {
-          console.log("response")
           console.log(response)
-          this.getSabha(this.mandalId);
         }
-      )
+      ) 
+  }
+
+  XYZ(){
+    console.log("klsjdfhlkashdgglsd hnoiusahfgiuashgosashu")
   }
 }

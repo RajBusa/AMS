@@ -28,7 +28,7 @@ namespace AMS.Repository
 
         public async Task<IEnumerable<Sabha>> GetUpComingSabhaByMandalId(int id)
         {
-            return await _db.QueryAsync<Sabha>("SELECT * FROM Sabha where MandalId = @id AND SabhaDate BETWEEN datetime('now') AND datetime('now', '+1 month') limit 1", new { @id = id });
+            return await _db.QueryAsync<Sabha>("SELECT * FROM Sabha where MandalId = @id AND SabhaDate BETWEEN datetime('now', '-1 day') AND datetime('now', '+1 month') limit 1", new { @id = id });
         }
 
         public async Task<int> InsertSabha(Sabha sabha)
@@ -38,12 +38,12 @@ namespace AMS.Repository
         }
         public async Task<int> UpdateSabha(Sabha sabha)
         {
-            string sd = sabha.SabhaDate.ToString("yyyy-MM-dd");
+            //string sd = sabha.SabhaDate.ToString("yyyy-MM-dd");
             Console.WriteLine("updateSabha Called 2");
-            Console.WriteLine(sd);
+            //Console.WriteLine(sd);
             //var sql = ("UPDATE Sabha SET MandalId = @MandalId,SabhaDate = @Date WHERE Id = @id");
             var sql = ("UPDATE Sabha SET MandalId = @MandalId,SabhaDate = @Date WHERE Id = @id");
-            return await _db.ExecuteAsync(sql, new { @MandalId = sabha.MandalId, @Date = sd, @id = sabha.Id });
+            return await _db.ExecuteAsync(sql, new { @MandalId = sabha.MandalId, @Date = sabha.SabhaDate, @id = sabha.Id });
         }
     }
 }

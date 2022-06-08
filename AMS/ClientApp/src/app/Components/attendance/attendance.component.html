@@ -16,8 +16,8 @@
                     </div>
                     <form action="" #form="ngForm" (ngSubmit)="onSubmit()">
                         <div class="modal-body">
-                            <input type="date" name="sahbadate" [(ngModel)] = "sahbadate">
-                            <p class="text-dark">{{sahbadate}}</p>
+                            <input type="date" value="{{sabha[0]?.sabhaDate}}" name="changeSabhaDate" [(ngModel)] = "changeSabhaDate">
+                            <!-- <p class="text-dark">{{sabha[0].sabhaDate}}</p> -->
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -37,7 +37,7 @@
             <button class="btn btn-primary col-12" routerLink="/yuvakList">View Attendance</button>
         </div>
     </form>
-    <ul class="list-group list-group-flush">
+    <!-- <ul class="list-group list-group-flush">
         <li class="list-group-item d-flex justify-content-between align-items-start"
             *ngFor="let y of yuvak | filter:searchText">
             <div class="ms-2 me-auto fw-bold">
@@ -45,14 +45,16 @@
             </div>
             <span><input type="checkbox" class="checkBox" name="" id=""></span>
         </li>
-    </ul>
-    <!-- <ul class="list-group list-group-flush" *ngIf="sabhaDate == '2019-06-29'; else elseBlock">
+    </ul> -->
+    <!-- <div>{{sabha[0].sabhaDate}}</div> -->
+    <ul class="list-group list-group-flush" *ngIf="sabha[0]?.sabhaDate == todayDate; else elseBlock">
         <li class="list-group-item d-flex justify-content-between align-items-start"
             *ngFor="let y of yuvak | filter:searchText">
             <div class="ms-2 me-auto fw-bold">
                 {{y.name}}
             </div>
-            <span><input type="checkbox" class="checkBox" name="" id=""></span>
+            <form action="" #form="ngForm" (ngSubmit)="XYZ()"></form>
+            <span><input type="checkbox" class="checkBox"  name="" id=""></span>
         </li>
     </ul>
     <ng-template #elseBlock>
@@ -65,5 +67,5 @@
                 <span><input type="checkbox" class="checkBox" name="" id="" disabled></span>
             </li>
         </ul>
-    </ng-template> -->
+    </ng-template>
 </div>
