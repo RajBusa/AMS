@@ -17,6 +17,9 @@ export class AttendanceComponent implements OnInit {
   sabha: Sabha[] = [];
   searchText: string = '';
   changeSabhaDate: string = '';
+  isAttendaanceTaken?: number;
+ 
+  //0 means Not Taken And 1 means Taken
   todayDate: string = formatDate(new Date(), 'yyyy-MM-dd', 'en_US');
   constructor(private yuvakServices: YuvakService) { }
 
@@ -60,7 +63,25 @@ export class AttendanceComponent implements OnInit {
       ) 
   }
 
-  XYZ(){
-    console.log("klsjdfhlkashdgglsd hnoiusahfgiuashgosashu")
+
+  takeAttendace(yid: number) {
+    console.log(yid);
+    this.yuvakServices.ExitisingAttendance(yid, this.sabha[0].id).subscribe(response => {
+      this.isAttendaanceTaken = response;
+      this.actionAttendace(yid);
+    })
+  }
+  
+  actionAttendace(yid: number) {
+    if (this.isAttendaanceTaken == 0) {
+      //Insert 
+    }
+    else {
+      //Delete
+      this.yuvakServices.DeleteAttendance(yid,this.sabha[0].id).subscribe(response => {
+        console.log(response);
+        console.log("Deleted");
+      })
+    }
   }
 }
