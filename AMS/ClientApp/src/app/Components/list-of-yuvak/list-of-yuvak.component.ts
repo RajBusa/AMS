@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Yuvak } from 'src/app/models/yuvak.model';
 import { YuvakService } from 'src/app/Services/Yuvak/yuvak.service';
 
@@ -8,13 +8,14 @@ import { YuvakService } from 'src/app/Services/Yuvak/yuvak.service';
   styleUrls: ['./list-of-yuvak.component.css']
 })
 export class ListOfYuvakComponent implements OnInit { 
-  yuvak: Yuvak[] = [];
+  yuvaks: Yuvak[] = [];
   samparkId: number = 1;
   mandalId: number = 1;
   isMandal: boolean = true;
   totalSabha: number = 0;
   filter: string = "Descending";
   searchText = '';
+  roleId: number = 2;
 
   
   constructor(private yuvakServices: YuvakService) { }
@@ -28,7 +29,7 @@ export class ListOfYuvakComponent implements OnInit {
     this.yuvakServices.getAllYuvak(samparkId, isMandal)
       .subscribe(
         response => {
-          this.yuvak = response;
+          this.yuvaks = response;
           // console.table(response);
         }
       );
@@ -36,11 +37,11 @@ export class ListOfYuvakComponent implements OnInit {
   
   sortYuvak(){
     if(this.filter == "Accending"){
-      this.yuvak = this.yuvak.sort((a:Yuvak, b:Yuvak)=> (a.count < b.count) ? -1 : 1 );
+      this.yuvaks = this.yuvaks.sort((a:Yuvak, b:Yuvak)=> (a.count < b.count) ? -1 : 1 );
       this.filter = "Descending";
     }
     else{
-      this.yuvak = this.yuvak.sort((a:Yuvak, b:Yuvak)=> (a.count > b.count) ? -1 : 1 );
+      this.yuvaks = this.yuvaks.sort((a:Yuvak, b:Yuvak)=> (a.count > b.count) ? -1 : 1 );
       this.filter = "Accending";
     }
 
@@ -73,7 +74,9 @@ export class ListOfYuvakComponent implements OnInit {
     }else{
       return 10;
     }
-
   }
 
+  getLink(y: Yuvak){
+    return `/yuvalProfile`;
+  }
 }

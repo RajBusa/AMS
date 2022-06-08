@@ -1,27 +1,54 @@
 <div class="container">
     <form class="d-flex my-3 row" role="search">
-            <div class="col-7">
-                <input class="form-control" type="search" placeholder="Search" [(ngModel)]="searchText" name="searchText">
-            </div>
-            <div class="col-5">
-                <!-- <i class="fa-solid fa-bars-filter"></i> -->
-                <button class="btn btn-primary col-12" (click)="sortYuvak()">{{filter}}</button>
-            </div>
+        <div class="col-7">
+            <input class="form-control" type="search" placeholder="Search" [(ngModel)]="searchText" name="searchText">
+        </div>
+        <div class="col-5">
+            <!-- <i class="fa-solid fa-bars-filter"></i> -->
+            <button class="btn btn-primary col-12" (click)="sortYuvak()">{{filter}}</button>
+        </div>
     </form>
-    <ul class="list-group list-group-flush" *ngFor="let y of yuvak | filter:searchText">
-        <li class="list-group-item d-flex justify-content-between bg-danger bg-opacity-{{calculateStuff(y.count)}} my-1 align-items-start">
-            <div class="ms-2 me-auto fw-bold">
-                {{y.name}}
-            </div>
-            <div class="me-5">
-                {{y.count}} / {{totalSabha}}
-            </div>
-            <div class="text-success px-3 h4 mb-0">
-                <a href="http://wa.me/91{{y.mobile}}"><i class="fa-brands fa-whatsapp text-success"></i></a>
-            </div>
-            <div class="px-3">
-                <a href="tel:+91{{y.mobile}}"><i class="fa-solid fa-phone text-success"></i></a>
-            </div>
-        </li>
-    </ul>
+    <div *ngIf="roleId == 1; else elseBlock">
+        <ul class="list-group list-group-flush" *ngFor="let y of yuvaks | filter:searchText">
+            <li
+                class="list-group-item d-flex justify-content-between bg-danger bg-opacity-{{calculateStuff(y.count)}} my-1 align-items-start">
+
+                <div class="ms-2 me-auto fw-bold">
+                    {{y.name}}
+                </div>
+                <div class="me-5">
+                    {{y.count}} / {{totalSabha}}
+                </div>
+                <div class="text-success px-3 h4 mb-0">
+                    <a href="http://wa.me/91{{y.mobile}}"><i class="fa-brands fa-whatsapp text-success"></i></a>
+                </div>
+                <div class="px-3">
+                    <a href="tel:+91{{y.mobile}}"><i class="fa-solid fa-phone text-success"></i></a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <ng-template #elseBlock>
+        <ul class="list-group list-group-flush" #elseBlock *ngFor="let y of yuvaks | filter:searchText">
+            <li
+                class="list-group-item d-flex justify-content-between bg-danger bg-opacity-{{calculateStuff(y.count)}} my-1 align-items-start">
+                <a [routerLink]="['/yuvalProfile']" [queryParams] = y class="row w-75 text-dark text-decoration-none">
+                    <!-- <div class="row w-75"> -->
+                    <div class="fw-bold col-6">
+                        {{y.name}}
+                    </div>
+                    <div class="col-6">
+                        {{y.count}} / {{totalSabha}}
+                    </div>
+                    <!-- </div> -->
+                </a>
+                <div class="text-success px-3 h4 mb-0">
+                    <a href="http://wa.me/91{{y.mobile}}"><i class="fa-brands fa-whatsapp text-success"></i></a>
+                </div>
+                <div class="px-3">
+                    <a href="tel:+91{{y.mobile}}"><i class="fa-solid fa-phone text-success"></i></a>
+                </div>
+            </li>
+        </ul>
+    </ng-template>
 </div>

@@ -1,7 +1,7 @@
 export interface Yuvak{
     id: number,
     name: string,
-    dob: Date,
+    dob: string,
     address: string,
     mobile: string,
     education: string,
