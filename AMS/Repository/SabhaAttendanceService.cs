@@ -34,12 +34,13 @@ namespace AMS.Repository
 
         public async Task<int> InsertSabhaAttendance(SabhaAttendance sabhaAttendance)
         {
-            var sql = "insert into SabhaAttendance values (NULL, @YuvakId, @SabhaId, @Attendance);";
+            //var sql = "insert into SabhaAttendance values (NULL, @YuvakId, @SabhaId, @Attendance);";
+            var sql = "insert into SabhaAttendance values (NULL, @YuvakId, @SabhaId, datetime('now', 'localtime'));";
             return await _db.ExecuteAsync(sql, new
             {
                 @YuvakId = sabhaAttendance.YuvakId,
                 @SabhaId = sabhaAttendance.SabhaId,
-                @Attendance = sabhaAttendance.Attendance
+                //@Attendance = sabhaAttendance.Attendance
             });
         }
 

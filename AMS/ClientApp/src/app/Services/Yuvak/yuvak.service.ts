@@ -3,6 +3,7 @@ import { Injectable, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { Sabha } from 'src/app/models/sabha.modal';
+import { SabhaAttendance } from 'src/app/models/sabhaAttendance.model';
 
 import { Yuvak } from 'src/app/models/yuvak.model';
 
@@ -34,5 +35,11 @@ export class YuvakService {
   }
   DeleteAttendance(yid:number,sid:number) : Observable<number>{
     return this.http.delete<number>(this.baseUrl + 'SabhaAttendance/'+yid+'/'+sid);
+  }
+
+  insertSabhaAttendance(sabhaAttendance: SabhaAttendance) : Observable<number>{
+    console.log("insertSabhaAttendance")
+    console.table(sabhaAttendance)
+    return this.http.post<number>(this.baseUrl + 'SabhaAttendance', sabhaAttendance);
   }
 }
