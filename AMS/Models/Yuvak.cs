@@ -33,5 +33,7 @@ namespace AMS.Models
         [ForeignKey("Karyakar")]
         public int SamparkId { get; set; }
         public Karyakar? Karyakar { get; set; }
+
+        public bool isSamparkKaryakar { get; set; }
     }
 }

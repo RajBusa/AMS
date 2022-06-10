@@ -1,4 +1,5 @@
-﻿using AMS.web.Models;
+﻿using AMS.Models;
+using AMS.web.Models;
 using Dapper;
 using System.Data.Common;
 
@@ -30,6 +31,11 @@ namespace AMS.Repository
         public async Task<IEnumerable<Karyakar>> GetKaryakar(int id)
         {
             return await _db.QueryAsync<Karyakar>("select * from Karyakar where Id = @Id", new { @Id = id });
+        }
+
+        public async Task<IEnumerable<SamparKaryakar>> GetSamparKaryakars(int mId)
+        {
+            return await _db.QueryAsync<SamparKaryakar>("SELECT Id, Name from Karyakar where RoleId = 1 AND Id in (SELECT KaryakarId FROM MandalKaryakar where MandalId = @mId);", new { @mId = mId });
         }
 
         public async Task<int> InsertKaryakar(Karyakar karyakar)

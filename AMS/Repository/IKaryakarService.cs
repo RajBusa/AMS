@@ -1,4 +1,5 @@
-﻿using AMS.web.Models;
+﻿using AMS.Models;
+using AMS.web.Models;
 
 namespace AMS.Repository
 {
@@ -7,6 +8,8 @@ namespace AMS.Repository
         Task<IEnumerable<Karyakar>> GetAllKaryakar();
 
         Task<IEnumerable<Karyakar>> GetKaryakar(int id);
+
+        Task<IEnumerable<SamparKaryakar>> GetSamparKaryakars(int mId);
 
         Task<int> DeleteKaryakar(int id);
 

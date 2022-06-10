@@ -30,7 +30,7 @@ export class ListOfYuvakComponent implements OnInit {
       .subscribe(
         response => {
           this.yuvaks = response;
-          // console.table(response);
+          console.table(response[0].isSamparkKaryakar);
         }
       );
   }
@@ -74,9 +74,5 @@ export class ListOfYuvakComponent implements OnInit {
     }else{
       return 10;
     }
-  }
-
-  getLink(y: Yuvak){
-    return `/yuvalProfile`;
   }
 }

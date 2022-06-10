@@ -237,6 +237,9 @@ namespace AMS.Migrations
                     b.Property<int>("SamparkId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("isSamparkKaryakar")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.HasIndex("MandalId");

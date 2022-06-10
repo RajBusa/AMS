@@ -4,6 +4,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Sabha } from 'src/app/models/sabha.modal';
 import { SabhaAttendance } from 'src/app/models/sabhaAttendance.model';
+import { SamparkKaryakar } from 'src/app/models/samparkKaryakar.model';
 
 import { Yuvak } from 'src/app/models/yuvak.model';
 
@@ -16,6 +17,15 @@ export class YuvakService {
 
   getAllYuvak(id: number, isMandal: boolean): Observable<Yuvak[]> {
     return this.http.get<Yuvak[]>(this.baseUrl + 'Yuvak/getKaryakarById/' + id + '/' + isMandal);
+  }
+
+  updateYuvak(yuvak: Yuvak):Observable<Yuvak>{
+    return this.http.put<Yuvak>(this.baseUrl + 'Yuvak', yuvak);
+  }
+
+  insertYuvak(yuvak: Yuvak): Observable<Yuvak>{
+    console.log(yuvak);
+    return this.http.post<Yuvak>(this.baseUrl + 'Yuvak', yuvak);
   }
 
   getTotalSabha(id: number): Observable<number> {
@@ -42,4 +52,10 @@ export class YuvakService {
     console.table(sabhaAttendance)
     return this.http.post<number>(this.baseUrl + 'SabhaAttendance', sabhaAttendance);
   }
+
+  getSamparkKaryakar(mId: number) : Observable<SamparkKaryakar[]>{
+    console.log(mId)
+    return this.http.get<SamparkKaryakar[]>(this.baseUrl + 'Karyakar/getSamparkKaryakar/' + mId);
+  }
+
 }

@@ -14,5 +14,6 @@ namespace AMS.Models
         public int MandalId { get; set; }
         public int SamparkId { get; set; }
         public int count{ get; set; }
+        public bool isSamparkKaryakar { get; set; }
     }
 }

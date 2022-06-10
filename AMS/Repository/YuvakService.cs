@@ -66,6 +66,7 @@ namespace AMS.Repository
                 lastMonthSabha.MandalId = item.MandalId;
                 lastMonthSabha.SamparkId = item.SamparkId;
                 lastMonthSabha.count = count;
+                lastMonthSabha.isSamparkKaryakar = item.isSamparkKaryakar;
                 data.Add(lastMonthSabha);
                 lastMonthSabha = null;
             }
@@ -74,7 +75,7 @@ namespace AMS.Repository
 
         public async Task<int> InsertYuvak(Yuvak yuvak)
         {
-            var sql = "insert into Yuvak values (NULL, @Name, @DOB, @Address, @Mobile, @Education, @Email ,@MandalId, @SamparkId);";
+            var sql = "insert into Yuvak values (NULL, @Name, @DOB, @Address, @Mobile, @Education, @Email ,@MandalId, @SamparkId, @isSamparkKaryakar);";
             return await _db.ExecuteAsync(sql, new
             {
                 @Name = yuvak.Name,
@@ -84,13 +85,14 @@ namespace AMS.Repository
                 @Education = yuvak.Education,
                 @Email = yuvak.Email,
                 @MandalId = yuvak.MandalId,
-                @SamparkId = yuvak.SamparkId
+                @SamparkId = yuvak.SamparkId,
+                @isSamparkKaryakar = yuvak.isSamparkKaryakar
             });
         }
 
         public async Task<int> UpdateYuvak(Yuvak yuvak)
         {
-            var sql = "Update Yuvak set Name = @Name, DOB = @DOB, Address = @Address, Mobile = @Mobile, Education = @Education, Email = @Email, MandalId = @MandalId, SamparkId = @SamparkId where id = @id";
+            var sql = "Update Yuvak set Name = @Name, DOB = @DOB, Address = @Address, Mobile = @Mobile, Education = @Education, Email = @Email, MandalId = @MandalId, SamparkId = @SamparkId, isSamparkKaryakar = @isSamparkKaryakar where id = @id";
             return await _db.ExecuteAsync(sql, new
             {
                 @id = yuvak.Id,
@@ -101,7 +103,9 @@ namespace AMS.Repository
                 @Education = yuvak.Education,
                 @Email = yuvak.Email,
                 @MandalId = yuvak.MandalId,
-                @SamparkId = yuvak.SamparkId
+                @SamparkId = yuvak.SamparkId,
+                @isSamparkKaryakar = yuvak.isSamparkKaryakar
+
             });
         }
     }

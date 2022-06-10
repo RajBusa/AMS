@@ -1,3 +1,4 @@
+<button class="btn btn-primary rounded-circle position-absolute bottom-0 end-0 mb-4 me-4" [routerLink]="['/yuvalProfile']" [queryParams] = {mandalId:mandalId}><h1 class="m-0">+</h1></button>
 <div class="container">
     <form class="d-flex my-3 row" role="search">
         <div class="col-7">
@@ -32,7 +33,7 @@
         <ul class="list-group list-group-flush" #elseBlock *ngFor="let y of yuvaks | filter:searchText">
             <li
                 class="list-group-item d-flex justify-content-between bg-danger bg-opacity-{{calculateStuff(y.count)}} my-1 align-items-start">
-                <a [routerLink]="['/yuvalProfile']" [queryParams] = y class="row w-75 text-dark text-decoration-none">
+                <a [routerLink]="['/yuvalProfile']" [queryParams] = "{id:y.id, name: y.name, email: y.email, mobile: y.mobile, education: y.education, address: y.address,dob: y.dob, samparkId: y.samparkId, isSamparkKaryakar: y.isSamparkKaryakar, mandalId: mandalId}" class="row w-75 text-dark text-decoration-none">
                     <!-- <div class="row w-75"> -->
                     <div class="fw-bold col-6">
                         {{y.name}}

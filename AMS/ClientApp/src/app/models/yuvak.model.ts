@@ -8,5 +8,6 @@ export interface Yuvak{
     email: string,
     mandalId: number,
     samparkId: number,
-    count: number
+    count: number,
+    isSamparkKaryakar: boolean
 }

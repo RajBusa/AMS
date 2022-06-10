@@ -37,23 +37,23 @@ namespace AMS.Controllers
         }
 
         [HttpPost]
-        [ActionName("insertKaryakar")]
-        public async Task<IActionResult> insertKaryakar([FromBody] Yuvak yuvak)
+        [ActionName("insertYuvak")]
+        public async Task<IActionResult> insertYuvak([FromBody] Yuvak yuvak)
         {
             return Ok(await _context.InsertYuvak(yuvak));
         }
 
         [HttpPut]
-        [ActionName("updateKaryakar")]
-        public async Task<IActionResult> updateKaryakar([FromBody] Yuvak yuvak)
+        public async Task<IActionResult> updateYuvak([FromBody] Yuvak yuvak)
         {
+            Console.WriteLine("funsldkfhlashevtoastoiowu ru");
             return Ok(await _context.UpdateYuvak(yuvak));
         }
 
         [HttpDelete]
         [Route("{id:int}")]
         [ActionName("deletetKaryakar")]
-        public async Task<IActionResult> deletetKaryakar([FromRoute] int id)
+        public async Task<IActionResult> deletetYuvak([FromRoute] int id)
         {
             return Ok(await _context.DeleteYuvak(id));
         }

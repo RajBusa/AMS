@@ -28,6 +28,13 @@ namespace AMS.Controllers
             return Ok(await _context.GetKaryakar(id));
         }
 
+        [HttpGet]
+        [Route("[action]/{mId:int}")]
+        public async Task<IActionResult> getSamparkKaryakar(int mId)
+        {
+            return Ok(await _context.GetSamparKaryakars(mId));
+        }
+
         [HttpPost]
         public async Task<IActionResult> insertKaryakar([FromBody] Karyakar karyakar)
         {
