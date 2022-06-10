@@ -25,8 +25,10 @@ namespace AMS.Models
         public int KshetraId { get; set; }
         public Kshetra? Kshetra { get; set; }
 
-        [StringLength(10)]
-        public string? Day { get; set; }
+        //[StringLength(10)]
+        //public string? Day { get; set; }
+        
+        public int Day { get; set; }
 
     }
 }

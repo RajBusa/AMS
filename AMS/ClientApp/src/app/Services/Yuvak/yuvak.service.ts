@@ -57,5 +57,7 @@ export class YuvakService {
     console.log(mId)
     return this.http.get<SamparkKaryakar[]>(this.baseUrl + 'Karyakar/getSamparkKaryakar/' + mId);
   }
-
+  updateIsAttendanceTaken(id:number,data:boolean) : Observable<number> {
+    return this.http.put<number>(this.baseUrl + 'Yuvak/UpdateYuvakAttendance/'+id,data);
+  }
 }

@@ -115,9 +115,8 @@ namespace AMS.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Day")
-                        .HasMaxLength(10)
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Day")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("KshetraId")
                         .HasColumnType("INTEGER");
@@ -235,6 +234,9 @@ namespace AMS.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("SamparkId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("isAttendanceTaken")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("isSamparkKaryakar")

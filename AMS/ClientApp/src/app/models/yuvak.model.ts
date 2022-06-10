@@ -9,5 +9,6 @@ export interface Yuvak{
     mandalId: number,
     samparkId: number,
     count: number,
-    isSamparkKaryakar: boolean
+    isSamparkKaryakar: boolean,
+    isAttendanceTaken: boolean
 }

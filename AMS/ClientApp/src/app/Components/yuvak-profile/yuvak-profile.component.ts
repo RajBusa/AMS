@@ -27,7 +27,8 @@ export class YuvakProfileComponent implements OnInit {
     mandalId: 1,
     samparkId: 1,
     count: 1,
-    isSamparkKaryakar: false
+    isSamparkKaryakar: false,
+    isAttendanceTaken:false
   };
   constructor(private route: ActivatedRoute, private yuvakServices: YuvakService) { }
 

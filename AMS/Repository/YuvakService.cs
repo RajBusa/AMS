@@ -22,6 +22,7 @@ namespace AMS.Repository
 
         public async Task<IEnumerable<Yuvak>> GetAllYuvak()
         {
+            Console.WriteLine(await _db.QueryAsync<Yuvak>("select * from Yuvak"));
             return await _db.QueryAsync<Yuvak>("select * from Yuvak");
         }
 
@@ -75,7 +76,7 @@ namespace AMS.Repository
 
         public async Task<int> InsertYuvak(Yuvak yuvak)
         {
-            var sql = "insert into Yuvak values (NULL, @Name, @DOB, @Address, @Mobile, @Education, @Email ,@MandalId, @SamparkId, @isSamparkKaryakar);";
+            var sql = "insert into Yuvak values (NULL, @Name, @DOB, @Address, @Mobile, @Education, @Email ,@MandalId, @SamparkId, @isSamparkKaryakar,false);";
             return await _db.ExecuteAsync(sql, new
             {
                 @Name = yuvak.Name,
@@ -106,6 +107,16 @@ namespace AMS.Repository
                 @SamparkId = yuvak.SamparkId,
                 @isSamparkKaryakar = yuvak.isSamparkKaryakar
 
+            });
+        }
+        
+        public async Task<int> UpdateYuvakAttendance(int id, bool data)
+        {
+            var sql = "Update Yuvak set isAttendanceTaken = @data where id = @id";
+            return await _db.ExecuteAsync(sql, new
+            {
+                @id = id,
+                @data = data
             });
         }
     }

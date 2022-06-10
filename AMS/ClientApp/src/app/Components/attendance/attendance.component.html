@@ -54,7 +54,14 @@
                 {{y.name}}
             </div>
             <!-- <form action="" #form="ngForm" (ngSubmit)="XYZ()"></form> -->
-            <span><input type="checkbox" (click)="takeAttendace(y.id)" class="checkBox"  name="" id=""></span>
+            <div *ngIf = "y.isAttendanceTaken == true;else elseBlock1">
+                {{y.isAttendanceTaken}}
+                <span><input type="checkbox" (click)="takeAttendace(y.id)" class="checkBox" checked  name="" id=""></span>
+            </div>
+            <ng-template #elseBlock1>
+                {{y.isAttendanceTaken}}
+                <span><input type="checkbox" (click)="takeAttendace(y.id)" class="checkBox"  name="" id=""></span>
+            </ng-template>
         </li>
     </ul>
     <ng-template #elseBlock>

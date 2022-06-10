@@ -1,7 +1,8 @@
 ﻿using AMS.Repository;
 using AMS.web.Models;
 using Microsoft.AspNetCore.Mvc;
-
+using System;
+using System.Timers;
 namespace AMS.Controllers
 {
     [ApiController]
@@ -9,7 +10,7 @@ namespace AMS.Controllers
     public class KaryakarController : Controller
     {
         private readonly IKaryakarService _context;
-
+        private static System.Timers.Timer aTimer;
         public KaryakarController(IKaryakarService context)
         {
             _context = context;
@@ -18,9 +19,29 @@ namespace AMS.Controllers
         [HttpGet]
         public async Task<IActionResult> getAllKaryakar()
         {
+            Console.WriteLine("Hey Started");
+            aTimer = new System.Timers.Timer();
+            aTimer.Interval = 2000;
+
+            // Hook up the Elapsed event for the timer. 
+             aTimer.Elapsed += hey;
+             //aTimer.Elapsed += OnTimedEvent;
+
+            // Have the timer fire repeated events (true is the default)
+            aTimer.AutoReset = true;
+
+            // Start the timer
+            aTimer.Enabled = true;
             return Ok(await _context.GetAllKaryakar());
         }
-
+        private static void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
+        {
+            Console.WriteLine("The Elapsed event was raised at {0}", e.SignalTime);
+        }
+        public static void hey(Object source,System.Timers.ElapsedEventArgs e)
+        {
+            Console.WriteLine("Hey 2 sec");
+        }
         [HttpGet]
         [Route("{id:int}")]
         public async Task<IActionResult> getKaryakar(int id)
