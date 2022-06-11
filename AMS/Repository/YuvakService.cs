@@ -68,6 +68,7 @@ namespace AMS.Repository
                 lastMonthSabha.SamparkId = item.SamparkId;
                 lastMonthSabha.count = count;
                 lastMonthSabha.isSamparkKaryakar = item.isSamparkKaryakar;
+                lastMonthSabha.isAttendanceTaken = item.isAttendanceTaken;
                 data.Add(lastMonthSabha);
                 lastMonthSabha = null;
             }
