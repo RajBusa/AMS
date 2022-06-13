@@ -49,6 +49,12 @@ namespace AMS.Controllers
             Console.WriteLine("funsldkfhlashevtoastoiowu ru");
             return Ok(await _context.UpdateYuvak(yuvak));
         }
+        [HttpPut]
+        [Route("[action]/{id:int}")]
+        public async Task<IActionResult> updateYuvakAttendance([FromRoute] int id, [FromBody] bool data)
+        {
+            return Ok(await _context.UpdateYuvakAttendance(id,data));
+        }
 
         [HttpDelete]
         [Route("{id:int}")]

@@ -42,7 +42,7 @@ export class AttendanceComponent implements OnInit {
       .subscribe(
         response => {
           this.yuvak = response;
-          // console.table(response);
+          console.log(response);
         }
       );
   }
@@ -85,6 +85,9 @@ export class AttendanceComponent implements OnInit {
           .subscribe(response => {
             console.log(response);
           })
+          this.yuvakServices.updateIsAttendanceTaken(yid, true).subscribe(response => {
+            console.log(response);
+          })
         }
         else {
           //Delete
@@ -92,6 +95,9 @@ export class AttendanceComponent implements OnInit {
           this.yuvakServices.DeleteAttendance(yid, this.sabha[0].id).subscribe(response => {
             console.log(response);
             console.log("Deleted");
+          })
+          this.yuvakServices.updateIsAttendanceTaken(yid, false).subscribe(response => {
+            console.log(response);
           })
         }
       })

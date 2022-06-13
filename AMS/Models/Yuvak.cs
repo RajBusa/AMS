@@ -35,5 +35,6 @@ namespace AMS.Models
         public Karyakar? Karyakar { get; set; }
 
         public bool isSamparkKaryakar { get; set; }
+        public bool isAttendanceTaken { get; set; }
     }
 }

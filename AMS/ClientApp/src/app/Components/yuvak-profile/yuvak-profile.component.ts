@@ -32,7 +32,8 @@ export class YuvakProfileComponent implements OnInit {
     mandalId: 1,
     samparkId: 2,
     count: 1,
-    isSamparkKaryakar: false
+    isSamparkKaryakar: false,
+    isAttendanceTaken:false
   };
 
   samparkKaryakar: Karyakar = {

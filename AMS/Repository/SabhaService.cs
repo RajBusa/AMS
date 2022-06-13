@@ -42,7 +42,7 @@ namespace AMS.Repository
             Console.WriteLine("updateSabha Called 2");
             //Console.WriteLine(sd);
             //var sql = ("UPDATE Sabha SET MandalId = @MandalId,SabhaDate = @Date WHERE Id = @id");
-            var sql = ("UPDATE Sabha SET MandalId = @MandalId,SabhaDate = @Date WHERE Id = @id");
+            var sql = ("UPDATE Sabha SET MandalId = @MandalId,SabhaDate =date(@Date) WHERE Id = @id");
             return await _db.ExecuteAsync(sql, new { @MandalId = sabha.MandalId, @Date = sabha.SabhaDate, @id = sabha.Id });
         }
     }
