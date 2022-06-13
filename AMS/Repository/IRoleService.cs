@@ -6,7 +6,7 @@ namespace AMS.Repository
     {
         Task<IEnumerable<KaryakarRole>> GetAllRoles();
 
-        Task<int> InsertKaryakarRole(KaryakarRole role);
+        Task<IEnumerable<int>> InsertKaryakarRole(KaryakarRole role);
         Task<int> DeleteYuvak(int id);
 
         Task<int> UpdateKaryakar(KaryakarRole role);

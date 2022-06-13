@@ -38,10 +38,17 @@ namespace AMS.Repository
             return await _db.QueryAsync<SamparKaryakar>("SELECT Id, Name from Karyakar where RoleId = 1 AND Id in (SELECT KaryakarId FROM MandalKaryakar where MandalId = @mId);", new { @mId = mId });
         }
 
-        public async Task<int> InsertKaryakar(Karyakar karyakar)
+        //public async Task<int> GetSamparkId()
+        //{
+        //    var sql = "SELECT id from Karyakar order by ROWID DESC limit 1";
+        //    return await _db.QueryAsync<int>(sql);
+        //}
+
+        public async Task<IEnumerable<int>> InsertKaryakar(Karyakar karyakar)
         {
-            var sql = "insert into Karyakar (Id, Name, DOB, Address, MobileNo, Education, RoleId ,Email, Password, isActivated, KshetraId, KarayakarNo) values (NULL, @Name, @DOB, @Address, @MobileNo, @Education, @RoleId ,@Email, @Password, @isActivated, @KshetraId, @KarayakarNo);";
-            return await _db.ExecuteAsync(sql, new 
+            Console.WriteLine("INserted call");
+            var sql = "insert into Karyakar (Id, Name, DOB, Address, MobileNo, Education, RoleId ,Email, Password, isActivated, KshetraId, KarayakarNo) values (NULL, @Name, @DOB, @Address, @MobileNo, @Education, @RoleId ,@Email, @Password, @isActivated, @KshetraId, @KarayakarNo); select last_insert_rowid();";
+            return await _db.QueryAsync<int>(sql, new
             {
                 @Name = karyakar.Name,
                 @DOB = karyakar.DOB,
@@ -54,7 +61,10 @@ namespace AMS.Repository
                 @isActivated = karyakar.isActivated,
                 @KshetraId = karyakar.KshetraId,
                 @KarayakarNo = karyakar.KarayakarNo
-            }); 
+            });
+            //INSERT INTO KarayakarRole VALUES(NULL,'Raj');
+            //last_insert_rowid()
+
         }
 
         public async Task<int> UpdateKaryakar(Karyakar karyakar)

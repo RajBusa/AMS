@@ -17,13 +17,12 @@ namespace AMS.Repository
         public Task<IEnumerable<KaryakarRole>> GetAllRoles()
         {
             return _db.QueryAsync<KaryakarRole>("select * from KarayakarRole");
-            
         }
 
-        public async Task<int>  InsertKaryakarRole(KaryakarRole role)
+        public async Task<IEnumerable<int>> InsertKaryakarRole(KaryakarRole role)
         {
-            var sql = "insert into KarayakarRole values (NULL, @role);";
-            return await _db.ExecuteAsync(sql, new
+            var sql = "insert into KarayakarRole values (NULL, @role); select last_insert_rowid();";
+            return await _db.QueryAsync<int>(sql, new
             {
                 @role = role.RoleName
             });
