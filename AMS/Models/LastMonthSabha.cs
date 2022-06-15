@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace AMS.Models
+﻿namespace AMS.Models
 {
     public class LastMonthSabha
     {
