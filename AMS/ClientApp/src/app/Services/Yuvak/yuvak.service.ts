@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
+import { Karyakar } from 'src/app/models/karyakar.model';
 import { MandalKaryakar } from 'src/app/models/mandalKaryakar.model';
 import { Sabha } from 'src/app/models/sabha.modal';
 import { SabhaAttendance } from 'src/app/models/sabhaAttendance.model';
@@ -21,7 +22,7 @@ export class YuvakService {
   }
 
   updateYuvak(yuvak: Yuvak):Observable<Yuvak>{
-    console.log(yuvak)
+    // console.log(yuvak)
     return this.http.put<Yuvak>(this.baseUrl + 'Yuvak', yuvak);
   }
 
@@ -38,13 +39,19 @@ export class YuvakService {
     return this.http.post<number>(this.baseUrl + 'MandalKaryakar', mandalKaryakar);
   }
 
-  getSamparkId(): Observable<number>{
-    return this.http.get<number>(this.baseUrl + 'Karyakar/getSamparkId')
+  deleteMandalKaryakar(Karyakarid: number): Observable<number>{
+    console.log(Karyakarid)
+    return this.http.delete<number>(this.baseUrl + 'MandalKaryakar/' + Karyakarid);
   } 
 
-  updateSamparkKaryakar(samparkKaryakar: SamparkKaryakar): Observable<SamparkKaryakar>{
-    console.log(samparkKaryakar);
-    return this.http.put<SamparkKaryakar>(this.baseUrl + 'Karyakar', samparkKaryakar)
+  deleteKaryakar(Karyakarid: number): Observable<number>{
+    console.log(Karyakarid)
+    return this.http.delete<number>(this.baseUrl + 'Karyakar/' + Karyakarid);
+  } 
+
+  updateSamparkKaryakar(samparkKaryakar: Karyakar): Observable<number>{
+    // console.log(samparkKaryakar);
+    return this.http.put<number>(this.baseUrl + 'Karyakar', samparkKaryakar)
   } 
 
   getTotalSabha(id: number): Observable<number> {

@@ -30,7 +30,7 @@ export class ListOfYuvakComponent implements OnInit {
       .subscribe(
         response => {
           this.yuvaks = response;
-          console.table(response[0].isSamparkKaryakar);
+          // console.table(response[0].isSamparkKaryakar);
         }
       );
   }

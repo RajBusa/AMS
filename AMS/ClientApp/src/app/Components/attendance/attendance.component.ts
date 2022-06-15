@@ -42,7 +42,7 @@ export class AttendanceComponent implements OnInit {
       .subscribe(
         response => {
           this.yuvak = response;
-          console.log(response);
+          // console.log(response);
         }
       );
   }
@@ -53,7 +53,7 @@ export class AttendanceComponent implements OnInit {
         response => {
           this.sabha = response;
           this.sabha[0].sabhaDate = formatDate(this.sabha[0].sabhaDate, 'yyyy-MM-dd', 'en_US')
-          console.table(this.sabha[0])
+          // console.table(this.sabha[0])
         }
       )
   }

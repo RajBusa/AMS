@@ -37,7 +37,7 @@ namespace AMS.Controllers
 
         [HttpDelete]
         [Route("{id:int}")]
-        public async Task<IActionResult> DeleteMandalKaryakarRole([FromRoute] int id)
+        public async Task<IActionResult> DeleteMandalKaryakar([FromRoute] int id)
         {
             return Ok(await _context.DeleteMandalKaryakar(id));
         }

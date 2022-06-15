@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Yuvak } from 'src/app/models/yuvak.model';
 import { ActivatedRoute } from '@angular/router';
 import { formatDate } from '@angular/common';
@@ -18,10 +18,11 @@ import { MandalKaryakar } from 'src/app/models/mandalKaryakar.model';
 export class YuvakProfileComponent implements OnInit {
   samparkKaryakars: SamparkKaryakar[] = [];
   syRole?: string;
-  mandalId: number = 0 ;
+  isSamparkKaryakarBefore?: string;
+  mandalId: number = 0;
   kshetraId: number = 1;
 
-  yuvak :Yuvak = {
+  yuvak: Yuvak = {
     id: 0,
     name: '',
     dob: '  ',
@@ -33,7 +34,7 @@ export class YuvakProfileComponent implements OnInit {
     samparkId: 2,
     count: 1,
     isSamparkKaryakar: false,
-    isAttendanceTaken:false
+    isAttendanceTaken: false
   };
 
   samparkKaryakar: Karyakar = {
@@ -54,7 +55,7 @@ export class YuvakProfileComponent implements OnInit {
   mandalKaryakar: MandalKaryakar = {
     id: 0,
     mandalId: 0,
-    karyakarId: 0  
+    karyakarId: 0
   };
 
   constructor(private route: ActivatedRoute, private yuvakServices: YuvakService) { }
@@ -62,10 +63,10 @@ export class YuvakProfileComponent implements OnInit {
   ngOnInit(): void {
 
     this.route.queryParams.subscribe(
-      params=>{
+      params => {
         // console.log(typeof params['isSamparkKaryakar'])
         this.mandalId = params['mandalId']
-        if(params['id'] != undefined){
+        if (params['id'] != undefined) {
           // console.log(params);
           this.yuvak.id = params['id'];
           this.yuvak.name = params['name'];
@@ -76,68 +77,94 @@ export class YuvakProfileComponent implements OnInit {
           this.yuvak.education = params['education'];
           this.yuvak.email = params['email'];
           this.yuvak.samparkId = params['samparkId'];
-          console.log(params['samparkId']);
           this.yuvak.count = params['count'];
           this.syRole = params['isSamparkKaryakar'];
+          this.isSamparkKaryakarBefore = params['isSamparkKaryakar'];
+
+          this.samparkKaryakar.id = this.yuvak.samparkId;
+          // console.log(this.isSamparkKaryakarBefore);
+          // console.log(this.syRole);
         }
       }
-      ) 
-      this.getSamparkKaryakar(this.mandalId)
+    )
+    this.getSamparkKaryakar(this.mandalId)
   }
 
-  onSubmit(){
-    if(this.syRole == 'true'){
+  onSubmit() {
+    if (this.syRole == 'true') {
       this.yuvak.isSamparkKaryakar = true
     }
-    else{
+    else {
       this.yuvak.isSamparkKaryakar = false
     }
-    console.log("InSide Function")
-    if(this.yuvak.id == 0){
-      if(this.yuvak.isSamparkKaryakar == false){
+    // console.log("InSide Function")
+    if (this.yuvak.id == 0) {
+      if (this.yuvak.isSamparkKaryakar == false) {
         this.insertYuvak();
       }
-      else{
-        this.insertSamparkKaryakar(); 
+      else {
+        this.insertSamparkKaryakar();
       }
       // console.log("Insert")
-      
+
     }
-    else{
+    else {
+
+      console.log(typeof this.isSamparkKaryakarBefore)
+      console.log(typeof this.syRole)
       // console.log("Update")
-      if(this.yuvak.isSamparkKaryakar == false){
+
+      if (this.syRole == 'false' && this.isSamparkKaryakarBefore == 'false') {
+        console.log('FF')
         this.updateYuvakProfile()
-      }
-      else{
-        this.updateYuvakProfile()
+      } else if (this.syRole == 'true' && this.isSamparkKaryakarBefore == 'true') {
+        console.log('TT')
+        this.updateSamparkKaryakar();
+      } else if (this.syRole == 'false' && this.isSamparkKaryakarBefore == 'true') {
+        this.isSamparkKaryakarBefore = 'false';
+        console.log("TF")
+        this.updateYuvakProfile();
+        this.deleteMandalKaryakar();
+        this.deleteKaryakar();
+      } else {
+        this.isSamparkKaryakarBefore = 'true';
+        console.log("FT");
+        this.insertSamparkKaryakar()
+        // this.samparkKaryakar.address = this.yuvak.address
+        // this.samparkKaryakar.dob = this.yuvak.dob
+        // this.samparkKaryakar.education = this.yuvak.education
+        // this.samparkKaryakar.email = this.yuvak.email
+        // this.samparkKaryakar.karayakarNo = 0
+        // this.samparkKaryakar.kshetraId = this.kshetraId
+        // this.samparkKaryakar.mobileNo = this.yuvak.mobile
+        // this.samparkKaryakar.name = this.yuvak.name
 
-        this.samparkKaryakar.id = this.yuvak.samparkId 
-        this.samparkKaryakar.address = this.yuvak.address
-        this.samparkKaryakar.dob = this.yuvak.dob
-        this.samparkKaryakar.education=this.yuvak.education
-        this.samparkKaryakar.email=this.yuvak.email
-        this.samparkKaryakar.karayakarNo = 0
-        this.samparkKaryakar.kshetraId = this.kshetraId
-        this.samparkKaryakar.mobileNo = this.yuvak.mobile
-        this.samparkKaryakar.name = this.yuvak.name
-        
+        // this.mandalKaryakar.mandalId = this.yuvak.mandalId;
 
-
-        this.yuvakServices.updateSamparkKaryakar(this.samparkKaryakar)
-          .subscribe(
-            response => {
-              console.log(response)
-            }
-          )
+        // this.yuvakServices.insertSamparkKaryakar(this.samparkKaryakar)
+        //   .subscribe(
+        //     response => {
+        //       console.log(response[0])
+        //       console.log(typeof response)
+        //       console.log(typeof response[0])
+        //       console.log(typeof this.yuvak.samparkId)
+        //       this.yuvak.samparkId = response[0];
+        //       this.mandalKaryakar.karyakarId = response[0];
+        //       this.insertMandalKaryakar();
+        //       this.updateYuvakProfile();
+        //     }
+        //   )
       }
     }
   }
 
   insertSamparkKaryakar() {
+    console.log("Inside Function")
+    console.log(this.samparkKaryakar.id)
     this.samparkKaryakar.address = this.yuvak.address
     this.samparkKaryakar.dob = this.yuvak.dob
-    this.samparkKaryakar.education=this.yuvak.education
-    this.samparkKaryakar.email=this.yuvak.email
+    this.samparkKaryakar.education = this.yuvak.education
+    this.samparkKaryakar.email = this.yuvak.email
     this.samparkKaryakar.karayakarNo = 0
     this.samparkKaryakar.kshetraId = this.kshetraId
     this.samparkKaryakar.mobileNo = this.yuvak.mobile
@@ -146,31 +173,35 @@ export class YuvakProfileComponent implements OnInit {
     this.mandalKaryakar.mandalId = this.yuvak.mandalId;
 
     this.yuvakServices.insertSamparkKaryakar(this.samparkKaryakar)
-          .subscribe(
-            response => {
-              console.log(response[0])
-              console.log(typeof response)
-              console.log(typeof response[0])
-              console.log(typeof this.yuvak.samparkId)
-              this.yuvak.samparkId = response[0];
-              this.mandalKaryakar.karyakarId = response[0];
-              this.insertYuvak();
-              this.InsertMandalKaryakar();
-            }
-
-          )
-  }
-
-  insertYuvak(){
-    this.yuvakServices.insertYuvak(this.yuvak)
-        .subscribe(
-          response => {
-            console.log(response)
+      .subscribe(
+        response => {
+          console.log(response[0])
+          console.log(typeof response)
+          console.log(typeof response[0])
+          console.log(typeof this.yuvak.samparkId)
+          this.yuvak.samparkId = response[0];
+          this.mandalKaryakar.karyakarId = response[0];
+          if (this.yuvak.id == 0) {
+            this.insertYuvak();
+          } else {
+            this.updateYuvakProfile()
           }
-        );
+          this.insertMandalKaryakar();
+        }
+
+      )
   }
 
-  InsertMandalKaryakar(){
+  insertYuvak() {
+    this.yuvakServices.insertYuvak(this.yuvak)
+      .subscribe(
+        response => {
+          console.log(response)
+        }
+      );
+  }
+
+  insertMandalKaryakar() {
     this.yuvakServices.insertMandalKarykar(this.mandalKaryakar)
       .subscribe(
         response => {
@@ -180,16 +211,58 @@ export class YuvakProfileComponent implements OnInit {
   }
 
 
-  updateYuvakProfile(){
+
+  updateSamparkKaryakar() {
+
+    this.samparkKaryakar.id = this.yuvak.samparkId
+    this.samparkKaryakar.address = this.yuvak.address
+    this.samparkKaryakar.dob = this.yuvak.dob
+    this.samparkKaryakar.education = this.yuvak.education
+    this.samparkKaryakar.email = this.yuvak.email
+    this.samparkKaryakar.karayakarNo = 0
+    this.samparkKaryakar.kshetraId = this.kshetraId
+    this.samparkKaryakar.mobileNo = this.yuvak.mobile
+    this.samparkKaryakar.name = this.yuvak.name
+
+    this.yuvakServices.updateSamparkKaryakar(this.samparkKaryakar)
+      .subscribe(
+        response => {
+          console.log(response);
+        }
+      )
+    this.updateYuvakProfile();
+  }
+
+  updateYuvakProfile() {
     this.yuvakServices.updateYuvak(this.yuvak)
       .subscribe(
         response => {
-          // console.log(response);
+          console.log(response);
         }
       );
   }
 
-  getSamparkKaryakar(mandalId: number){
+  deleteMandalKaryakar() {
+    console.log(this.samparkKaryakar.id)
+    this.yuvakServices.deleteMandalKaryakar(this.samparkKaryakar.id)
+      .subscribe(
+        response => {
+          console.log(response)
+        }
+      )
+  }
+
+  deleteKaryakar() {
+    console.log(this.samparkKaryakar.id)
+    this.yuvakServices.deleteKaryakar(this.samparkKaryakar.id)
+      .subscribe(
+        response => {
+          console.log(response)
+        }
+      )
+  }
+
+  getSamparkKaryakar(mandalId: number) {
     this.yuvakServices.getSamparkKaryakar(mandalId)
       .subscribe(
         response => {
@@ -197,15 +270,5 @@ export class YuvakProfileComponent implements OnInit {
           // console.log(response);
         }
       )
-  }
-
-  getSamparkId(){
-    this.yuvakServices.getSamparkId()
-          .subscribe(
-            response => {
-              console.log(response)
-              // this.yuvak.samparkId = response;
-            }
-          )
   }
 }
