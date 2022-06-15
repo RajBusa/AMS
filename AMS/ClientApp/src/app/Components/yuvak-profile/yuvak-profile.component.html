@@ -29,7 +29,8 @@
         <div class="mb-3">
             <label for="role" class="form-label">Role</label>
             <div *ngIf="syRole == 'true'; else elseBlock">
-                <select class="form-select" aria-label="Default select example" name="syRole" [(ngModel)]="syRole"  id="role">
+                <select class="form-select" aria-label="Default select example" name="syRole" [(ngModel)]="syRole"
+                    id="role">
                     <option value='false'>Yuvak</option>
                     <option value='true' selected>Sampark Karyakar</option>
                 </select>
@@ -38,10 +39,15 @@
             <ng-template #elseBlock>
                 <select aria-label="Default select example" id="role" name="syRole" [(ngModel)]="syRole">
                     <option value='false' selected>Yuvak</option>
-                    <option value='true' >Sampark Karyakar</option>
+                    <option value='true'>Sampark Karyakar</option>
                 </select>
             </ng-template>
         </div>
+
+        <!-- <div>
+            <span>Current Sampark Karyakar</span>
+            <span>{{yuvak.samparkId}}</span>
+        </div> -->
 
         <div *ngIf="syRole == 'false'">
             <label class="form-label">Sampark Karyakar</label>
@@ -49,10 +55,10 @@
                 <option *ngFor="let s of samparkKaryakars" value="{{s.id}}">{{s.name}}</option>
             </select>
         </div>
-        
+
 
         <button type="submit" class="btn btn-primary">Submit</button>
 
     </form>
-    <button class="btn" (click)="onSubmit()">getSamparkId</button>
+    <!-- <button class="btn" (click)="onSubmit()">getSamparkId</button> -->
 </div>

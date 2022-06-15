@@ -15,7 +15,7 @@ namespace AMS.Repository
 
         public async Task<int> DeleteKaryakar(int id)
         {
-            var sql = "DELETE FROM Karyakar WHERE id = @id";
+            var sql = "DELETE FROM Karyakar WHERE Id = @id";
             return await _db.ExecuteAsync(sql, new
             {
                 @id = id,

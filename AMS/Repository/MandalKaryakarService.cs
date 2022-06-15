@@ -21,7 +21,7 @@ namespace AMS.Repo
 
         public async Task<int> DeleteMandalKaryakar(int id)
         {
-          return await _db.ExecuteAsync("DELETE FROM MandalKaryakar WHERE Id = @Id", new { @Id = id});
+          return await _db.ExecuteAsync("DELETE FROM MandalKaryakar WHERE KaryakarId = @Id", new { @Id = id});
         }
 
         public Task<IEnumerable<MandalKaryakar>> GetAllMandalKaryakar()

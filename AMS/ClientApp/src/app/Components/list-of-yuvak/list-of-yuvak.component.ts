@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { Yuvak } from 'src/app/models/yuvak.model';
+import { SabhaService } from 'src/app/Services/Sabha/sabha.service';
 import { YuvakService } from 'src/app/Services/Yuvak/yuvak.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class ListOfYuvakComponent implements OnInit {
   roleId: number = 2;
 
   
-  constructor(private yuvakServices: YuvakService) { }
+  constructor(private yuvakServices: YuvakService, private sabhaServices: SabhaService) { }
   ngOnInit(): void {
     this.getAllYuvak(this.samparkId, this.isMandal);
     this.getTotalSabha(this.mandalId);
@@ -30,7 +31,7 @@ export class ListOfYuvakComponent implements OnInit {
       .subscribe(
         response => {
           this.yuvaks = response;
-          console.table(response[0].isSamparkKaryakar);
+          // console.table(response[0].isSamparkKaryakar);
         }
       );
   }
@@ -49,7 +50,7 @@ export class ListOfYuvakComponent implements OnInit {
   }
 
   getTotalSabha(mandalId: number){
-    this.yuvakServices.getTotalSabha(mandalId)
+    this.sabhaServices.getTotalSabha(mandalId)
       .subscribe(
         response => {
           this.totalSabha = response;
