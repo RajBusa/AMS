@@ -30,4 +30,9 @@ export class KaryakarService {
     // console.log(mId)
     return this.http.get<SamparkKaryakar[]>(this.baseUrl + 'Karyakar/getSamparkKaryakar/' + mId);
   }
+
+  getSanchlak(mId: number) : Observable<Karyakar[]>{
+    // console.log(mId)
+    return this.http.get<Karyakar[]>(this.baseUrl + 'Karyakar/getSanchalak/' + mId);
+  }
 }

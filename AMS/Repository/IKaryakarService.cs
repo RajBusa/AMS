@@ -11,11 +11,12 @@ namespace AMS.Repository
 
         Task<IEnumerable<SamparKaryakar>> GetSamparKaryakars(int mId);
 
-        //Task<int> GetSamparkId();
         Task<int> DeleteKaryakar(int id);
 
         Task<int> UpdateKaryakar(Karyakar karyakar);
 
         Task<IEnumerable<int>> InsertKaryakar(Karyakar karyakar);
+
+        Task<IEnumerable<Karyakar>> GetSanchalak(int mId);
     }
 }

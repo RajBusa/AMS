@@ -23,7 +23,7 @@ export class ListOfYuvakComponent implements OnInit {
   ngOnInit(): void {
     this.getAllYuvak(this.samparkId, this.isMandal);
     this.getTotalSabha(this.mandalId);
-    this.sortYuvak()
+    this.sortYuvak();
   }
 
   getAllYuvak(samparkId: number, isMandal: boolean) {
@@ -62,7 +62,7 @@ export class ListOfYuvakComponent implements OnInit {
     if(count === this.totalSabha){
       return 10;
     }
-    let a = 100 - (count/this.totalSabha) * 100;
+    let a = 100 - (count/this.totalSabha) * 100;  
     if((a <= 100 && a > 75)){
       return 100;
     }

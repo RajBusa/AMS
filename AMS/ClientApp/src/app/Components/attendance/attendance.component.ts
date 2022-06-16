@@ -89,6 +89,7 @@ export class AttendanceComponent implements OnInit {
           })
           this.yuvakService.updateIsAttendanceTaken(yid, true).subscribe(response => {
             console.log(response);
+            this.getAllYuvak(this.mandalId, this.isMandal)
           })
         }
         else {
@@ -100,6 +101,7 @@ export class AttendanceComponent implements OnInit {
           })
           this.yuvakService.updateIsAttendanceTaken(yid, false).subscribe(response => {
             console.log(response);
+            this.getAllYuvak(this.mandalId, this.isMandal)
           })
         }
       })

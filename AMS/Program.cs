@@ -38,6 +38,7 @@ builder.Services.AddScoped<ISabhaService, SabhaService>();
 builder.Services.AddScoped<ISabhaAttendanceService, SabhaAttendanceService>();
 builder.Services.AddScoped<IYuvakService, YuvakService>();
 builder.Services.AddScoped<ITimerService, TimerService>();
+builder.Services.AddScoped<IMandalWithYuvakCountService, MandalWithYuvakCountService>();
 
 
 builder.Services.AddControllers();
