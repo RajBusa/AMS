@@ -51,7 +51,7 @@
     </ul> -->
     <!-- <div>{{sabha[0].sabhaDate}}</div> -->
     <ul class="list-group list-group-flush" *ngIf="sabha[0]?.sabhaDate == todayDate; else elseBlock">
-        <li class="list-group-item d-flex justify-content-between align-items-start"
+        <li [ngClass]="{'checked': y.isAttendanceTaken}" class="list-group-item d-flex justify-content-between align-items-start hover"
             *ngFor="let y of yuvak | filter:searchText">
             <div class="ms-2 me-auto fw-bold">
                 {{y.name}}

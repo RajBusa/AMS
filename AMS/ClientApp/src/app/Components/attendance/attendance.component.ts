@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Sabha } from 'src/app/models/sabha.modal';
 import { SabhaAttendance } from 'src/app/models/sabhaAttendance.model';
 import { Yuvak } from 'src/app/models/yuvak.model';
+import { SabhaService } from 'src/app/Services/Sabha/sabha.service';
+import { SabhaAttendanceService } from 'src/app/Services/SabhaAttendance/sabha-attendance.service';
 import { YuvakService } from 'src/app/Services/Yuvak/yuvak.service';
 
 
@@ -28,7 +30,7 @@ export class AttendanceComponent implements OnInit {
 
   //0 means Not Taken And 1 means Taken
   todayDate: string = formatDate(new Date(), 'yyyy-MM-dd', 'en_US');
-  constructor(private yuvakServices: YuvakService) { }
+  constructor(private sabhaService: SabhaService, private sabhaAttendanceService: SabhaAttendanceService, private yuvakService: YuvakService) { }
 
 
   ngOnInit(): void {
@@ -38,7 +40,7 @@ export class AttendanceComponent implements OnInit {
 
 
   getAllYuvak(mandalId: number, isMandal: boolean) {
-    this.yuvakServices.getAllYuvak(mandalId, isMandal)
+    this.yuvakService.getAllYuvak(mandalId, isMandal)
       .subscribe(
         response => {
           this.yuvak = response;
@@ -48,7 +50,7 @@ export class AttendanceComponent implements OnInit {
   }
 
   getSabha(mandalId: number) {
-    this.yuvakServices.getUpcomingSabhaByMandalId(mandalId)
+    this.sabhaService.getUpcomingSabhaByMandalId(mandalId)
       .subscribe(
         response => {
           this.sabha = response;
@@ -62,7 +64,7 @@ export class AttendanceComponent implements OnInit {
     // formatDate(new Date(), 'yyyy-MM-dd', 'en_US')
     this.sabha[0].sabhaDate = formatDate(this.changeSabhaDate, 'yyyy-MM-dd', 'en_US');
     console.log(this.sabha[0].sabhaDate);
-    this.yuvakServices.updateSabha(this.sabha[0])
+    this.sabhaService.updateSabha(this.sabha[0])
       .subscribe(
         response => {
           console.log(response)
@@ -73,7 +75,7 @@ export class AttendanceComponent implements OnInit {
 
   takeAttendace(yid: number) {
     console.log(yid);
-    this.yuvakServices.ExitisingAttendance(yid, this.sabha[0].id)
+    this.sabhaAttendanceService.ExitisingAttendance(yid, this.sabha[0].id)
       .subscribe(response => {
         if (response == 0) {
           //Insert
@@ -81,23 +83,25 @@ export class AttendanceComponent implements OnInit {
           this.sabhaAttendance.yuvakId = yid;
           this.sabhaAttendance.attendance = new Date()
           console.log("Insert")
-          this.yuvakServices.insertSabhaAttendance(this.sabhaAttendance)
+          this.sabhaAttendanceService.insertSabhaAttendance(this.sabhaAttendance)
           .subscribe(response => {
             console.log(response);
           })
-          this.yuvakServices.updateIsAttendanceTaken(yid, true).subscribe(response => {
+          this.yuvakService.updateIsAttendanceTaken(yid, true).subscribe(response => {
             console.log(response);
+            this.getAllYuvak(this.mandalId, this.isMandal)
           })
         }
         else {
           //Delete
           console.log("Delete")
-          this.yuvakServices.DeleteAttendance(yid, this.sabha[0].id).subscribe(response => {
+          this.sabhaAttendanceService.DeleteAttendance(yid, this.sabha[0].id).subscribe(response => {
             console.log(response);
             console.log("Deleted");
           })
-          this.yuvakServices.updateIsAttendanceTaken(yid, false).subscribe(response => {
+          this.yuvakService.updateIsAttendanceTaken(yid, false).subscribe(response => {
             console.log(response);
+            this.getAllYuvak(this.mandalId, this.isMandal)
           })
         }
       })

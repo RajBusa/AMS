@@ -8,6 +8,8 @@ import { SamparkKaryakar } from 'src/app/models/samparkKaryakar.model';
 import { Karyakar } from 'src/app/models/karyakar.model';
 import { __await } from 'tslib';
 import { MandalKaryakar } from 'src/app/models/mandalKaryakar.model';
+import { KaryakarService } from 'src/app/Services/Karyakar/karyakar.service';
+import { MandalKaryakarService } from 'src/app/Services/MandalKaryakar/mandal-karyakar.service';
 
 
 @Component({
@@ -58,7 +60,7 @@ export class YuvakProfileComponent implements OnInit {
     karyakarId: 0
   };
 
-  constructor(private route: ActivatedRoute, private yuvakServices: YuvakService) { }
+  constructor(private route: ActivatedRoute, private yuvakServices: YuvakService, private karyakarService: KaryakarService, private mandalKaryakarService: MandalKaryakarService ) { }
 
   ngOnInit(): void {
 
@@ -172,7 +174,7 @@ export class YuvakProfileComponent implements OnInit {
 
     this.mandalKaryakar.mandalId = this.yuvak.mandalId;
 
-    this.yuvakServices.insertSamparkKaryakar(this.samparkKaryakar)
+    this.karyakarService.insertSamparkKaryakar(this.samparkKaryakar)
       .subscribe(
         response => {
           console.log(response[0])
@@ -202,7 +204,7 @@ export class YuvakProfileComponent implements OnInit {
   }
 
   insertMandalKaryakar() {
-    this.yuvakServices.insertMandalKarykar(this.mandalKaryakar)
+    this.mandalKaryakarService.insertMandalKarykar(this.mandalKaryakar)
       .subscribe(
         response => {
           console.log(response)
@@ -224,7 +226,7 @@ export class YuvakProfileComponent implements OnInit {
     this.samparkKaryakar.mobileNo = this.yuvak.mobile
     this.samparkKaryakar.name = this.yuvak.name
 
-    this.yuvakServices.updateSamparkKaryakar(this.samparkKaryakar)
+    this.karyakarService.updateSamparkKaryakar(this.samparkKaryakar)
       .subscribe(
         response => {
           console.log(response);
@@ -244,7 +246,7 @@ export class YuvakProfileComponent implements OnInit {
 
   deleteMandalKaryakar() {
     console.log(this.samparkKaryakar.id)
-    this.yuvakServices.deleteMandalKaryakar(this.samparkKaryakar.id)
+    this.mandalKaryakarService.deleteMandalKaryakar(this.samparkKaryakar.id)
       .subscribe(
         response => {
           console.log(response)
@@ -254,7 +256,7 @@ export class YuvakProfileComponent implements OnInit {
 
   deleteKaryakar() {
     console.log(this.samparkKaryakar.id)
-    this.yuvakServices.deleteKaryakar(this.samparkKaryakar.id)
+    this.karyakarService.deleteKaryakar(this.samparkKaryakar.id)
       .subscribe(
         response => {
           console.log(response)
@@ -263,7 +265,7 @@ export class YuvakProfileComponent implements OnInit {
   }
 
   getSamparkKaryakar(mandalId: number) {
-    this.yuvakServices.getSamparkKaryakar(mandalId)
+    this.karyakarService.getSamparkKaryakar(mandalId)
       .subscribe(
         response => {
           this.samparkKaryakars = response;

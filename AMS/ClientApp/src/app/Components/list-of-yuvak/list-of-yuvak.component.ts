@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { Yuvak } from 'src/app/models/yuvak.model';
+import { SabhaService } from 'src/app/Services/Sabha/sabha.service';
 import { YuvakService } from 'src/app/Services/Yuvak/yuvak.service';
 
 @Component({
@@ -18,11 +19,11 @@ export class ListOfYuvakComponent implements OnInit {
   roleId: number = 2;
 
   
-  constructor(private yuvakServices: YuvakService) { }
+  constructor(private yuvakServices: YuvakService, private sabhaServices: SabhaService) { }
   ngOnInit(): void {
     this.getAllYuvak(this.samparkId, this.isMandal);
     this.getTotalSabha(this.mandalId);
-    this.sortYuvak()
+    this.sortYuvak();
   }
 
   getAllYuvak(samparkId: number, isMandal: boolean) {
@@ -49,7 +50,7 @@ export class ListOfYuvakComponent implements OnInit {
   }
 
   getTotalSabha(mandalId: number){
-    this.yuvakServices.getTotalSabha(mandalId)
+    this.sabhaServices.getTotalSabha(mandalId)
       .subscribe(
         response => {
           this.totalSabha = response;
@@ -61,7 +62,7 @@ export class ListOfYuvakComponent implements OnInit {
     if(count === this.totalSabha){
       return 10;
     }
-    let a = 100 - (count/this.totalSabha) * 100;
+    let a = 100 - (count/this.totalSabha) * 100;  
     if((a <= 100 && a > 75)){
       return 100;
     }

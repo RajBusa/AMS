@@ -7,8 +7,8 @@ namespace AMS.Controllers
     [Route("api/[controller]")]
     public class NirikshakController : Controller
     {
-        private readonly INirikshakService _context;
-        public NirikshakController(INirikshakService context)
+        private readonly IMandalWithYuvakCountService _context;
+        public NirikshakController(IMandalWithYuvakCountService context)
         {
             _context = context;
         }
