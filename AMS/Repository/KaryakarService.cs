@@ -86,5 +86,42 @@ namespace AMS.Repository
                 @KarayakarNo = karyakar.KarayakarNo
             });
         }
+
+        public async Task<IEnumerable<Extra>> GetAllYuvaks(int id)
+        {
+            Console.WriteLine("Hi1");
+            List<Extra> data = new List<Extra>();
+            List<SamparKaryakar> sk;
+            List<yuvakEdited>? yuvaks = new List<yuvakEdited>();
+            sk = (List<SamparKaryakar>)await _db.QueryAsync<SamparKaryakar>("SELECT Id,Name FROM Karyakar Where RoleId = 1  And Id in (SELECT KaryakarId FROM MandalKaryakar where MandalId = @id);", new { @id = id, });
+            Console.WriteLine("Hi2");
+            Console.WriteLine(sk[0].name);
+            Console.WriteLine(sk[1].name);
+            yuvaks = (List<yuvakEdited>)await _db.QueryAsync<yuvakEdited>("SELECT Id,Name,SamparkId FROM Yuvak Where SamparkId = @id;", new { @id = 0, });
+            Console.WriteLine(yuvaks.Count);
+            if (yuvaks.Count > 0)
+            {
+                Console.WriteLine(yuvaks.Count);
+                Extra n = new Extra();
+                n.sId = 0;
+                n.sName = "Unassigned";
+                n.yuvaks = yuvaks;
+                data.Add(n);
+            }
+            foreach (SamparKaryakar s in sk)
+            {
+                Extra n = new Extra();
+                yuvaks = null;
+                yuvaks = (List<yuvakEdited>)await _db.QueryAsync<yuvakEdited>("SELECT Id,Name,SamparkId FROM Yuvak Where SamparkId = @id  And isSamparkKaryakar = 0;", new { @id = s.Id, });
+                n.sId = s.Id;
+                n.sName = s.name;
+                n.yuvaks = yuvaks;
+                if (yuvaks.Count > 0)
+                {
+                data.Add(n);
+                }
+            }
+            return data;
+        }
     }
 }

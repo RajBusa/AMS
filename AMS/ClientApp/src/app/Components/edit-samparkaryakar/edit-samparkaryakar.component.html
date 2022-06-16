@@ -1,0 +1,178 @@
+<div class="container mt-3">
+ <button class="btn btn-primary col-12" routerLink="/editSampark">Add Sampark</button>
+
+<!-- Frist Karyaykar  -->
+<div class=""*ngFor="let y of data" >
+<div class="box1 mt-3 ps-3 pe-3  " >
+  <div class="list-group list-group-radio d-grid gap-3 border-0 w-auto ">
+    <!-- Name -->
+    <!-- <div class="justify-content-between align-items-start d-flex ">
+      <div class="ms-2 mb-2 me-auto">
+        <h3>Raj Bhusa</h3>
+      </div>
+      <div class="mt-3">
+      <input class="form-check-input " type="checkbox" value="" >
+    </div>
+    </div> -->
+    <!-- Name End -->
+    <div class="position-relative" *ngFor="let m of y.yuvaks">
+      <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="checkbox" value="">
+      <label class="list-group-item py-3 pe-5">
+        <strong class="fw-semibold">{{m.name}}</strong>
+      </label>
+    </div>
+  </div>
+</div>
+<div class="ms-2 mb-3">
+{{y.sName}}
+</div>
+</div>
+ <!-- Frist Karyaykar End -->
+ <button class="btn btn-primary col-12" routerLink="/editSampark">Move To</button>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<div class="container ">
+
+    <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto">
+        <input class="list-group-item-check pe-none" type="radio" name="listGroupCheckableRadios" id="listGroupCheckableRadios1" value="" checked>
+        <label class="list-group-item rounded-3 py-3" for="listGroupCheckableRadios1">
+            First radio
+            <span class="d-block small opacity-50">With support text underneath to add more detail</span>
+        </label>
+        
+        <input class="list-group-item-check pe-none" type="radio" name="listGroupCheckableRadios" id="listGroupCheckableRadios2" value="">
+        <label class="list-group-item rounded-3 py-3" for="listGroupCheckableRadios2">
+            Second radio
+            <span class="d-block small opacity-50">Some other text goes here</span>
+        </label>
+        
+        <input class="list-group-item-check pe-none" type="radio" name="listGroupCheckableRadios" id="listGroupCheckableRadios3" value="">
+        <label class="list-group-item rounded-3 py-3" for="listGroupCheckableRadios3">
+            Third radio
+            <span class="d-block small opacity-50">And we end with another snippet of text</span>
+        </label>
+        
+        <input class="list-group-item-check pe-none" type="radio" name="listGroupCheckableRadios" id="listGroupCheckableRadios4" value="" disabled>
+        <label class="list-group-item rounded-3 py-3" for="listGroupCheckableRadios4">
+            Fourth disabled radio
+            <span class="d-block small opacity-50">This option is disabled</span>
+        </label>
+    </div>
+</div>
+    
+<div class="b-example-divider"></div>
+<div class="container">
+
+    <div class="list-group list-group-radio d-grid gap-2 border-0 w-auto">
+        <div class="position-relative">
+            <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="radio" name="listGroupRadioGrid" id="listGroupRadioGrid1" value="" checked>
+            <label class="list-group-item py-3 pe-5" for="listGroupRadioGrid1">
+                <strong class="fw-semibold">First radio</strong>
+                <span class="d-block small opacity-75">With support text underneath to add more detail</span>
+            </label>
+        </div>
+        
+        <div class="position-relative">
+            <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="radio" name="listGroupRadioGrid" id="listGroupRadioGrid2" value="">
+            <label class="list-group-item py-3 pe-5" for="listGroupRadioGrid2">
+                <strong class="fw-semibold">Second radio</strong>
+                <span class="d-block small opacity-75">Some other text goes here</span>
+            </label>
+        </div>
+        
+        <div class="position-relative">
+            <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="radio" name="listGroupRadioGrid" id="listGroupRadioGrid3" value="">
+            <label class="list-group-item py-3 pe-5" for="listGroupRadioGrid3">
+                <strong class="fw-semibold">Third radio</strong>
+                <span class="d-block small opacity-75">And we end with another snippet of text</span>
+            </label>
+        </div>
+        
+        <div class="position-relative">
+            <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="radio" name="listGroupRadioGrid" id="listGroupRadioGrid4" value="" disabled>
+            <label class="list-group-item py-3 pe-5" for="listGroupRadioGrid4">
+                <strong class="fw-semibold">Fourth disabled radio</strong>
+                <span class="d-block small opacity-75">This option is disabled</span>
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-sheet position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalSheet">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content rounded-4 shadow">
+        <div class="modal-header border-bottom-0">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body py-0">
+          <p>This is a modal sheet, a variation of the modal that docs itself to the bottom of the viewport like the newer share sheets in iOS.</p>
+        </div>
+        <div class="modal-footer flex-column border-top-0">
+          <button type="button" class="btn btn-lg btn-primary w-100 mx-0 mb-2">Save changes</button>
+          <button type="button" class="btn btn-lg btn-light w-100 mx-0" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="b-example-divider"></div>
+  <div class="modal modal-alert position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalChoice">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content rounded-3 shadow">
+        <div class="modal-body p-4 text-center">
+          <h5 class="mb-0">Enable this setting?</h5>
+          <p class="mb-0">You can always change your mind in your account settings.</p>
+        </div>
+        <div class="modal-footer flex-nowrap p-0">
+          <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end"><strong>Yes, enable</strong></button>
+          <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0" data-bs-dismiss="modal">No thanks</button>
+        </div>
+      </div>
+    </div>
+  </div>
+   -->

@@ -6,6 +6,7 @@ import { Karyakar } from 'src/app/models/karyakar.model';
 import { MandalKaryakar } from 'src/app/models/mandalKaryakar.model';
 import { Sabha } from 'src/app/models/sabha.modal';
 import { SabhaAttendance } from 'src/app/models/sabhaAttendance.model';
+import { Sampark } from 'src/app/models/Sampark';
 import { SamparkKaryakar } from 'src/app/models/samparkKaryakar.model';
 
 import { Yuvak } from 'src/app/models/yuvak.model';
@@ -85,5 +86,9 @@ export class YuvakService {
   }
   updateIsAttendanceTaken(id:number,data:boolean) : Observable<number> {
     return this.http.put<number>(this.baseUrl + 'Yuvak/UpdateYuvakAttendance/'+id,data);
+  }
+
+  getAllYuvakAndSK(id: number): Observable<Sampark[]> {
+    return this.http.get<Sampark[]>(this.baseUrl+'Karyakar/GetAllYuvaks/'+id)
   }
 }

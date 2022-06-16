@@ -55,7 +55,12 @@ namespace AMS.Controllers
         {
             return Ok(await _context.GetSamparKaryakars(mId));
         }
-
+        [HttpGet]
+        [Route("[action]/{id:int}")]
+        public async Task<IActionResult> GetAllYuvaks([FromRoute] int id)
+        {
+            return Ok(await _context.GetAllYuvaks(id));
+        }
         //[HttpGet]
         //[Route("[action]")]
         //public async Task<IActionResult> getSamparkId()
