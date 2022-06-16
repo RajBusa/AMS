@@ -2,12 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { Karyakar } from 'src/app/models/karyakar.model';
-import { MandalKaryakar } from 'src/app/models/mandalKaryakar.model';
-import { Sabha } from 'src/app/models/sabha.modal';
-import { SabhaAttendance } from 'src/app/models/sabhaAttendance.model';
-import { SamparkKaryakar } from 'src/app/models/samparkKaryakar.model';
-
+import { Sampark } from 'src/app/models/Sampark';
 import { Yuvak } from 'src/app/models/yuvak.model';
 
 @Injectable({

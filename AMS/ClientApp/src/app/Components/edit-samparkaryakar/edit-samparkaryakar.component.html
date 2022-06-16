@@ -2,8 +2,8 @@
  <button class="btn btn-primary col-12" routerLink="/editSampark">Add Sampark</button>
 
 <!-- Frist Karyaykar  -->
-<div class=""*ngFor="let y of data" >
-<div class="box1 mt-3 ps-3 pe-3  " >
+<div class="" *ngFor="let y of data" > 1</div>
+<div class="box1 mt-3 ps-3 pe-3 " >
   <div class="list-group list-group-radio d-grid gap-3 border-0 w-auto ">
     <!-- Name -->
     <!-- <div class="justify-content-between align-items-start d-flex ">
@@ -15,17 +15,30 @@
     </div>
     </div> -->
     <!-- Name End -->
-    <div class="position-relative" *ngFor="let m of y.yuvaks">
-      <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="checkbox" value="">
-      <label class="list-group-item py-3 pe-5">
-        <strong class="fw-semibold">{{m.name}}</strong>
+    <div class="position-relative">
+      <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="checkbox" name="listGroupRadioGrid" id="listGroupRadioGrid1" value="" checked>
+      <label class="list-group-item py-3 pe-5" for="listGroupRadioGrid1">
+        <strong class="fw-semibold">First radio</strong>
+      </label>
+    </div>
+    
+    <div class="position-relative">
+      <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="checkbox" name="listGroupRadioGrid" id="listGroupRadioGrid2" value="">
+      <label class="list-group-item py-3 pe-5" for="listGroupRadioGrid2">
+        <strong class="fw-semibold">Second radio</strong>
+      </label>
+    </div>
+    
+    <div class="position-relative">
+      <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="checkbox" name="listGroupRadioGrid" id="listGroupRadioGrid3" value="">
+      <label class="list-group-item py-3 pe-5" for="listGroupRadioGrid3">
+        <strong class="fw-semibold">Third radio</strong>
       </label>
     </div>
   </div>
 </div>
 <div class="ms-2 mb-3">
-{{y.sName}}
-</div>
+  Unassigned
 </div>
  <!-- Frist Karyaykar End -->
  <button class="btn btn-primary col-12" routerLink="/editSampark">Move To</button>

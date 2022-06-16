@@ -12,17 +12,13 @@ export class EditSamparkaryakarComponent implements OnInit {
 
   constructor(private yuvakServices: YuvakService) { }
   mandalId: number = 1;
-  data: Sampark[] = [{
-    sId: 0,
-    sName: '',
-    yuvaks:[],
-  }];
+  data: Sampark[] = [];
   ngOnInit(): void {
     this.getAllYuvaks(this.mandalId);
   }
 
-  getAllYuvaks(mandalId: number) {
-    this.yuvakServices.getAllYuvakAndSK(mandalId)
+  async getAllYuvaks(mandalId: number) {
+   await this.yuvakServices.getAllYuvakAndSK(mandalId)
       .subscribe(
         response => {
           // console.table(this.sabha[0])
