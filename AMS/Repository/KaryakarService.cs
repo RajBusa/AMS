@@ -85,7 +85,6 @@ namespace AMS.Repository
 
         public async Task<IEnumerable<Extra>> GetAllYuvaks(int id)
         {
-            Console.WriteLine("Hi1");
             List<Extra> data = new List<Extra>();
             List<SamparKaryakar> sk;
             List<yuvakEdited>? yuvaks = new List<yuvakEdited>();
@@ -94,7 +93,6 @@ namespace AMS.Repository
             Console.WriteLine(sk[0].name);
             Console.WriteLine(sk[1].name);
             yuvaks = (List<yuvakEdited>)await _db.QueryAsync<yuvakEdited>("SELECT Id,Name,SamparkId FROM Yuvak Where SamparkId = @id;", new { @id = 0, });
-            Console.WriteLine(yuvaks.Count);
             if (yuvaks.Count > 0)
             {
                 Console.WriteLine(yuvaks.Count);
