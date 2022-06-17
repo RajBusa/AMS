@@ -29,7 +29,6 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AttendanceComponent } from './Components/attendance/attendance.component';
 import { YuvakProfileComponent } from './Components/yuvak-profile/yuvak-profile.component';
 import { EditSamparkaryakarComponent } from './Components/edit-samparkaryakar/edit-samparkaryakar.component';
-import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -49,12 +48,9 @@ import { CommonModule } from '@angular/common';
     ListOfYuvakComponent,
     AttendanceComponent,
     YuvakProfileComponent,
-    EditSamparkaryakarComponent,
   ],
   imports: [
-    // BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    BrowserModule,
-    CommonModule,
+    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     ApiAuthorizationModule,
@@ -70,6 +66,8 @@ import { CommonModule } from '@angular/common';
       { path: 'yuvakList', component: ListOfYuvakComponent},
       { path: 'yuvalProfile', component: YuvakProfileComponent },
       { path: 'editSampark', component:EditSamparkaryakarComponent},
+      { path: 'listOfMandalPeople', component:ListOfMandalPeopleComponent},
+      { path: 'profile', component:ProfileComponent},
 
     ]),
 

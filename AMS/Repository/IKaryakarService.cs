@@ -8,8 +8,9 @@ namespace AMS.Repository
         Task<IEnumerable<Karyakar>> GetAllKaryakar();
 
         Task<IEnumerable<Karyakar>> GetKaryakar(int id);
+        Task<IEnumerable<Karyakar>> GetSanchalak(int mId);
 
-        Task<IEnumerable<SamparKaryakar>> GetSamparKaryakars(int mId);
+        Task<IEnumerable<SamparKaryakar>> GetSamparKaryakars(int Id);
 
         Task<int> DeleteKaryakar(int id);
 
