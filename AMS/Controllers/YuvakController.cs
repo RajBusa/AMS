@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AMS.Controllers
 {
-    [ApiController]
+    //[ApiController]
     [Route("api/[controller]")]
     public class YuvakController : Controller
     {
@@ -46,15 +46,26 @@ namespace AMS.Controllers
         [HttpPut]
         public async Task<IActionResult> updateYuvak([FromBody] Yuvak yuvak)
         {
-            Console.WriteLine("funsldkfhlashevtoastoiowu ru");
             return Ok(await _context.UpdateYuvak(yuvak));
         }
         [HttpPut]
         [Route("[action]/{id:int}")]
         public async Task<IActionResult> updateYuvakAttendance([FromRoute] int id, [FromBody] bool data)
         {
-            return Ok(await _context.UpdateYuvakAttendance(id,data));
+            return Ok(await _context.UpdateYuvakAttendance(id, data));
         }
+
+        [HttpPut]
+        [Route("[action]")]
+        public async Task<IActionResult> update([FromBody] List<int> yId, [FromBody] List<int> sId)
+        {
+            Console.WriteLine("Function Called");
+            Console.WriteLine(yId.Count);
+            Console.WriteLine(sId.Count);
+            return Ok(await _context.UpdateSamparkId(yId, sId));
+        }
+
+
 
         [HttpDelete]
         [Route("{id:int}")]
