@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { YuvakService } from 'src/app/Services/Yuvak/yuvak.service';
 import { Sampark } from 'src/app/models/Sampark';
+import { KaryakarService } from 'src/app/Services/Karyakar/karyakar.service';
+import { SamparkKaryakar } from 'src/app/models/samparkKaryakar.model';
+
 
 
 @Component({
@@ -10,9 +13,17 @@ import { Sampark } from 'src/app/models/Sampark';
 })
 export class EditSamparkaryakarComponent implements OnInit {
 
-  constructor(private yuvakServices: YuvakService) { }
+  constructor(private yuvakServices: YuvakService,private karyakarService: KaryakarService) { }
   mandalId: number = 1;
+  samparkKaryakars: SamparkKaryakar[] = [];
   data: Sampark[] = [];
+  yuvakList: number[] = [];
+  btnDisable: boolean = false;
+  fristPage: boolean = true;
+  yName: string = '';
+  sName: string = '';
+  yId: number = 0;
+  sId: number = 0;
   ngOnInit(): void {
     this.getAllYuvaks(this.mandalId);
   }
@@ -25,6 +36,52 @@ export class EditSamparkaryakarComponent implements OnInit {
           this.data = response;
           console.log(this.data);
         }
+    )
+   }
+  tooglePage() {
+    this.fristPage = false;
+    this.getSamparkKaryakar(this.mandalId);
+   }
+  doAction() {
+    document.getElementById('hi' + this.yId)?.click();
+  }
+  toogleIntoList(yId: number, yName: string, sName: string) {
+    this.yName = yName;
+    this.sName = sName;
+    this.yId = yId;
+    // document.getElementById('hi' + yId).click();
+    var exit = this.yuvakList.includes(yId);
+    if (exit) {
+      var index = this.yuvakList.indexOf(yId);
+      this.yuvakList.splice(index,1);
+    }
+    else {
+      document.getElementById('ShowAlert')?.click();
+      this.yuvakList.push(yId);
+    }
+    console.log(this.yuvakList);
+    if (this.yuvakList.length>0) {
+      this.btnDisable = true;
+    }
+    else {
+      this.btnDisable = false;
+    }
+  }
+  setSkId(sId:number) {
+    this.sId = sId;
+  }
+  getSamparkKaryakar(mandalId: number) {
+    this.karyakarService.getSamparkKaryakar(mandalId)
+      .subscribe(
+        response => {
+          this.samparkKaryakars = response;
+          console.log(this.samparkKaryakars);
+        }
       )
   }
+
+  changeSkOfYuvak() {
+    
+  }
+
 }

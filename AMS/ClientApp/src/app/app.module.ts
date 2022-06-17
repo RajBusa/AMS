@@ -29,6 +29,9 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AttendanceComponent } from './Components/attendance/attendance.component';
 import { YuvakProfileComponent } from './Components/yuvak-profile/yuvak-profile.component';
 import { EditSamparkaryakarComponent } from './Components/edit-samparkaryakar/edit-samparkaryakar.component';
+import { ListOfMandalComponent } from './Components/list-of-mandal/list-of-mandal.component';
+import { ListOfMandalPeopleComponent } from './Components/list-of-mandal-people/list-of-mandal-people.component';
+import { ProfileComponent } from './Components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,10 @@ import { EditSamparkaryakarComponent } from './Components/edit-samparkaryakar/ed
     ListOfYuvakComponent,
     AttendanceComponent,
     YuvakProfileComponent,
+    ListOfMandalComponent,
+    ListOfMandalPeopleComponent,
+    ProfileComponent,
+    EditSamparkaryakarComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
