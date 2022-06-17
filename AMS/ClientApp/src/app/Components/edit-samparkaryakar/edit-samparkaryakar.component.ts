@@ -17,8 +17,8 @@ export class EditSamparkaryakarComponent implements OnInit {
     this.getAllYuvaks(this.mandalId);
   }
 
-  async getAllYuvaks(mandalId: number) {
-   await this.yuvakServices.getAllYuvakAndSK(mandalId)
+   getAllYuvaks(mandalId: number) {
+    this.yuvakServices.getAllYuvakAndSK(mandalId)
       .subscribe(
         response => {
           // console.table(this.sabha[0])
