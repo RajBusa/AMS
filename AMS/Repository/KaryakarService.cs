@@ -118,34 +118,38 @@ namespace AMS.Repository
             return data;
         }
 
-        public async Task<int> InsertKaryakarFromYuvakId(int yId)
+        public async Task<int> InsertKaryakarFromYuvakId(int[] yId)
         {
-            //for (int i = 0; i < yId.Count; i++)
-            //{
-                Yuvak yuvak = (Yuvak)await _db.QueryAsync<Yuvak>("select * from Yuvak where Id = @Id", new { @Id = yId});
+            List<Yuvak>? yuvaks = new List<Yuvak>();
 
-                IEnumerable<int> kshetraId = await _db.QueryAsync<int>("select KshetraId from Mandal where Id = @id", new { @id = yuvak.MandalId });
+            for (int i = 0; i < yId.Length; i++)
+            {
+                yuvaks = (List<Yuvak>)await _db.QueryAsync<Yuvak>("select * from Yuvak where Id = @Id", new { @Id = yId[0] });
+
+                IEnumerable<int> kshetraId = await _db.QueryAsync<int>("select KshetraId from Mandal where Id = @id", new { @id = yuvaks[0].MandalId });
 
                 var sql = "insert into Karyakar (Id, Name, DOB, Address, MobileNo, Education, RoleId ,Email, Password, isActivated, KshetraId, KarayakarNo) values (NULL, @Name, @DOB, @Address, @MobileNo, @Education, @RoleId ,@Email, @Password, @isActivated, @KshetraId, @KarayakarNo); select last_insert_rowid();";
 
 
                 IEnumerable<int> karyakarId = await _db.QueryAsync<int>(sql, new
                 {
-                    @Name = yuvak.Name,
-                    @DOB = yuvak.DOB,
-                    @Address = yuvak.Address,
-                    @MobileNo = yuvak.Mobile,
-                    @Education = yuvak.Education,
+                    @Name = yuvaks[0].Name,
+                    @DOB = yuvaks[0].DOB,
+                    @Address = yuvaks[0].Address,
+                    @MobileNo = yuvaks[0].Mobile,
+                    @Education = yuvaks[0].Education,
                     @RoleId = 1,
-                    @Email = yuvak.Email,
+                    @Email = yuvaks[0].Email,
                     @Password = ' ',
                     @isActivated = 0,
                     @KshetraId = kshetraId,
                     @KarayakarNo = 0
                 });
 
-    
-                return await _db.ExecuteAsync("INSERT INTO MandalKaryakar (Id,MandalId,KaryakarId) VALUES (NULL,@MandalId,@KaryakarId)", new { @MandalId = yuvak.MandalId, @KaryakarId = karyakarId});
+
+                await _db.ExecuteAsync("INSERT INTO MandalKaryakar (Id,MandalId,KaryakarId) VALUES (NULL,@MandalId,@KaryakarId)", new { @MandalId = yuvaks[0].MandalId, @KaryakarId = karyakarId });
+            }
+            return yId.Length;
         }
     //}
     }

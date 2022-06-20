@@ -58,9 +58,10 @@ namespace AMS.Controllers
         }
 
         [HttpPost]
-        [Route("Raj/{yId:int}")]
-        public async Task<IActionResult> insertKaryakarFromYuvakId([FromRoute] int yId)
+        [Route("Raj")]
+        public async Task<IActionResult> insertKaryakarFromYuvakId([FromBody] int[] yId)
         {
+            Console.WriteLine(yId);
             return Ok(await _context.InsertKaryakarFromYuvakId(yId));
         }
 

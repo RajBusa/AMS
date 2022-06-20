@@ -19,6 +19,6 @@ namespace AMS.Repository
         Task<IEnumerable<int>> InsertKaryakar(Karyakar karyakar);
         Task<IEnumerable<Extra>> GetAllYuvaks(int id);
 
-        Task<int> InsertKaryakarFromYuvakId(int yId);
+        Task<int> InsertKaryakarFromYuvakId(int[] yId);
     }
 }
