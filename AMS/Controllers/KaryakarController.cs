@@ -1,8 +1,6 @@
 ﻿using AMS.Repository;
 using AMS.web.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Timers;
 namespace AMS.Controllers
 {
     [ApiController]
@@ -10,7 +8,6 @@ namespace AMS.Controllers
     public class KaryakarController : Controller
     {
         private readonly IKaryakarService _context;
-        private static System.Timers.Timer aTimer;
         public KaryakarController(IKaryakarService context)
         {
             _context = context;
@@ -54,12 +51,21 @@ namespace AMS.Controllers
         //}
 
         [HttpPost]
+        [Route("[action]")]
         public async Task<IActionResult> insertKaryakar([FromBody] Karyakar karyakar)
         {
             return Ok(await _context.InsertKaryakar(karyakar));
         }
 
+        [HttpPost]
+        [Route("Raj/{yId:int}")]
+        public async Task<IActionResult> insertKaryakarFromYuvakId([FromRoute] int yId)
+        {
+            return Ok(await _context.InsertKaryakarFromYuvakId(yId));
+        }
+
         [HttpPut]
+
         public async Task<IActionResult> updateKaryakar([FromBody] Karyakar karyakar)
         {
             return Ok(await _context.UpdateKaryakar(karyakar));

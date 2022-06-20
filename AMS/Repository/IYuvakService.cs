@@ -16,5 +16,7 @@ namespace AMS.Repository
         Task<int> InsertYuvak(Yuvak yuvak);
 
         Task<int> UpdateYuvakAttendance(int id,bool data);
+
+        Task<int> UpdateSamparkId(List<int> yId, List<int> sId);
     }
 }
