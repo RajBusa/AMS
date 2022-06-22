@@ -1,4 +1,5 @@
-﻿using AMS.Repository;
+﻿using AMS.Models;
+using AMS.Repository;
 using AMS.web.Models;
 using Microsoft.AspNetCore.Mvc;
 namespace AMS.Controllers
@@ -37,6 +38,16 @@ namespace AMS.Controllers
         {
             return Ok(await _context.GetSanchalak(mId));
         }
+
+        [HttpPost]
+        [Route("[action]")]
+        public async Task<IActionResult> getKaryakarByEmailId([FromBody]string email)
+        {
+            return Ok(await _context.GetKaryakarByEmailId(email));
+        }
+
+
+
         [HttpGet]
         [Route("[action]/{id:int}")]
         public async Task<IActionResult> GetAllYuvaks([FromRoute] int id)
@@ -58,10 +69,10 @@ namespace AMS.Controllers
         }
 
         [HttpPost]
-        [Route("Raj")]
+        [Route("[action]")]
         public async Task<IActionResult> insertKaryakarFromYuvakId([FromBody] int[] yId)
         {
-            Console.WriteLine(yId);
+            //Console.WriteLine(yId);
             return Ok(await _context.InsertKaryakarFromYuvakId(yId));
         }
 
@@ -72,13 +83,26 @@ namespace AMS.Controllers
             return Ok(await _context.UpdateKaryakar(karyakar));
         }
 
+        [HttpPut]
+        [Route("[action]")]
+        public async Task<IActionResult> SignIn([FromBody] SignIn signIn)
+        {
+            return Ok(await _context.SignIn(signIn));
+        }
+
+        [HttpPut]
+        [Route("[action]")]
+        public async Task<IActionResult> changePassword([FromBody] SignIn signIn)
+        {
+            return Ok(await _context.changePassword(signIn));
+        }
+
+
         [HttpDelete]
         [Route("{id:int}")]
         public async Task<IActionResult> deletetKaryakar([FromRoute] int id)
         {
             return Ok(await _context.DeleteKaryakar(id));
         }
-
-
     }
 }

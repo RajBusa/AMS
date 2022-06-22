@@ -17,6 +17,6 @@ namespace AMS.Repository
 
         Task<int> UpdateYuvakAttendance(int id,bool data);
 
-        Task<int> UpdateSamparkId(List<int> yId, List<int> sId);
+        Task<int> UpdateSamparkId(int[] yId, int sId);
     }
 }

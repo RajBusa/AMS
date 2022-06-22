@@ -92,22 +92,18 @@ namespace AMS.Repository
             });
         }
 
-        public async Task<int> UpdateSamparkId(List<int> yId, List<int> sId)
+        public async Task<int> UpdateSamparkId(int[] yId, int sId)
         {
-            for(int i = 0; i < yId.Count; i++)
+            for(int i = 0; i < yId.Length; i++)
             {
-                await _db.ExecuteAsync("Update Yuvak set SamparkId = @SamparkId, isSamparkKaryakar = 1 where id = @id", new
+                await _db.ExecuteAsync("Update Yuvak set SamparkId = @SamparkId where id = @id", new
                 {
                     @id = yId[i],
-                    @SamparkId = sId[i]
+                    @SamparkId = sId
                 });
             }
 
-            return await _db.ExecuteAsync("Update Yuvak set SamparkId = @SamparkId, isSamparkKaryakar = 1 where id = @id", new
-            {
-                @id = yId[yId.Count],
-                @SamparkId = sId[yId.Count]
-            });
+            return yId.Length;
         }
 
         public async Task<int> UpdateYuvak(Yuvak yuvak)

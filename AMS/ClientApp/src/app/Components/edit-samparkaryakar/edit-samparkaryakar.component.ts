@@ -29,12 +29,12 @@ export class EditSamparkaryakarComponent implements OnInit {
   }
 
    getAllYuvaks(mandalId: number) {
-    this.yuvakServices.getAllYuvakAndSK(mandalId)
+    this.karyakarService.getAllYuvakAndSK(mandalId)
       .subscribe(
         response => {
           // console.table(this.sabha[0])
           this.data = response;
-          console.log(this.data);
+          // console.log(this.data);
         }
     )
    }
@@ -59,7 +59,7 @@ export class EditSamparkaryakarComponent implements OnInit {
       document.getElementById('ShowAlert')?.click();
       this.yuvakList.push(yId);
     }
-    console.log(this.yuvakList);
+    // console.log(this.yuvakList);
     if (this.yuvakList.length>0) {
       this.btnDisable = true;
     }
@@ -75,13 +75,27 @@ export class EditSamparkaryakarComponent implements OnInit {
       .subscribe(
         response => {
           this.samparkKaryakars = response;
-          console.log(this.samparkKaryakars);
+          // console.log(this.samparkKaryakars);
         }
       )
   }
 
-  changeSkOfYuvak() {
-    
+  changesOfYuvak() {
+    this.yuvakServices.changesOfYuvak(this.sId, this.yuvakList)
+      .subscribe(
+        response => {
+          // console.log(response)
+        }
+      )
+  }
+
+  newSamparkKaryakar(){
+    this.karyakarService.newSamparkKaryakar(this.yuvakList)
+      .subscribe(
+        response => {
+          // console.log(response);
+        }
+      )
   }
 
 }

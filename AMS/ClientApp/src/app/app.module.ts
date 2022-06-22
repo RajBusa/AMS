@@ -32,6 +32,8 @@ import { EditSamparkaryakarComponent } from './Components/edit-samparkaryakar/ed
 import { ListOfMandalPeopleComponent } from './Components/list-of-mandal-people/list-of-mandal-people.component';
 import { ProfileComponent } from './Components/profile/profile.component';
 import { ListOfMandalComponent } from './Components/list-of-mandal/list-of-mandal.component';
+import { SigninWithGoogleComponent } from './Components/signin-with-google/signin-with-google.component';
+import { NewPasswordComponent } from './Components/new-password/new-password.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,8 @@ import { ListOfMandalComponent } from './Components/list-of-mandal/list-of-manda
     ListOfMandalPeopleComponent,
     ListOfMandalComponent,
     EditSamparkaryakarComponent,
+    SigninWithGoogleComponent,
+    NewPasswordComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -74,6 +78,8 @@ import { ListOfMandalComponent } from './Components/list-of-mandal/list-of-manda
       { path: 'editSampark', component: EditSamparkaryakarComponent },
       { path: 'listOfMandalPeople', component: ListOfMandalPeopleComponent },
       { path: 'profile', component: ProfileComponent },
+      { path: 'signInWithGoogle', component: SigninWithGoogleComponent },
+      { path: 'newPassword', component: NewPasswordComponent },
 
     ]),
 

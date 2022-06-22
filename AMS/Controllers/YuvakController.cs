@@ -25,7 +25,7 @@ namespace AMS.Controllers
         [Route("[action]/{id:int}")]
         public async Task<IActionResult> getKaryakar(int id)
         {
-            Console.WriteLine("getKaryakar");
+            //Console.WriteLine("getKaryakar");
             return Ok(await _context.GetYuvak(id));
         }
         
@@ -56,16 +56,14 @@ namespace AMS.Controllers
         }
 
         [HttpPut]
-        [Route("[action]")]
-        public async Task<IActionResult> update([FromBody] List<int> yId, [FromBody] List<int> sId)
+        [Route("[action]/{sId:int}")]
+        public async Task<IActionResult> updateSamparkidOfYuvak([FromBody] int[] yId, [FromRoute] int sId)
         {
-            Console.WriteLine("Function Called");
-            Console.WriteLine(yId.Count);
-            Console.WriteLine(sId.Count);
+            //Console.WriteLine("Function Called");
+            //Console.WriteLine(yId);
+            //Console.WriteLine(sId);
             return Ok(await _context.UpdateSamparkId(yId, sId));
         }
-
-
 
         [HttpDelete]
         [Route("{id:int}")]

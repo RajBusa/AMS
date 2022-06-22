@@ -29,6 +29,11 @@ namespace AMS.Repo
             return _db.QueryAsync<MandalKaryakar>("select * from MandalKaryakar");
         }
 
+        public Task<IEnumerable<int>> getMandalId(int id)
+        {
+            return _db.QueryAsync<int>("select MandalId from MandalKaryakar where KaryakarId = @id", new { @id = id });
+        }
+
         public async Task<int> UpdateMandalKaryakar(MandalKaryakar mandalKaryakar)
         {
             return  await _db.ExecuteAsync("UPDATE MandalKaryakar SET MandalId = @MandalId, KaryakarId = @KaryakarId WHERE Id = @Id", new { @MandalId = mandalKaryakar.MandalId, @KaryakarId = mandalKaryakar.KaryakarId, @Id = mandalKaryakar.Id });

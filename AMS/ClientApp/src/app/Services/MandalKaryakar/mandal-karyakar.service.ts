@@ -16,6 +16,10 @@ export class MandalKaryakarService {
     return this.http.post<number>(this.baseUrl + 'MandalKaryakar', mandalKaryakar);
   }
 
+  getMandalId(id: number): Observable<number[]>{
+    return this.http.get<number[]>(this.baseUrl + 'MandalKaryakar/GetMandalId/' + id);
+  }
+
   deleteMandalKaryakar(Karyakarid: number): Observable<number>{
     // console.log(Karyakarid)
     return this.http.delete<number>(this.baseUrl + 'MandalKaryakar/' + Karyakarid);

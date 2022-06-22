@@ -22,6 +22,14 @@ namespace AMS.Controllers
             return Ok(await _context.GetAllMandalKaryakar());
         }
 
+        [HttpGet]
+        [Route("[action]/{id:int}")]
+        public async Task<IActionResult> GetMandalId([FromRoute] int id)
+        {
+            Console.WriteLine(id);
+            return Ok(await _context.getMandalId(id));
+        }
+
         [HttpPost]
         public async Task<IActionResult> InsertMandalKaryakar([FromBody] MandalKaryakar data)
         {

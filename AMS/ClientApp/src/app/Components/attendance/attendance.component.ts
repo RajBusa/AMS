@@ -1,8 +1,10 @@
 import { formatDate} from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Karyakar } from 'src/app/models/karyakar.model';
 import { Sabha } from 'src/app/models/sabha.modal';
 import { SabhaAttendance } from 'src/app/models/sabhaAttendance.model';
 import { Yuvak } from 'src/app/models/yuvak.model';
+import { MandalKaryakarService } from 'src/app/Services/MandalKaryakar/mandal-karyakar.service';
 import { SabhaService } from 'src/app/Services/Sabha/sabha.service';
 import { SabhaAttendanceService } from 'src/app/Services/SabhaAttendance/sabha-attendance.service';
 import { YuvakService } from 'src/app/Services/Yuvak/yuvak.service';
@@ -14,8 +16,9 @@ import { YuvakService } from 'src/app/Services/Yuvak/yuvak.service';
   styleUrls: ['./attendance.component.css']
 })
 export class AttendanceComponent implements OnInit {
+  @Input() karyakar!: Karyakar;
   
-  mandalId: number = 1;
+  mandalId: number = 0;
   isMandal: boolean = true;
   yuvak: Yuvak[] = [];
   sabha: Sabha[] = [];
@@ -27,15 +30,15 @@ export class AttendanceComponent implements OnInit {
     sabhaId: 5,
     attendance: new Date('2022-05-04 17:00:00')
   };
-
+  
   //0 means Not Taken And 1 means Taken
   todayDate: string = formatDate(new Date(), 'yyyy-MM-dd', 'en_US');
-  constructor(private sabhaService: SabhaService, private sabhaAttendanceService: SabhaAttendanceService, private yuvakService: YuvakService) { }
-
+  
+  constructor(private sabhaService: SabhaService, private sabhaAttendanceService: SabhaAttendanceService, private yuvakService: YuvakService, private mandalKaryakarService: MandalKaryakarService) { }
 
   ngOnInit(): void {
-    this.getAllYuvak(this.mandalId, this.isMandal);
-    this.getSabha(this.mandalId)
+    console.log(this.karyakar)
+    this.getMandalId();
   }
 
 
@@ -47,6 +50,17 @@ export class AttendanceComponent implements OnInit {
           // console.log(response);
         }
       );
+  }
+
+  getMandalId(){
+    this.mandalKaryakarService.getMandalId(this.karyakar.id)
+    .subscribe(
+      response=>{
+        this.mandalId = response[0];
+        this.getAllYuvak(this.mandalId, this.isMandal);
+        this.getSabha(this.mandalId);
+      }
+    )
   }
 
   getSabha(mandalId: number) {

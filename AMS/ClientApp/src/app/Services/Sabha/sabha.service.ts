@@ -12,6 +12,7 @@ export class SabhaService {
   baseUrl = 'https://localhost:7140/api/';
 
   getTotalSabha(id: number): Observable<number> {
+    console.log(id);
     return this.http.get<number>(this.baseUrl + 'Sabha/getTotalSabhaByMandalId/' + id);
   }
 

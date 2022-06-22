@@ -28,7 +28,7 @@
   <div class="" *ngIf="fristPage;else elseBlock1">
 
     <div class="" *ngIf="btnDisable;else elseBlock2">
-      <button class="btn btn-primary col-12" routerLink="/sanchalak">Add Sampark</button>
+      <button class="btn btn-primary col-12" routerLink="/sanchalak" (click)="newSamparkKaryakar()">Add Sampark</button>
     </div>
     <ng-template #elseBlock2>
       <button class="btn btn-primary col-12" routerLink="/sanchalak" disabled>Add Sampark</button>
@@ -82,7 +82,7 @@
       </div>
     </div>
   </div>
-  <button class="btn btn-primary col-12" routerLink="/sanchalak" (click)="changeSkOfYuvak()">Submit</button>
+  <button class="btn btn-primary col-12" routerLink="/sanchalak" (click)="changesOfYuvak()">Submit</button>
 </ng-template>
 
 

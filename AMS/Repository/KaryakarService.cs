@@ -33,6 +33,11 @@ namespace AMS.Repository
             return await _db.QueryAsync<Karyakar>("select * from Karyakar where Id = @Id", new { @Id = id });
         }
 
+        public async Task<IEnumerable<Karyakar>> GetKaryakarByEmailId(string emailId)
+        {
+            return await _db.QueryAsync<Karyakar>("select * from Karyakar where email = @email", new { @email = emailId });
+        }
+
         public async Task<IEnumerable<SamparKaryakar>> GetSamparKaryakars(int mId)
         {
             return await _db.QueryAsync<SamparKaryakar>("SELECT Id, Name from Karyakar where RoleId = 1 AND Id in (SELECT KaryakarId FROM MandalKaryakar where MandalId = @mId);", new { @mId = mId });
@@ -124,7 +129,7 @@ namespace AMS.Repository
 
             for (int i = 0; i < yId.Length; i++)
             {
-                yuvaks = (List<Yuvak>)await _db.QueryAsync<Yuvak>("select * from Yuvak where Id = @Id", new { @Id = yId[0] });
+                yuvaks = (List<Yuvak>)await _db.QueryAsync<Yuvak>("select * from Yuvak where Id = @Id", new { @Id = yId[i] });
 
                 IEnumerable<int> kshetraId = await _db.QueryAsync<int>("select KshetraId from Mandal where Id = @id", new { @id = yuvaks[0].MandalId });
 
@@ -148,9 +153,60 @@ namespace AMS.Repository
 
 
                 await _db.ExecuteAsync("INSERT INTO MandalKaryakar (Id,MandalId,KaryakarId) VALUES (NULL,@MandalId,@KaryakarId)", new { @MandalId = yuvaks[0].MandalId, @KaryakarId = karyakarId });
+
+                await _db.ExecuteAsync("Update Yuvak set SamparkId = @SamparkId, isSamparkKaryakar = 1 where id = @id", new { @id = yId[i], @SamparkId = karyakarId });
             }
             return yId.Length;
         }
-    //}
+
+        public async Task<int> SignIn(SignIn signIn)
+        {
+            List<int> id;
+            id = (List<int>)await _db.QueryAsync<int>("select id from karyakar where email = @email", new { @email = signIn.Email });
+            //Console.WriteLine(id[0]);
+            Console.WriteLine(id.Count());
+            if(id.Count() == 1)
+            {
+                List<int> isActivated = (List<int>)await _db.QueryAsync<int>("select isActivated from karyakar where id = @id", new { @id = id });
+                if(isActivated[0] == 1)
+                {
+                    Console.WriteLine("IsActivated");
+                    List<string> pass = (List<string>)await _db.QueryAsync<string>("select password from karyakar where id = @id", new { @id = id });
+                    if(BCrypt.Net.BCrypt.Verify(signIn.Password, pass[0]))
+                    {
+                        return id[0];
+                    }
+                    else
+                    {
+                        return (-2);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("NotActivated");
+                    return (-1);
+                }
+
+            }
+            return 0;
+            //Console.WriteLine(id);
+            //return 0; == email id not exist
+            //retutn -1; == isActivated == 0
+            //return -2; == password incorrect
+            //return -3; == Success full signIn
+        }
+
+        public async Task<int> changePassword(SignIn signIn)
+        {
+            string passwordHash = BCrypt.Net.BCrypt.HashPassword(signIn.Password);
+
+            Console.WriteLine(passwordHash);
+            List<int> isActivated = (List<int>)await _db.QueryAsync<int>("select isActivated from karyakar where email = @email", new { @email = signIn.Email });
+            if (isActivated[0] == 0)
+            {
+                return await _db.ExecuteAsync("Update Karyakar set Password = @Password, isActivated = 1 where email = @email", new { @email = signIn.Email, @Password = passwordHash});
+            }
+            return -1;
+        }
     }
 }

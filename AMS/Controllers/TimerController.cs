@@ -19,7 +19,7 @@ namespace AMS.Controllers
         [HttpGet]
         public async Task<IActionResult> getAllKaryakar()
         {
-            Console.WriteLine("Hey Started");
+            //Console.WriteLine("Hey Started");
             aTimer = new System.Timers.Timer();
             aTimer.Interval = 86400;
             aTimer.Elapsed += hey;
@@ -30,7 +30,7 @@ namespace AMS.Controllers
 
         public async static void hey(Object source, System.Timers.ElapsedEventArgs e)
         {
-            Console.WriteLine("Hey 2 sec");
+            //Console.WriteLine("Hey 2 sec");
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("https://localhost:7140/");
             client.DefaultRequestHeaders.Accept.Clear();
@@ -45,7 +45,7 @@ namespace AMS.Controllers
         [HttpGet]
         public async Task<IActionResult> getQuery()
         {
-            Console.WriteLine("Hey Started 1");
+            //Console.WriteLine("Hey Started 1");
             return Ok(await _context.AddDate());
         }
 

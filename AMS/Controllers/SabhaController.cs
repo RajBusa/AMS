@@ -19,7 +19,7 @@ namespace AMS.Controllers
 
         public async Task<IActionResult> getSabha()
         {
-            Console.WriteLine("GetSabha is called");
+            //Console.WriteLine("GetSabha is called");
             return Ok(await _context.GetAllSabha());
         }
         //Get Sabha By Id
@@ -34,7 +34,7 @@ namespace AMS.Controllers
         [Route("{id:int}")]
         public async Task<IActionResult> getTotalSabhaByMandalId([FromRoute] int id)
         {
-            Console.WriteLine(id);
+            //Console.WriteLine(id);
             return Ok(await _context.GetTotalSabhaByMandalId(id));
         }
 
@@ -55,7 +55,7 @@ namespace AMS.Controllers
         [HttpPut]
         public async Task<IActionResult> updateSabha([FromBody] Sabha data)
         {
-            Console.WriteLine("updateSabha Called 1");
+            //Console.WriteLine("updateSabha Called 1");
             return Ok(await _context.UpdateSabha(data));
         }
     }

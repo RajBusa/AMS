@@ -1,5 +1,7 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
+import { Karyakar } from 'src/app/models/karyakar.model';
 import { Yuvak } from 'src/app/models/yuvak.model';
+import { MandalKaryakarService } from 'src/app/Services/MandalKaryakar/mandal-karyakar.service';
 import { SabhaService } from 'src/app/Services/Sabha/sabha.service';
 import { YuvakService } from 'src/app/Services/Yuvak/yuvak.service';
 
@@ -9,9 +11,12 @@ import { YuvakService } from 'src/app/Services/Yuvak/yuvak.service';
   styleUrls: ['./list-of-yuvak.component.css']
 })
 export class ListOfYuvakComponent implements OnInit { 
+
+  @Input() karyakar!: Karyakar;
+  
   yuvaks: Yuvak[] = [];
   samparkId: number = 1;
-  mandalId: number = 1;
+  mandalId: number = 0;
   isMandal: boolean = true;
   totalSabha: number = 0;
   filter: string = "Descending";
@@ -19,11 +24,13 @@ export class ListOfYuvakComponent implements OnInit {
   roleId: number = 2;
 
   
-  constructor(private yuvakServices: YuvakService, private sabhaServices: SabhaService) { }
-  ngOnInit(): void {
-    this.getAllYuvak(this.samparkId, this.isMandal);
-    this.getTotalSabha(this.mandalId);
-    this.sortYuvak();
+  constructor(private yuvakServices: YuvakService, private sabhaServices: SabhaService, private mandalKaryakarService: MandalKaryakarService) { }
+  ngOnInit() {
+    if(this.karyakar.roleId == 1) {
+     this.isMandal = false;
+    }
+    this.getMandalId();
+    // console.log(this.karyakar);
   }
 
   getAllYuvak(samparkId: number, isMandal: boolean) {
@@ -49,13 +56,27 @@ export class ListOfYuvakComponent implements OnInit {
     // console.table(this.yuvak);
   }
 
-  getTotalSabha(mandalId: number){
-    this.sabhaServices.getTotalSabha(mandalId)
+  getTotalSabha(){
+    this.sabhaServices.getTotalSabha(this.mandalId)
       .subscribe(
         response => {
           this.totalSabha = response;
         }
       );
+  }
+
+  getMandalId(){
+    this.mandalKaryakarService.getMandalId(this.karyakar.id)
+      .subscribe(
+        response => {
+          console.log(response)
+          this.mandalId = response[0];
+          console.log(this.mandalId)
+          this.getAllYuvak(this.karyakar.id, this.isMandal);
+          this.getTotalSabha();
+          this.sortYuvak();
+        }
+      )
   }
 
   calculateStuff(count: number){

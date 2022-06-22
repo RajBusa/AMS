@@ -8,6 +8,8 @@ namespace AMS.Repository
         Task<IEnumerable<Karyakar>> GetAllKaryakar();
 
         Task<IEnumerable<Karyakar>> GetKaryakar(int id);
+
+        Task<IEnumerable<Karyakar>> GetKaryakarByEmailId(string emailId);
         Task<IEnumerable<Karyakar>> GetSanchalak(int mId);
 
         Task<IEnumerable<SamparKaryakar>> GetSamparKaryakars(int Id);
@@ -20,5 +22,9 @@ namespace AMS.Repository
         Task<IEnumerable<Extra>> GetAllYuvaks(int id);
 
         Task<int> InsertKaryakarFromYuvakId(int[] yId);
+
+        Task<int> SignIn(SignIn signIn);
+
+        Task<int> changePassword(SignIn signIn);
     }
 }

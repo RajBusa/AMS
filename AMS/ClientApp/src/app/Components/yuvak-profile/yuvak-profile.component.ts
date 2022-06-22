@@ -112,57 +112,33 @@ export class YuvakProfileComponent implements OnInit {
     }
     else {
 
-      console.log(typeof this.isSamparkKaryakarBefore)
-      console.log(typeof this.syRole)
+      // console.log(typeof this.isSamparkKaryakarBefore)
+      // console.log(typeof this.syRole)
       // console.log("Update")
 
       if (this.syRole == 'false' && this.isSamparkKaryakarBefore == 'false') {
-        console.log('FF')
+        // console.log('FF')
         this.updateYuvakProfile()
       } else if (this.syRole == 'true' && this.isSamparkKaryakarBefore == 'true') {
-        console.log('TT')
+        // console.log('TT')
         this.updateSamparkKaryakar();
       } else if (this.syRole == 'false' && this.isSamparkKaryakarBefore == 'true') {
         this.isSamparkKaryakarBefore = 'false';
-        console.log("TF")
+        // console.log("TF")
         this.updateYuvakProfile();
         this.deleteMandalKaryakar();
         this.deleteKaryakar();
       } else {
         this.isSamparkKaryakarBefore = 'true';
-        console.log("FT");
+        // console.log("FT");
         this.insertSamparkKaryakar()
-        // this.samparkKaryakar.address = this.yuvak.address
-        // this.samparkKaryakar.dob = this.yuvak.dob
-        // this.samparkKaryakar.education = this.yuvak.education
-        // this.samparkKaryakar.email = this.yuvak.email
-        // this.samparkKaryakar.karayakarNo = 0
-        // this.samparkKaryakar.kshetraId = this.kshetraId
-        // this.samparkKaryakar.mobileNo = this.yuvak.mobile
-        // this.samparkKaryakar.name = this.yuvak.name
-
-        // this.mandalKaryakar.mandalId = this.yuvak.mandalId;
-
-        // this.yuvakServices.insertSamparkKaryakar(this.samparkKaryakar)
-        //   .subscribe(
-        //     response => {
-        //       console.log(response[0])
-        //       console.log(typeof response)
-        //       console.log(typeof response[0])
-        //       console.log(typeof this.yuvak.samparkId)
-        //       this.yuvak.samparkId = response[0];
-        //       this.mandalKaryakar.karyakarId = response[0];
-        //       this.insertMandalKaryakar();
-        //       this.updateYuvakProfile();
-        //     }
-        //   )
       }
     }
   }
 
   insertSamparkKaryakar() {
-    console.log("Inside Function")
-    console.log(this.samparkKaryakar.id)
+    // console.log("Inside Function")
+    // console.log(this.samparkKaryakar.id)
     this.samparkKaryakar.address = this.yuvak.address
     this.samparkKaryakar.dob = this.yuvak.dob
     this.samparkKaryakar.education = this.yuvak.education
@@ -177,10 +153,10 @@ export class YuvakProfileComponent implements OnInit {
     this.karyakarService.insertSamparkKaryakar(this.samparkKaryakar)
       .subscribe(
         response => {
-          console.log(response[0])
-          console.log(typeof response)
-          console.log(typeof response[0])
-          console.log(typeof this.yuvak.samparkId)
+          // console.log(response[0])
+          // console.log(typeof response)
+          // console.log(typeof response[0])
+          // console.log(typeof this.yuvak.samparkId)
           this.yuvak.samparkId = response[0];
           this.mandalKaryakar.karyakarId = response[0];
           if (this.yuvak.id == 0) {
@@ -198,7 +174,7 @@ export class YuvakProfileComponent implements OnInit {
     this.yuvakServices.insertYuvak(this.yuvak)
       .subscribe(
         response => {
-          console.log(response)
+          // console.log(response)
         }
       );
   }
@@ -207,7 +183,7 @@ export class YuvakProfileComponent implements OnInit {
     this.mandalKaryakarService.insertMandalKarykar(this.mandalKaryakar)
       .subscribe(
         response => {
-          console.log(response)
+          // console.log(response)
         }
       )
   }
@@ -229,7 +205,7 @@ export class YuvakProfileComponent implements OnInit {
     this.karyakarService.updateSamparkKaryakar(this.samparkKaryakar)
       .subscribe(
         response => {
-          console.log(response);
+          // console.log(response);
         }
       )
     this.updateYuvakProfile();
@@ -239,27 +215,27 @@ export class YuvakProfileComponent implements OnInit {
     this.yuvakServices.updateYuvak(this.yuvak)
       .subscribe(
         response => {
-          console.log(response);
+          // console.log(response);
         }
       );
   }
 
   deleteMandalKaryakar() {
-    console.log(this.samparkKaryakar.id)
+    // console.log(this.samparkKaryakar.id)
     this.mandalKaryakarService.deleteMandalKaryakar(this.samparkKaryakar.id)
       .subscribe(
         response => {
-          console.log(response)
+          // console.log(response)
         }
       )
   }
 
   deleteKaryakar() {
-    console.log(this.samparkKaryakar.id)
+    // console.log(this.samparkKaryakar.id)
     this.karyakarService.deleteKaryakar(this.samparkKaryakar.id)
       .subscribe(
         response => {
-          console.log(response)
+          // console.log(response)
         }
       )
   }

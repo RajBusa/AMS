@@ -46,11 +46,8 @@ export class ListOfMandalPeopleComponent implements OnInit {
       .subscribe(
         response => {
           this.sanchalak = response;
-          console.log(this.sanchalak);
+          // console.log(this.sanchalak);
         }
       )
   }
-
-  
-
 }
