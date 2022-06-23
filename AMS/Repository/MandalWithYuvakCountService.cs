@@ -11,12 +11,19 @@ namespace AMS.Repository
         {
             _db = db;
         }
-        public async Task<IEnumerable<MandalWithYuvakCount>> GetAllMandal(int id)
+        public async Task<IEnumerable<MandalWithYuvakCount>> GetMandal(int id, bool idNirikshak)
         {
             List<MandalWithYuvakCount> data = new List<MandalWithYuvakCount>();
             List<Mandal> mandals;
             int total;
-            mandals = (List<Mandal>)await _db.QueryAsync<Mandal>("select * from Mandal where NirikshakId = @Id", new { @Id = id });
+            if (idNirikshak)
+            {
+                mandals = (List<Mandal>)await _db.QueryAsync<Mandal>("select * from Mandal where NirikshakId = @Id", new { @Id = id });
+            }
+            else
+            {
+                mandals = (List<Mandal>)await _db.QueryAsync<Mandal>("select * from Mandal where kshetraId = @Id", new { @Id = id });
+            }
             foreach (Mandal mandal in mandals)
             {
                total = 0;

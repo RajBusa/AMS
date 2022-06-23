@@ -1,5 +1,5 @@
 import { formatDate} from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { Karyakar } from 'src/app/models/karyakar.model';
 import { Sabha } from 'src/app/models/sabha.modal';
 import { SabhaAttendance } from 'src/app/models/sabhaAttendance.model';
@@ -17,7 +17,8 @@ import { YuvakService } from 'src/app/Services/Yuvak/yuvak.service';
 })
 export class AttendanceComponent implements OnInit {
   @Input() karyakar!: Karyakar;
-  
+
+  @Output() msgToSibling = new EventEmitter<any>();
   mandalId: number = 0;
   isMandal: boolean = true;
   yuvak: Yuvak[] = [];
@@ -40,6 +41,15 @@ export class AttendanceComponent implements OnInit {
     console.log(this.karyakar)
     this.getMandalId();
   }
+
+
+
+  msgToSib() {
+    console.log("object") 
+    this.msgToSibling.emit(this.karyakar)
+  }
+
+
 
 
   getAllYuvak(mandalId: number, isMandal: boolean) {
@@ -120,6 +130,4 @@ export class AttendanceComponent implements OnInit {
         }
       })
   }
-
-
 }

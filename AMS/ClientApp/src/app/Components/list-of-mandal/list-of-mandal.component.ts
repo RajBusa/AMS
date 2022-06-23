@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Karyakar } from 'src/app/models/karyakar.model';
 import { MandalwithYuvakCount } from 'src/app/models/mandalwithYuvakCount.model';
 import { MandalService } from 'src/app/Services/Mandal/mandal.service';
 
@@ -8,17 +9,21 @@ import { MandalService } from 'src/app/Services/Mandal/mandal.service';
   styleUrls: ['./list-of-mandal.component.css']
 })
 export class ListOfMandalComponent implements OnInit {
+
+  @Input() karyakar!: Karyakar;
   mandalwithYuvakCount: MandalwithYuvakCount[] = [];
-
-
 
   constructor(private mandalService: MandalService) { }
 
   ngOnInit(): void {
-    this.getMandalWithYuvakCount(3)
+    if(this.karyakar.roleId == 3){
+      this.getMandalWithYuvakCount(this.karyakar.id, true)
+    } else if (this.karyakar.roleId == 4) {
+      this.getMandalWithYuvakCount(this.karyakar.kshetraId, false)
+    }
   }
-  getMandalWithYuvakCount(id: number){
-    this.mandalService.getMandalWithYuvakCount(id)
+  getMandalWithYuvakCount(id: number, isNirikshak: boolean){
+    this.mandalService.getMandalWithYuvakCount(id, isNirikshak)
       .subscribe(
         response =>{
           // console.log(response)  

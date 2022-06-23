@@ -10,7 +10,7 @@ export class MandalService {
 
   constructor(private http: HttpClient) { }
   baseUrl = 'https://localhost:7140/api/';
-  getMandalWithYuvakCount(id: number): Observable<MandalwithYuvakCount[]> {
-    return this.http.get<MandalwithYuvakCount[]>(this.baseUrl + 'Nirikshak/' + id);
+  getMandalWithYuvakCount(id: number, isNirikshak: boolean): Observable<MandalwithYuvakCount[]> {
+    return this.http.get<MandalwithYuvakCount[]>(this.baseUrl + 'Nirikshak/' + id + '/' + isNirikshak);
   }
 }

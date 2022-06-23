@@ -15,10 +15,10 @@ namespace AMS.Controllers
 
         // GET: Kshetra
         [HttpGet]
-        [Route("{id:int}")]
-        public async Task<IActionResult> GetAllMandal([FromRoute]int id)
+        [Route("{id:int}/{isNirikshak:bool}")]
+        public async Task<IActionResult> GetMandal([FromRoute]int id, [FromRoute] bool isNirikshak)
         {
-            return Ok(await _context.GetAllMandal(id));
+            return Ok(await _context.GetMandal(id, isNirikshak));
         }
 
     }

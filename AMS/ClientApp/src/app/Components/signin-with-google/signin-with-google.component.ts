@@ -13,7 +13,7 @@ export class SigninWithGoogleComponent implements OnInit {
     email: '',
     password: ''
   };
-
+  isSingIn: boolean = false;
   constructor(private karyakarService: KaryakarService, private route: Router) { }
 
   ngOnInit(): void {
@@ -37,23 +37,24 @@ export class SigninWithGoogleComponent implements OnInit {
             setTimeout(() => {
               alert!.innerHTML = '';
             }, 2000);
-          } else  {
+          } else {
             this.karyakarService.getKaryakar(response)
-            .subscribe(
-              response=>{
-                console.log(response[0])
-                console.log(typeof response)
-                if(response[0].roleId == 1){
-                  this.route.navigate(['/sampark'], {queryParams: {samparkKaryakar :JSON.stringify(response[0])}})
-                } else if(response[0].roleId == 2) {
-                  this.route.navigate(['/sanchalak'], {queryParams: {sanchalak :JSON.stringify(response[0])}})
-                } else if(response[0].roleId == 3) { 
-                  this.route.navigate(['/nirikshak'], {queryParams: {nirikshak :JSON.stringify(response[0])}})
-                } else if(response[0].roleId == 4) {
-                  this.route.navigate(['/nirdeshak'], {queryParams: {nirdeshak :JSON.stringify(response[0])}})
+              .subscribe(
+                response => {
+                  // console.log(response[0])
+                  // console.log(typeof response)
+                  this.isSingIn = true;
+                  if (response[0].roleId == 1) {
+                    this.route.navigateByUrl('/sampark', { state: { samparkKaryakar: response[0], isSingIn: this.isSingIn } })
+                  } else if (response[0].roleId == 2) {
+                    this.route.navigateByUrl('/sanchalak', { state: { sanchalak: response[0], isSingIn: this.isSingIn } })
+                  } else if (response[0].roleId == 3) {
+                    this.route.navigateByUrl('/nirikshak', { state: { nirikshak: response[0], isSingIn: this.isSingIn } })
+                  } else if (response[0].roleId == 4) {
+                    this.route.navigateByUrl('/nirdeshak', { state: { nirdeshak: response[0], isSingIn: this.isSingIn } })
+                  }
                 }
-              }
-            )
+              )
           }
         }
       )

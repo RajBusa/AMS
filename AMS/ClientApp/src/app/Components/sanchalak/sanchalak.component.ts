@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Karyakar } from 'src/app/models/karyakar.model';
 
 @Component({
@@ -8,9 +8,7 @@ import { Karyakar } from 'src/app/models/karyakar.model';
   styleUrls: ['./sanchalak.component.css']
 })
 export class SanchalakComponent implements OnInit {
-  sabhaDate = '2019-06-29';
-  t : boolean = false;
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: Router) { }
   sanchalak: Karyakar = {
     id: 0,
     address: '',
@@ -25,18 +23,21 @@ export class SanchalakComponent implements OnInit {
     roleId: 1,
     isActivated: true
   };
+
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      // console.log(params['sanchalak']);
-      this.sanchalak = JSON.parse(params["sanchalak"])
-      // console.log(this.sanchalak)
-    })
-  }
-  onClick(){
-    this.t = true;
-  }
-  onClick1(date: string){
-    this.sabhaDate = date;
-    // console.log(this.sabhaDate)
+    if(history.state.sanchalak != undefined){
+      console.log(history.state);
+      this.sanchalak = history.state.sanchalak;
+      console.log(this.sanchalak)
+      sessionStorage.setItem("sanchalak", JSON.stringify(this.sanchalak))
+      sessionStorage.setItem("isSignIn", history.state.isSingIn)
+    } else {
+      if(sessionStorage.getItem('sanchalak') == null){
+        this.route.navigateByUrl('/signInWithGoogle');
+      }
+      console.log("Undifined")
+      console.log(sessionStorage.getItem('sanchalak'));
+      this.sanchalak = JSON.parse(sessionStorage.getItem('sanchalak')!)
+    } 
   }
 }

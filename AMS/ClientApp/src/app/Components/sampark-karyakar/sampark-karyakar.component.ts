@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Karyakar } from 'src/app/models/karyakar.model';
 
 @Component({
@@ -23,14 +23,26 @@ export class SamparkKaryakarComponent implements OnInit {
     isActivated: true
   };
 
-  str: String = '';
-  constructor(private route: ActivatedRoute) { }
+  isSignIn: string = '';
+  constructor(private route: Router) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      // console.log(params['samparkKaryakar']);
-      this.samparkKaryakar = JSON.parse(params["samparkKaryakar"])
+    if(history.state.samparkKaryakar != undefined){
+      console.log(history.state);
+      this.samparkKaryakar = history.state.samparkKaryakar;
       console.log(this.samparkKaryakar)
-    })
+      sessionStorage.setItem("samparkKaryakar", JSON.stringify(this.samparkKaryakar))
+      sessionStorage.setItem("isSignIn", history.state.isSingIn)
+    } else {
+      if(sessionStorage.getItem('samparkKaryakar') == null){
+        this.route.navigateByUrl('/signInWithGoogle');
+      }
+      console.log("Undifined")
+      console.log(sessionStorage.getItem('samparkKaryakar'));
+      this.samparkKaryakar = JSON.parse(sessionStorage.getItem('samparkKaryakar')!);
+      this.isSignIn = sessionStorage.getItem('isSignIn')!;
+      // console.log(sessionStorage.getItem('isSignIn')!)
+      // console.log(typeof sessionStorage.getItem('isSignIn')!)
+    }
   }
 }

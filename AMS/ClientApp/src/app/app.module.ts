@@ -66,13 +66,81 @@ import { NewPasswordComponent } from './Components/new-password/new-password.com
     ApiAuthorizationModule,
     Ng2SearchPipeModule,
     RouterModule.forRoot([
-      { path: '', component: InitComponent, pathMatch: 'full' },
+      { path: '', component: SigninWithGoogleComponent},
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
-      { path: 'nirdeshak', component: NirdeshakComponent },
-      { path: 'nirikshak', component: NirikshakComponent },
-      { path: 'sanchalak', component: SanchalakComponent },
-      { path: 'sampark', component: SamparkKaryakarComponent },
+      {
+        path: 'nirdeshak', component: NirdeshakComponent, data: {
+          nirdeshak: {
+            id: 0,
+            address: '',
+            dob: '',
+            education: '',
+            email: '',
+            karayakarNo: 0,
+            kshetraId: 0,
+            mobileNo: '',
+            name: '',
+            password: '',
+            roleId: 1,
+            isActivated: true
+          }, isSingIn: false
+        }
+      },
+      {
+        path: 'nirikshak', component: NirikshakComponent, data: {
+          nirikshak: {
+            id: 0,
+            address: '',
+            dob: '',
+            education: '',
+            email: '',
+            karayakarNo: 0,
+            kshetraId: 0,
+            mobileNo: '',
+            name: '',
+            password: '',
+            roleId: 1,
+            isActivated: true
+          }, isSingIn: false
+        }
+      },
+      {
+        path: 'sanchalak', component: SanchalakComponent, data: {
+          sanchalak: {
+            id: 0,
+            address: '',
+            dob: '',
+            education: '',
+            email: '',
+            karayakarNo: 0,
+            kshetraId: 0,
+            mobileNo: '',
+            name: '',
+            password: '',
+            roleId: 1,
+            isActivated: true
+          }, isSingIn: false
+        }
+      },
+      {
+        path: 'sampark', component: SamparkKaryakarComponent, data: {
+          samparkKaryakar: {
+            id: 0,
+            address: '',
+            dob: '',
+            education: '',
+            email: '',
+            karayakarNo: 0,
+            kshetraId: 0,
+            mobileNo: '',
+            name: '',
+            password: '',
+            roleId: 1,
+            isActivated: true
+          }, isSingIn: false
+        }
+      },
       { path: 'yuvakList', component: ListOfYuvakComponent },
       { path: 'yuvalProfile', component: YuvakProfileComponent },
       { path: 'editSampark', component: EditSamparkaryakarComponent },
