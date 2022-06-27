@@ -1,5 +1,5 @@
 import { formatDate} from '@angular/common';
-import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Karyakar } from 'src/app/models/karyakar.model';
 import { Sabha } from 'src/app/models/sabha.modal';
 import { SabhaAttendance } from 'src/app/models/sabhaAttendance.model';
@@ -18,7 +18,6 @@ import { YuvakService } from 'src/app/Services/Yuvak/yuvak.service';
 export class AttendanceComponent implements OnInit {
   @Input() karyakar!: Karyakar;
 
-  @Output() msgToSibling = new EventEmitter<any>();
   mandalId: number = 0;
   isMandal: boolean = true;
   yuvak: Yuvak[] = [];
@@ -40,13 +39,6 @@ export class AttendanceComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.karyakar)
     this.getMandalId();
-  }
-
-
-
-  msgToSib() {
-    console.log("object") 
-    this.msgToSibling.emit(this.karyakar)
   }
 
 
@@ -98,6 +90,8 @@ export class AttendanceComponent implements OnInit {
 
 
   takeAttendace(yid: number) {
+    this.searchText = '';
+    document.getElementById('searchInput')?.focus();
     console.log(yid);
     this.sabhaAttendanceService.ExitisingAttendance(yid, this.sabha[0].id)
       .subscribe(response => {
@@ -131,3 +125,5 @@ export class AttendanceComponent implements OnInit {
       })
   }
 }
+
+// 192.168.206.233

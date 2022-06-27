@@ -33,12 +33,12 @@
     </div>
     <form class="d-flex my-2 row" role="search">
         <div class="col-7">
-            <input class="form-control" type="search" placeholder="Search" [(ngModel)]="searchText" name="searchText">
+            <input class="form-control" type="search" id="searchInput" placeholder="Search" [(ngModel)]="searchText" name="searchText" autofocus>
         </div>
         <div class="col-5">
             <!-- <i class="fa-solid fa-bars-filter"></i> -->
             <!-- <button class="btn btn-primary col-12" routerLink="/yuvakList">View Attendance</button> -->
-            <button class="btn btn-primary col-12" (click)="msgToSib()">View Attendance</button>
+            <button class="btn btn-primary col-12" routerLink="/yuvakList">View Attendance</button>
         </div>
     </form>
     <!-- <ul class="list-group list-group-flush">
@@ -52,19 +52,34 @@
     </ul> -->
     <!-- <div>{{sabha[0].sabhaDate}}</div> -->
     <ul class="list-group list-group-flush" *ngIf="sabha[0]?.sabhaDate == todayDate; else elseBlock">
-        <li [ngClass]="{'checked': y.isAttendanceTaken}" class="list-group-item d-flex justify-content-between align-items-start hover"
-            *ngFor="let y of yuvak | filter:searchText">
-            <div class="ms-2 me-auto fw-bold">
-                {{y.name}}
-            </div>
-            <!-- <form action="" #form="ngForm" (ngSubmit)="XYZ()"></form> -->
-            <div *ngIf = "y.isAttendanceTaken == true;else elseBlock1">
-                <span><input type="checkbox" (click)="takeAttendace(y.id)" class="checkBox" checked  name="" id=""></span>
-            </div>
-            <ng-template #elseBlock1>
-                <span><input type="checkbox" (click)="takeAttendace(y.id)" class="checkBox"  name="" id=""></span>
-            </ng-template>
-        </li>
+        <label for="">
+            <li [ngClass]="{'checked': y.isAttendanceTaken}" class="list-group-item  align-items-start hover"
+                *ngFor="let y of yuvak | filter:searchText">
+                <label (click)="takeAttendace(y.id)" class="d-flex justify-content-between">
+                    <div class="ms-2 me-auto fw-bold">
+                        {{y.name}}
+                    </div>
+                    <!-- <form action="" #form="ngForm" (ngSubmit)="XYZ()"></form> -->
+
+
+                    <div *ngIf = "y.isAttendanceTaken == true;else elseBlock1">
+                        <span><input type="checkbox" class="checkBox" checked  name=""></span>
+                    </div>
+                    <ng-template #elseBlock1>
+                        <span><input type="checkbox" class="checkBox"  name=""></span>
+                    </ng-template>
+
+
+
+                    <!-- <div *ngIf = "y.isAttendanceTaken == true;else elseBlock1">
+                        <span><input type="checkbox" (click)="takeAttendace(y.id)" class="checkBox" checked  name="" id="{{y.id}}"></span>
+                    </div>
+                    <ng-template #elseBlock1>
+                        <span><input type="checkbox" (click)="takeAttendace(y.id)" class="checkBox"  name="" id="{{y.id}}"></span>
+                    </ng-template> -->
+                </label>
+            </li>
+        </label>
     </ul>
     <ng-template #elseBlock>
         <ul class="list-group list-group-flush">
@@ -73,7 +88,7 @@
                 <div class="ms-2 me-auto fw-bold">
                     {{y.name}}
                 </div>
-                <span><input type="checkbox" class="checkBox" name="" id="" disabled></span>
+                <span><input type="checkbox" class="checkBox" name="" id="" disabled></span>            
             </li>
         </ul>
     </ng-template>

@@ -141,13 +141,14 @@ import { NewPasswordComponent } from './Components/new-password/new-password.com
           }, isSingIn: false
         }
       },
-      { path: 'yuvakList', component: ListOfYuvakComponent },
+      { path: 'yuvakList', component: ListOfYuvakComponent, data: {mandalId: 0} },
       { path: 'yuvalProfile', component: YuvakProfileComponent },
       { path: 'editSampark', component: EditSamparkaryakarComponent },
       { path: 'listOfMandalPeople', component: ListOfMandalPeopleComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'signInWithGoogle', component: SigninWithGoogleComponent },
       { path: 'newPassword', component: NewPasswordComponent },
+      { path: 'takeAttendance', component: AttendanceComponent },
 
     ]),
 

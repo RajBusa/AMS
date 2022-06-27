@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Karyakar } from 'src/app/models/karyakar.model';
+import { MandalKaryakarService } from 'src/app/Services/MandalKaryakar/mandal-karyakar.service';
 
 @Component({
   selector: 'app-sanchalak',
@@ -8,7 +9,7 @@ import { Karyakar } from 'src/app/models/karyakar.model';
   styleUrls: ['./sanchalak.component.css']
 })
 export class SanchalakComponent implements OnInit {
-  constructor(private route: Router) { }
+  constructor(private route: Router, private mandalKaryakarService: MandalKaryakarService) { }
   sanchalak: Karyakar = {
     id: 0,
     address: '',
@@ -23,7 +24,7 @@ export class SanchalakComponent implements OnInit {
     roleId: 1,
     isActivated: true
   };
-
+  mandalId: number = 0;
   ngOnInit(): void {
     if(history.state.sanchalak != undefined){
       console.log(history.state);
@@ -39,5 +40,20 @@ export class SanchalakComponent implements OnInit {
       console.log(sessionStorage.getItem('sanchalak'));
       this.sanchalak = JSON.parse(sessionStorage.getItem('sanchalak')!)
     } 
+    this.getmandalId();
   }
+
+  getmandalId(){
+    this.mandalKaryakarService.getMandalId(this.sanchalak.id)
+      .subscribe(
+        response => {
+          this.mandalId = response[0];
+        }
+      )
+  }
+
+  viewYuvakList(){
+    this.route.navigateByUrl('/yuvakList', { state: { mandalId: this.mandalId} })
+  }
+
 }

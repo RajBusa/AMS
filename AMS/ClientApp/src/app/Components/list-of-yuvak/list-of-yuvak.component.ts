@@ -4,7 +4,6 @@ import { Yuvak } from 'src/app/models/yuvak.model';
 import { MandalKaryakarService } from 'src/app/Services/MandalKaryakar/mandal-karyakar.service';
 import { SabhaService } from 'src/app/Services/Sabha/sabha.service';
 import { YuvakService } from 'src/app/Services/Yuvak/yuvak.service';
-
 @Component({
   selector: 'app-list-of-yuvak',
   templateUrl: './list-of-yuvak.component.html',
@@ -26,10 +25,25 @@ export class ListOfYuvakComponent implements OnInit {
   
   constructor(private yuvakServices: YuvakService, private sabhaServices: SabhaService, private mandalKaryakarService: MandalKaryakarService) { }
   ngOnInit() {
-    if(this.karyakar.roleId == 1) {
-     this.isMandal = false;
+    if(history.state.mandalId != undefined){
+      this.isMandal == true;
+      this.mandalId = history.state.mandalId;
+      sessionStorage.setItem("mandalId",history.state.mandalId)
+      this.getAllYuvak(this.mandalId, this.isMandal);
+      this.getTotalSabha();
+      this.sortYuvak();
+      console.log(this.mandalId)
+    } else if(sessionStorage.getItem('mandalId') != null) {
+      this.mandalId = parseInt(sessionStorage.getItem('mandalId')!);
+      this.getAllYuvak(this.mandalId, this.isMandal);
+      this.getTotalSabha();
+      this.sortYuvak();
+    } else {
+      if(this.karyakar.roleId == 1) {
+       this.isMandal = false;
+      }
+      this.getMandalId();
     }
-    this.getMandalId();
     // console.log(this.karyakar);
   }
 
