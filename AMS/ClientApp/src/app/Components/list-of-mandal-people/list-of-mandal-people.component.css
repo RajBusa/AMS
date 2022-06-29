@@ -1,3 +1,17 @@
 .list-group-item:hover{
     background-color: lightgray;
 }
+
+::placeholder{
+    color: red;
+}
+
+.form-control:focus{
+    border-color: orange;
+    box-shadow: 0 0 0 0.2rem rgb(253, 222, 165);
+}
+
+.row-item:nth-child(even){
+    background-color: lightgray;
+}
+

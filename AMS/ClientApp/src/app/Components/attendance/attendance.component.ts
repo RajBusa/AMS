@@ -1,6 +1,6 @@
 import { formatDate} from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { Karyakar } from 'src/app/models/karyakar.model';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Sabha } from 'src/app/models/sabha.modal';
 import { SabhaAttendance } from 'src/app/models/sabhaAttendance.model';
 import { Yuvak } from 'src/app/models/yuvak.model';
@@ -16,7 +16,7 @@ import { YuvakService } from 'src/app/Services/Yuvak/yuvak.service';
   styleUrls: ['./attendance.component.css']
 })
 export class AttendanceComponent implements OnInit {
-  @Input() karyakar!: Karyakar;
+  // @Input() karyakar!: Karyakar;
 
   mandalId: number = 0;
   isMandal: boolean = true;
@@ -34,11 +34,21 @@ export class AttendanceComponent implements OnInit {
   //0 means Not Taken And 1 means Taken
   todayDate: string = formatDate(new Date(), 'yyyy-MM-dd', 'en_US');
   
-  constructor(private sabhaService: SabhaService, private sabhaAttendanceService: SabhaAttendanceService, private yuvakService: YuvakService, private mandalKaryakarService: MandalKaryakarService) { }
+  constructor(private sabhaService: SabhaService, private sabhaAttendanceService: SabhaAttendanceService, private yuvakService: YuvakService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    console.log(this.karyakar)
-    this.getMandalId();
+    if(sessionStorage.getItem('isSignIn') == 'true'){
+      this.route.queryParams.subscribe(
+        params => {
+          this.mandalId =  params['mandalId'];
+        }
+      )
+        this.getAllYuvak(this.mandalId, this.isMandal);
+        this.getSabha(this.mandalId);
+    } else {
+      this.router.navigateByUrl('/signInWithGoogle');
+    }
+    // console.log(this.karyakar)
   }
 
 
@@ -54,16 +64,16 @@ export class AttendanceComponent implements OnInit {
       );
   }
 
-  getMandalId(){
-    this.mandalKaryakarService.getMandalId(this.karyakar.id)
-    .subscribe(
-      response=>{
-        this.mandalId = response[0];
-        this.getAllYuvak(this.mandalId, this.isMandal);
-        this.getSabha(this.mandalId);
-      }
-    )
-  }
+  // getMandalId(){
+  //   this.mandalKaryakarService.getMandalId(this.karyakar.id)
+  //   .subscribe(
+  //     response=>{
+  //       this.mandalId = response[0];
+  //       this.getAllYuvak(this.mandalId, this.isMandal);
+  //       this.getSabha(this.mandalId);
+  //     }
+  //   )
+  // }
 
   getSabha(mandalId: number) {
     this.sabhaService.getUpcomingSabhaByMandalId(mandalId)

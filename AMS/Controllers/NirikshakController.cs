@@ -12,7 +12,7 @@ namespace AMS.Controllers
         {
             _context = context;
         }
-
+            
         // GET: Kshetra
         [HttpGet]
         [Route("{id:int}/{isNirikshak:bool}")]

@@ -5,3 +5,56 @@
 .hover:hover{
     background-color: lightgray;
 }
+
+.fw-semibold{
+    font-weight: 600;
+}
+
+.btn-outline-light:focus{
+    box-shadow: none;
+}
+
+.form-control:focus{
+    border-color: orange;
+    box-shadow: 0 0 0 0.2rem rgb(253, 222, 165);
+}
+
+::placeholder { 
+    color: red;
+    opacity: 1; /* Firefox */
+  }
+
+.text-orange{
+    color: rgb(255 80 0);
+}
+
+.custom-checkbox{   
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgb(255 80 0);
+    display: block;
+    border-radius: 25%;
+    position: absolute;
+    top: 10px;
+    background-color: white;
+}
+
+input:checked ~ .custom-checkbox{
+    border: 1px solid orange;
+}
+
+input:checked ~ .custom-checkbox:after{
+    content: '\2713';
+    font-size: 18px;
+    color: black;
+    position: absolute;
+    top: -5px;
+    left: 2px;
+    font-weight: 600;
+}
+.box{
+    position: relative;
+}
+
+
+

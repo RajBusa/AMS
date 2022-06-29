@@ -3,6 +3,7 @@ import { YuvakService } from 'src/app/Services/Yuvak/yuvak.service';
 import { Sampark } from 'src/app/models/Sampark';
 import { KaryakarService } from 'src/app/Services/Karyakar/karyakar.service';
 import { SamparkKaryakar } from 'src/app/models/samparkKaryakar.model';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -13,8 +14,8 @@ import { SamparkKaryakar } from 'src/app/models/samparkKaryakar.model';
 })
 export class EditSamparkaryakarComponent implements OnInit {
 
-  constructor(private yuvakServices: YuvakService,private karyakarService: KaryakarService) { }
-  mandalId: number = 1;
+  constructor(private yuvakServices: YuvakService,private karyakarService: KaryakarService, private route: ActivatedRoute) { }
+  mandalId?: number;
   samparkKaryakars: SamparkKaryakar[] = [];
   data: Sampark[] = [];
   yuvakList: number[] = [];
@@ -25,7 +26,12 @@ export class EditSamparkaryakarComponent implements OnInit {
   yId: number = 0;
   sId: number = 0;
   ngOnInit(): void {
-    this.getAllYuvaks(this.mandalId);
+    this.route.queryParams.subscribe(
+        params => {
+          this.mandalId = params["mandalId"];
+          this.getAllYuvaks(this.mandalId!);
+        }
+    )
   }
 
    getAllYuvaks(mandalId: number) {
@@ -40,7 +46,7 @@ export class EditSamparkaryakarComponent implements OnInit {
    }
   tooglePage() {
     this.fristPage = false;
-    this.getSamparkKaryakar(this.mandalId);
+    this.getSamparkKaryakar(this.mandalId!);
    }
   doAction() {
     document.getElementById('hi' + this.yId)?.click();

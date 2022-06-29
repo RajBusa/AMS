@@ -1,10 +1,19 @@
-<div class="list-group container list-group-flush">
-    <a class="list-group-item d-flex justify-content-between align-items-start"  *ngFor="let mandal of mandalwithYuvakCount" [routerLink]="['/listOfMandalPeople']" [queryParams] = "{mandalId:mandal.mandalId, mandalName:mandal.name}">
-      <div class="ms-2 me-auto">
-        <div class="fw-bold">{{mandal.name}}</div>      
-      </div>
-      <span class="me-2 badge bg-primary rounded-pill">{{mandal.numberYuvak}}</span>
+
+<div class="container my-3">
+  <input class="form-control rounded-pill text-danger" type="search" placeholder="Search" [(ngModel)]="searchText" name="searchText">
+</div>
+
+<div class="container text-orange mb-2"><u>Select Mandal &#11167;</u></div>
+
+<div class="list-group list-group-flush">
+  <div class="list-group-item d-flex justify-content-between align-items-start"  *ngFor="let mandal of mandalwithYuvakCount | filter:searchText">
+    <a class="ms-2 me-auto text-decoration-none pe-5" [routerLink]="['/mandalSummary']" [queryParams] = "{mandalId:mandal.mandalId, mandalName:mandal.name}">
+      <div class="fw-secondary fs-6 text-orange">{{mandal.name}}</div>      
     </a>
+    <a class="me-2 badge bg-gray border border-secondary text-orange fs-6 px-2">{{mandal.numberYuvak}}</a>
+    <a class="me-2 badge bg-gray border border-secondary text-orange fs-6 px-2" href="tel:+919408396963">S <i class="fa-solid fa-phone text-primary"></i></a>
+    <a class="me-2 badge bg-gray border border-secondary text-orange fs-6 px-2" href="tel:+919408396963">N <i class="fa-solid fa-phone text-primary"></i></a>
+  </div>
 </div>
 
 

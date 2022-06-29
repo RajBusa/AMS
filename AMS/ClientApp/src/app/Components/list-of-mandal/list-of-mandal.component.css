@@ -2,3 +2,28 @@
     background-color: lightgray;
     color: black;
 }
+
+::placeholder{
+    color: red;
+}
+
+.form-control:focus{
+    border-color: orange;
+    box-shadow: 0 0 0 0.2rem rgb(253, 222, 165);
+}
+
+.text-orange{
+    color: rgb(255 80 0);
+}
+
+.bg-gray{
+    background-color: lightgray;
+}
+
+.fw-secondary{
+    font-weight: 600;
+}
+
+.list-group-item:nth-child(odd){
+    background-color: lightgray;
+}

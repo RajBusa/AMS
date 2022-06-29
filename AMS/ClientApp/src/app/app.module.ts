@@ -34,6 +34,7 @@ import { ProfileComponent } from './Components/profile/profile.component';
 import { ListOfMandalComponent } from './Components/list-of-mandal/list-of-mandal.component';
 import { SigninWithGoogleComponent } from './Components/signin-with-google/signin-with-google.component';
 import { NewPasswordComponent } from './Components/new-password/new-password.component';
+import { MandalSummaryComponent } from './Components/mandal-summary/mandal-summary.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { NewPasswordComponent } from './Components/new-password/new-password.com
     ListOfMandalComponent,
     EditSamparkaryakarComponent,
     SigninWithGoogleComponent,
-    NewPasswordComponent
+    NewPasswordComponent,
+    MandalSummaryComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -66,7 +68,7 @@ import { NewPasswordComponent } from './Components/new-password/new-password.com
     ApiAuthorizationModule,
     Ng2SearchPipeModule,
     RouterModule.forRoot([
-      { path: '', component: SigninWithGoogleComponent},
+      { path: '', component: NewPasswordComponent },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
       {
@@ -149,6 +151,7 @@ import { NewPasswordComponent } from './Components/new-password/new-password.com
       { path: 'signInWithGoogle', component: SigninWithGoogleComponent },
       { path: 'newPassword', component: NewPasswordComponent },
       { path: 'takeAttendance', component: AttendanceComponent },
+      { path: 'mandalSummary', component: MandalSummaryComponent },
 
     ]),
 

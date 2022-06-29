@@ -55,5 +55,4 @@ export class SanchalakComponent implements OnInit {
   viewYuvakList(){
     this.route.navigateByUrl('/yuvakList', { state: { mandalId: this.mandalId} })
   }
-
 }

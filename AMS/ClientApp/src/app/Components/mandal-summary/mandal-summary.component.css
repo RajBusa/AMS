@@ -1,0 +1,14 @@
+.btn-outline-primary{
+    border-radius: 15px !important;
+    border-width: 3px;
+    border-color: rgb(56, 15, 94);
+    color: #fd4614;
+    font-size: 1rem;
+}
+.btn-outline-primary:hover{
+    background-color: rgb(56, 15, 94);
+    color: white !important;
+}
+.btn-outline-primary:focus{
+    box-shadow: none;
+}

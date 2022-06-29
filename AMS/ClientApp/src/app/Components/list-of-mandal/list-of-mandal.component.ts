@@ -12,6 +12,8 @@ export class ListOfMandalComponent implements OnInit {
 
   @Input() karyakar!: Karyakar;
   mandalwithYuvakCount: MandalwithYuvakCount[] = [];
+  searchText = '';
+  val: number = 1;
 
   constructor(private mandalService: MandalService) { }
 

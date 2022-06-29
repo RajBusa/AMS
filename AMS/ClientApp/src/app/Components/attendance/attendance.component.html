@@ -1,14 +1,6 @@
 <div class="container">
-    <div class="">
-        <button class="btn btn-primary col-12" routerLink="/editSampark">Edit Sampark</button>
-    </div>
     <div class="ms-1 text-white Date my-3 row border-2">
-        <div class="date bg-primary text-center h3 py-2  rounded-start col-3 ">{{sabha[0]?.sabhaDate| date : 'dd'}}</div>
-        <div class="month bg-secondary py-1 h4  text-center rounded-end col-4">{{sabha[0]?.sabhaDate| date : 'LLLL'}}</div>
-        <div class="changeDate px-2 col-5">
-            <button class="btn w-100 py-2 btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"> Change
-                Date</button>
-        </div>
+        
 
         <div class="modal fade"tabindex="-1"  id="exampleModal"  aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -33,12 +25,14 @@
     </div>
     <form class="d-flex my-2 row" role="search">
         <div class="col-7">
-            <input class="form-control" type="search" id="searchInput" placeholder="Search" [(ngModel)]="searchText" name="searchText" autofocus>
-        </div>
+            <input class="form-control rounded-pill text-orange" id="searchInput" placeholder="Search" [(ngModel)]="searchText" name="searchText" autofocus>
+            <!-- <span class="fas fa-search search-icon"></span> -->
+        </div>  
         <div class="col-5">
-            <!-- <i class="fa-solid fa-bars-filter"></i> -->
-            <!-- <button class="btn btn-primary col-12" routerLink="/yuvakList">View Attendance</button> -->
-            <button class="btn btn-primary col-12" routerLink="/yuvakList">View Attendance</button>
+            <button class="btn btn-outline-light w-100 text-danger p-0 fw-semibold" data-bs-toggle="modal" data-bs-target="#exampleModal"> Change
+                Date</button>
+            
+            <div class="badge w-100 text-orange fs-6 p-1 fw-normal border border-secondary rounded-5">{{sabha[0]?.sabhaDate| date : 'dd'}}/{{sabha[0]?.sabhaDate| date : 'MM'}}/{{sabha[0]?.sabhaDate| date : 'yyyy'}}</div>
         </div>
     </form>
     <!-- <ul class="list-group list-group-flush">
@@ -53,20 +47,20 @@
     <!-- <div>{{sabha[0].sabhaDate}}</div> -->
     <ul class="list-group list-group-flush" *ngIf="sabha[0]?.sabhaDate == todayDate; else elseBlock">
         <label for="">
-            <li [ngClass]="{'checked': y.isAttendanceTaken}" class="list-group-item  align-items-start hover"
+            <li [ngClass]="{'checked': y.isAttendanceTaken}" class="list-group-item  align-items-start hover box"
                 *ngFor="let y of yuvak | filter:searchText">
-                <label (click)="takeAttendace(y.id)" class="d-flex justify-content-between">
-                    <div class="ms-2 me-auto fw-bold">
+                <label class="d-flex justify-content-between">
+                    <div class="ms-2 me-auto fw-normal text-orange">
                         {{y.name}}
                     </div>
-                    <!-- <form action="" #form="ngForm" (ngSubmit)="XYZ()"></form> -->
+                    <!-- <form action=""     #form="ngForm" (ngSubmit)="XYZ()"></form> -->
 
 
                     <div *ngIf = "y.isAttendanceTaken == true;else elseBlock1">
-                        <span><input type="checkbox" class="checkBox" checked  name=""></span>
+                        <span><input type="checkbox" class="checkBox rounded-5" (click)="takeAttendace(y.id)" checked name=""><span class="custom-checkbox"></span></span>
                     </div>
                     <ng-template #elseBlock1>
-                        <span><input type="checkbox" class="checkBox"  name=""></span>
+                        <span><input type="checkbox" class="checkBox rounded-5" (click)="takeAttendace(y.id)"  name=""><span class="custom-checkbox"></span></span>
                     </ng-template>
 
 
@@ -88,7 +82,7 @@
                 <div class="ms-2 me-auto fw-bold">
                     {{y.name}}
                 </div>
-                <span><input type="checkbox" class="checkBox" name="" id="" disabled></span>            
+                <span><input type="checkbox" class="checkBox" name="" id="" disabled><span class="custom-checkbox"></span></span>            
             </li>
         </ul>
     </ng-template>

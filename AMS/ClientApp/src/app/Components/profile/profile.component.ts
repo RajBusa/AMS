@@ -39,7 +39,4 @@ export class ProfileComponent implements OnInit {
         this.yuvak.email = params['email']; 
       })
   }
-
 }
-
-// DOB Education 

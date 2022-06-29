@@ -1,0 +1,10 @@
+<div class="container">
+    <div class="row d-flex justify-content-between">
+        <div class="col-6 my-2 h-25"><button type="button" class="rounded btn btn-outline-primary btn-lg w-100 py-4 px-1" [routerLink]="['/yuvalProfile']" [queryParams] = {mandalId:mandalId}><u>Add New Yuvak</u></button></div>
+        <div class="col-6 my-2 h-25"><button type="button" class="rounded btn btn-outline-primary btn-lg w-100 py-4 px-1" [routerLink]="['/listOfMandalPeople']" [queryParams] = "{mandalId:mandalId, mandalName: mandalName}"><u>View Yuvak List</u></button></div> 
+        <div class="col-6 my-2 h-25"><button type="button" class="rounded btn btn-outline-primary btn-lg w-100 py-3 px-1" [routerLink]="['/editSampark']" [queryParams] = "{mandalId:mandalId}"><u>Manage <br> Sampark Karyakar</u></button></div>  
+        <div class="col-6 my-2 h-25"><button type="button" class="rounded btn btn-outline-primary btn-lg w-100 py-3 px-1"><u>Manage <br> Sanchalak List</u></button></div>
+        <div class="col-6 my-2 h-25"><button type="button" class="rounded btn btn-outline-primary btn-lg w-100 py-4 px-1" routerLink="/editSampark"><u>View Report</u></button></div>
+    </div>
+</div>
+<!--[routerLink]="['/yuvalProfile']" [queryParams] = {mandalId:mandalId} -->
