@@ -2,11 +2,11 @@
 <div class="container">
     <form class="d-flex my-3 row" role="search">
         <div class="col-7">
-            <input class="form-control" type="search" placeholder="Search" [(ngModel)]="searchText" name="searchText">
+            <input class="form-control fs-6 border border-danger search-bar" type="search" placeholder="Search Yuvak for Sampark" [(ngModel)]="searchText" name="searchText">
         </div>
         <div class="col-5">
             <!-- <i class="fa-solid fa-bars-filter"></i> -->
-            <button class="btn btn-primary col-12" (click)="sortYuvak()">{{filter}}</button>
+            <button class="btn btn-primary col-12 search-bar" (click)="sortYuvak()">{{filter}}</button>
         </div>
     </form>
     <div *ngIf="roleId == 1; else elseBlock">

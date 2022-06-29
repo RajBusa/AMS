@@ -34,6 +34,7 @@ import { ProfileComponent } from './Components/profile/profile.component';
 import { ListOfMandalComponent } from './Components/list-of-mandal/list-of-mandal.component';
 import { SigninWithGoogleComponent } from './Components/signin-with-google/signin-with-google.component';
 import { NewPasswordComponent } from './Components/new-password/new-password.component';
+import { TopNavComponent } from './Components/top-nav/top-nav.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { NewPasswordComponent } from './Components/new-password/new-password.com
     ListOfMandalComponent,
     EditSamparkaryakarComponent,
     SigninWithGoogleComponent,
-    NewPasswordComponent
+    NewPasswordComponent,
+    TopNavComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
