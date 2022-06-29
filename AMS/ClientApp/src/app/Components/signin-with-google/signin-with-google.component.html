@@ -1,26 +1,43 @@
-<div style="height: 50px;" id="alert">
-</div>
+<div class="main">
 
-<main class="form-signin w-100 m-auto text-center">
-    <form class="mt-5">
-      <img class="mb-2" src="/assets/Baps_logo.png" alt="" width="57" height="72">
-      <!-- <h1 class="h3 mb-3 fw-normal">Please sign in</h1> -->
+  <div style="height: 50px;" id="alert"></div>
+
+  <div class="container mt-3 floting-screen">
+    <div class="text-center mb-3">
+      <img class="mb-4 w-50 h-25" src="/assets/Logo.png" alt="" width="57" height="72">
+    </div>
+    <div class="form-signin w-100 m-auto">
+
+      <h1 class="text-start text-secondary mb-4">Sign In</h1> 
+
+      <form class="p-2">
+
+        <div class="mb-4">
+          <label for="email" class="mb-1 fw-bold fs-3">Email address</label>
+          <input type="email" [(ngModel)]="signIn.email" name="email" class="form-control" id="email">
+        </div>
   
-      <div class="form-floating mb-3">
-        <input type="email" [(ngModel)]="signIn.email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" >
-        <label for="floatingInput">Email address</label>
-      </div>
-      <div class="form-floating mb-2">
-        <input type="password" [(ngModel)]="signIn.password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
-        <label for="floatingPassword">Password</label>
-      </div>
-  
-      <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-      </div>
-      <button class="w-100 btn btn-lg btn-primary" type="submit" (click)="SignIn()">Sign in</button>
-      <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
-    </form>
-  </main>
+        <div class="mb-4">
+          <label for="password" class="mb-1 fw-bold fs-3">Password</label>
+          <input type="password" [(ngModel)]="signIn.password" name="password" class="form-control"
+          id="password">
+          <div class="checkbox mt-1">
+              <label class="fs-4">Show Password  <input type="checkbox" [style]="{height: '20px', width: '20px'}" value="show-password"></label>
+          </div>
+        </div>
+
+
+        <div>
+          <button class="btn btn-secondary mt-2 fs-3" type="submit" (click)="SignIn()">Sign In</button>
+        </div>
+        <div class="my-2">
+          <a routerLink="/newPassword" class="text-secondary fs-5">Recover Password</a>
+        </div>
+        <!-- <div class="fs-6 my-2">Don't have an account?</div> -->
+        <!-- <button class="btn btn-sm btn-outline-primary" routerLink="/newPassword">Sign up</button> -->
+
+        <!-- <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p> -->
+      </form>
+    </div>
+  </div>
+</div>
