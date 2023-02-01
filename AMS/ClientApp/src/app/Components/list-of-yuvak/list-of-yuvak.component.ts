@@ -16,17 +16,17 @@ export class ListOfYuvakComponent implements OnInit {
   yuvaks: Yuvak[] = [];
   samparkId: number = 1;
   mandalId: number = 0;
-  isMandal: boolean = true;
+  isMandal?: boolean;
   totalSabha: number = 0;
   filter: string = "Descending";
   searchText = '';
-  roleId: number = 2;
+  // roleId: number = 2;
 
   
   constructor(private yuvakServices: YuvakService, private sabhaServices: SabhaService, private mandalKaryakarService: MandalKaryakarService) { }
   ngOnInit() {
     if(history.state.mandalId != undefined){
-      this.isMandal == true;
+      this.isMandal = true;
       this.mandalId = history.state.mandalId;
       sessionStorage.setItem("mandalId",history.state.mandalId)
       this.getAllYuvak(this.mandalId, this.isMandal);
@@ -35,7 +35,7 @@ export class ListOfYuvakComponent implements OnInit {
       console.log(this.mandalId)
     } else if(sessionStorage.getItem('mandalId') != null) {
       this.mandalId = parseInt(sessionStorage.getItem('mandalId')!);
-      this.getAllYuvak(this.mandalId, this.isMandal);
+      this.getAllYuvak(this.mandalId, this.isMandal!);
       this.getTotalSabha();
       this.sortYuvak();
     } else {
@@ -86,7 +86,7 @@ export class ListOfYuvakComponent implements OnInit {
           console.log(response)
           this.mandalId = response[0];
           console.log(this.mandalId)
-          this.getAllYuvak(this.karyakar.id, this.isMandal);
+          this.getAllYuvak(this.karyakar.id, this.isMandal!);
           this.getTotalSabha();
           this.sortYuvak();
         }

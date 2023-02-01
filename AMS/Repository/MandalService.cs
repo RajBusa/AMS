@@ -25,6 +25,11 @@ namespace AMS.Repository
             return await _db.QueryAsync<Mandal>("select * from Mandal Where Id = @Id", new {@Id = id});
         }
 
+        public async Task<IEnumerable<string>> GetMandalName(int id)
+        {
+            return await _db.QueryAsync<string>("select name from Mandal Where Id = @Id", new { @Id = id });
+        }
+
         public async Task<int> InsertMandal(Mandal mandal)
         {
             var sql = ("INSERT INTO Mandal (Id,Name,Address,Area,NirikshakId,KshetraId,Day) VALUES (NULL,@Name,@Address,@Area,@NirikshakId,@KshetraId,@Day)");

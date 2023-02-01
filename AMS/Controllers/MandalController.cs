@@ -30,6 +30,14 @@ namespace AMS.Controllers
             return Ok(await _context.GetMandalById(id));
         }
 
+        [HttpGet]
+        [Route("[action]/{id:int}")]
+        public async Task<IActionResult> GetMandalName([FromRoute] int id)
+        {
+            return Ok(await _context.GetMandalName(id));
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> InsertMandal([FromBody] Mandal data)
         {

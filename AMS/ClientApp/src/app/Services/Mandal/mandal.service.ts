@@ -13,4 +13,8 @@ export class MandalService {
   getMandalWithYuvakCount(id: number, isNirikshak: boolean): Observable<MandalwithYuvakCount[]> {
     return this.http.get<MandalwithYuvakCount[]>(this.baseUrl + 'Nirikshak/' + id + '/' + isNirikshak);
   }
+  getMandalName(id: number): Observable<string> {
+    return this.http.get<string>(this.baseUrl + 'Mandal/GetMandalName/' + id);
+    // Mandal/GetMandalName/1
+  }
 }

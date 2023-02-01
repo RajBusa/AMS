@@ -1,13 +1,14 @@
 <!-- <app-list-of-yuvak></app-list-of-yuvak> -->
-<div class="container">
+<app-top-nav [name]="sanchalak.name" [Role]="mandalName!" ></app-top-nav>
+<div class="container mt-4">
     <div class="row d-flex justify-content-between">
         <div class="col-6 my-2 h-25"><button type="button" class="rounded btn btn-outline-primary btn-lg w-100 py-4 px-1" [routerLink]="['/yuvalProfile']" [queryParams] = {mandalId:mandalId}><u>Add New Yuvak</u></button></div>
         <!-- [queryParams] = {mandalId:mandalId} -->
         
         <div class="col-6 my-2 h-25"><button type="button" class="rounded btn btn-outline-primary btn-lg w-100 py-4 px-1" (click)="viewYuvakList()"><u>View Yuvak List</u></button></div>
         <div class="col-6 my-2 h-25"><button type="button" class="rounded btn btn-outline-primary btn-lg w-100 py-4 px-1"><u>View Report</u></button></div>  
-        <div class="col-6 my-2 h-25"><button type="button" class="rounded btn btn-outline-primary btn-lg w-100 py-4 px-1" [routerLink]="['/takeAttendance']" [queryParams]="{mandalId: mandalId}"><u>Take Attendance</u></button></div>
-        <div class="col-6 my-2 h-25"><button type="button" class="rounded btn btn-outline-primary btn-lg w-100 py-3 px-1" routerLink="/editSampark"><u>Manage Sampark Karyakar</u></button></div>
+        <div class="col-6 my-2 h-25"><button type="button" class="rounded btn btn-outline-primary btn-lg w-100 py-4 px-1" [routerLink]="['/takeAttendance']" [queryParams]="{mandalId: mandalId, name: sanchalak.name}"><u>Take Attendance</u></button></div>
+        <div class="col-6 my-2 h-25"><button type="button" class="rounded btn btn-outline-primary btn-lg w-100 py-3 px-1" routerLink="/editSampark" [queryParams]="{mandalId: mandalId}"><u>Manage Sampark Karyakar</u></button></div>
     </div>
 </div>
 

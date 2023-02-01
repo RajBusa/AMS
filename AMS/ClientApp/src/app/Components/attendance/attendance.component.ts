@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Sabha } from 'src/app/models/sabha.modal';
 import { SabhaAttendance } from 'src/app/models/sabhaAttendance.model';
 import { Yuvak } from 'src/app/models/yuvak.model';
-import { MandalKaryakarService } from 'src/app/Services/MandalKaryakar/mandal-karyakar.service';
+import { MandalService } from 'src/app/Services/Mandal/mandal.service';
 import { SabhaService } from 'src/app/Services/Sabha/sabha.service';
 import { SabhaAttendanceService } from 'src/app/Services/SabhaAttendance/sabha-attendance.service';
 import { YuvakService } from 'src/app/Services/Yuvak/yuvak.service';
@@ -19,11 +19,13 @@ export class AttendanceComponent implements OnInit {
   // @Input() karyakar!: Karyakar;
 
   mandalId: number = 0;
+  karyakarName?: string;
   isMandal: boolean = true;
   yuvak: Yuvak[] = [];
   sabha: Sabha[] = [];
   searchText: string = '';
   changeSabhaDate: string = '';
+  mandalName?: string;
   sabhaAttendance: SabhaAttendance = {
     id: 0,
     yuvakId: 3,
@@ -34,13 +36,14 @@ export class AttendanceComponent implements OnInit {
   //0 means Not Taken And 1 means Taken
   todayDate: string = formatDate(new Date(), 'yyyy-MM-dd', 'en_US');
   
-  constructor(private sabhaService: SabhaService, private sabhaAttendanceService: SabhaAttendanceService, private yuvakService: YuvakService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private sabhaService: SabhaService, private sabhaAttendanceService: SabhaAttendanceService, private yuvakService: YuvakService, private route: ActivatedRoute, private router: Router, private mandalService: MandalService) { }
 
   ngOnInit(): void {
     if(sessionStorage.getItem('isSignIn') == 'true'){
       this.route.queryParams.subscribe(
         params => {
           this.mandalId =  params['mandalId'];
+          this.karyakarName = params['name'];
         }
       )
         this.getAllYuvak(this.mandalId, this.isMandal);
@@ -48,6 +51,13 @@ export class AttendanceComponent implements OnInit {
     } else {
       this.router.navigateByUrl('/signInWithGoogle');
     }
+
+    this.mandalService.getMandalName(this.mandalId).subscribe(
+      response => {
+        this.mandalName = response;
+      }
+      
+    )
     // console.log(this.karyakar)
   }
 

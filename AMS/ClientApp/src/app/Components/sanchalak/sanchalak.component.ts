@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Karyakar } from 'src/app/models/karyakar.model';
+import { MandalService } from 'src/app/Services/Mandal/mandal.service';
 import { MandalKaryakarService } from 'src/app/Services/MandalKaryakar/mandal-karyakar.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { MandalKaryakarService } from 'src/app/Services/MandalKaryakar/mandal-ka
   styleUrls: ['./sanchalak.component.css']
 })
 export class SanchalakComponent implements OnInit {
-  constructor(private route: Router, private mandalKaryakarService: MandalKaryakarService) { }
+  constructor(private route: Router, private mandalKaryakarService: MandalKaryakarService, private mandalService: MandalService) { }
   sanchalak: Karyakar = {
     id: 0,
     address: '',
@@ -25,6 +26,7 @@ export class SanchalakComponent implements OnInit {
     isActivated: true
   };
   mandalId: number = 0;
+  mandalName?: string;
   ngOnInit(): void {
     if(history.state.sanchalak != undefined){
       console.log(history.state);
@@ -48,6 +50,12 @@ export class SanchalakComponent implements OnInit {
       .subscribe(
         response => {
           this.mandalId = response[0];
+          this.mandalService.getMandalName(this.mandalId).subscribe(
+            response => {
+              this.mandalName = response;
+            }
+            
+          )
         }
       )
   }

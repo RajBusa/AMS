@@ -1,35 +1,15 @@
-<button class="btn btn-primary rounded-circle position-fixed bottom-0 end-0 mb-4 me-4" [routerLink]="['/yuvalProfile']" [queryParams] = {mandalId:mandalId}><h1 class="m-0">+</h1></button>
+<button *ngIf="isMandal" class="btn btn-primary rounded-circle position-fixed bottom-0 end-0 mb-4 me-4" [routerLink]="['/yuvalProfile']" [queryParams] = {mandalId:mandalId}><h1 class="m-0">+</h1></button>
 <div class="container">
     <form class="d-flex my-3 row" role="search">
         <div class="col-7">
-            <input class="form-control" type="search" placeholder="Search" [(ngModel)]="searchText" name="searchText">
+            <input class="form-control fs-6 search-bar rounded-pill" type="search" placeholder="Search Yuvak" [(ngModel)]="searchText" name="searchText">
         </div>
         <div class="col-5">
             <!-- <i class="fa-solid fa-bars-filter"></i> -->
-            <button class="btn btn-primary col-12" (click)="sortYuvak()">{{filter}}</button>
+            <button class="btn btn-primary col-12 search-bar rounded-pill" (click)="sortYuvak()">{{filter}}</button>
         </div>
     </form>
-    <div *ngIf="roleId == 1; else elseBlock">
-        <ul class="list-group list-group-flush" *ngFor="let y of yuvaks | filter:searchText">
-            <li
-                class="list-group-item d-flex justify-content-between bg-danger bg-opacity-{{calculateStuff(y.count)}} my-1 align-items-start">
-
-                <div class="ms-2 me-auto fw-bold">
-                    {{y.name}}
-                </div>
-                <div class="me-5">
-                    {{y.count}} / {{totalSabha}}
-                </div>
-                <div class="text-success px-3 h4 mb-0">
-                    <a href="http://wa.me/91{{y.mobile}}"><i class="fa-brands fa-whatsapp text-success"></i></a>
-                </div>
-                <div class="px-3">
-                    <a href="tel:+91{{y.mobile}}"><i class="fa-solid fa-phone text-success"></i></a>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <ng-template #elseBlock>
+    <div *ngIf="isMandal; else elseBlock">
         <ul class="list-group list-group-flush" #elseBlock *ngFor="let y of yuvaks | filter:searchText">
             <li
                 class="list-group-item d-flex justify-content-between bg-danger bg-opacity-{{calculateStuff(y.count)}} my-1 align-items-start">
@@ -43,6 +23,26 @@
                     </div>
                     <!-- </div> -->
                 </a>
+                <div class="text-success px-3 h4 mb-0">
+                    <a href="http://wa.me/91{{y.mobile}}"><i class="fa-brands fa-whatsapp text-success"></i></a>
+                </div>
+                <div class="px-3">
+                    <a href="tel:+91{{y.mobile}}"><i class="fa-solid fa-phone text-success"></i></a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <ng-template #elseBlock>
+        <ul class="list-group list-group-flush" *ngFor="let y of yuvaks | filter:searchText">
+            <li
+                class="list-group-item d-flex justify-content-between bg-danger bg-opacity-{{calculateStuff(y.count)}} my-1 align-items-start">
+
+                <div class="ms-2 me-auto fw-bold">
+                    {{y.name}}
+                </div>
+                <div class="me-5">
+                    {{y.count}} / {{totalSabha}}
+                </div>
                 <div class="text-success px-3 h4 mb-0">
                     <a href="http://wa.me/91{{y.mobile}}"><i class="fa-brands fa-whatsapp text-success"></i></a>
                 </div>

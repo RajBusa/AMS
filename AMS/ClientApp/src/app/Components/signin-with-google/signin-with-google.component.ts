@@ -59,4 +59,13 @@ export class SigninWithGoogleComponent implements OnInit {
         }
       )
   }
+
+  onCheck(){
+    let pass = document.getElementById("password");
+    if(pass?.getAttribute("type") == "password"){
+      pass.setAttribute("type", "text")
+    } else {
+      pass?.setAttribute("type", "password")
+    }
+  }
 }

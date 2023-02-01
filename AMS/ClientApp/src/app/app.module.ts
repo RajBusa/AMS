@@ -35,6 +35,8 @@ import { ListOfMandalComponent } from './Components/list-of-mandal/list-of-manda
 import { SigninWithGoogleComponent } from './Components/signin-with-google/signin-with-google.component';
 import { NewPasswordComponent } from './Components/new-password/new-password.component';
 import { MandalSummaryComponent } from './Components/mandal-summary/mandal-summary.component';
+import { TopNavComponent } from './Components/top-nav/top-nav.component';
+
 
 @NgModule({
   declarations: [
@@ -59,7 +61,8 @@ import { MandalSummaryComponent } from './Components/mandal-summary/mandal-summa
     EditSamparkaryakarComponent,
     SigninWithGoogleComponent,
     NewPasswordComponent,
-    MandalSummaryComponent
+    MandalSummaryComponent,
+    TopNavComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -69,6 +72,7 @@ import { MandalSummaryComponent } from './Components/mandal-summary/mandal-summa
     Ng2SearchPipeModule,
     RouterModule.forRoot([
       { path: '', component: NewPasswordComponent },
+      // { path: '', component: ChartComponent },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
       {

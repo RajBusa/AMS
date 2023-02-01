@@ -22,7 +22,7 @@
           <input type="password" [(ngModel)]="signIn.password" name="password" class="form-control"
           id="password">
           <div class="checkbox mt-1">
-              <label class="fs-4">Show Password  <input type="checkbox" [style]="{height: '20px', width: '20px'}" value="show-password"></label>
+              <label class="fs-4">Show Password  <input (click)="onCheck()" type="checkbox" [style]="{height: '20px', width: '20px'}" value="show-password"></label>
           </div>
         </div>
 
